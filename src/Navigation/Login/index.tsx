@@ -7,12 +7,20 @@ import { LoginContainer } from '@/Screens/Login';
 const Tab = createBottomTabNavigator();
 
 // @refresh reset
-export const MainNavigator = () => {
+export const LoginNavigator = () => {
     return (
         <Tab.Navigator>
             <Tab.Screen
                 name="Home"
                 component={HomeContainer}
+                options={{
+                    tabBarIconStyle: { display: 'none' },
+                    tabBarLabelPosition: 'beside-icon',
+                }}
+            />
+            <Tab.Screen
+                name="Login"
+                component={LoginContainer}
                 options={{
                     tabBarIconStyle: { display: 'none' },
                     tabBarLabelPosition: 'beside-icon',
