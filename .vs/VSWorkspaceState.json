@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\Screens",
+    "\\src\\Screens\\MealPlanning",
+    "\\src\\Screens\\Search",
+    "\\src\\Screens\\Welcome"
+  ],
+  "SelectedNode": "\\src\\Screens\\MealPlanning\\styles.tsx",
+  "PreviewInSolutionExplorer": false
+}
