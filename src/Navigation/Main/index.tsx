@@ -2,7 +2,8 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { HomeContainer } from '@/Screens/Home';
 import { MealPlanningContainer } from '@/Screens/MealPlanning';
-import { LoginContainer } from '@/Screens/Login';
+import { SearchContainer } from '@/Screens/Search';
+
 
 const Tab = createBottomTabNavigator();
 
@@ -21,6 +22,14 @@ export const MainNavigator = () => {
             <Tab.Screen
                 name="MealPlanning"
                 component={MealPlanningContainer}
+                options={{
+                    tabBarIconStyle: { display: 'none' },
+                    tabBarLabelPosition: 'beside-icon',
+                }}
+            />
+            <Tab.Screen
+                name="Search"
+                component={SearchContainer}
                 options={{
                     tabBarIconStyle: { display: 'none' },
                     tabBarLabelPosition: 'beside-icon',

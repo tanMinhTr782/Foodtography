@@ -3,10 +3,9 @@
     "",
     "\\src",
     "\\src\\Screens",
-    "\\src\\Screens\\MealPlanning",
     "\\src\\Screens\\Search",
-    "\\src\\Screens\\Welcome"
+    "\\src\\Screens\\SearchByIngredients"
   ],
-  "SelectedNode": "\\src\\Screens\\MealPlanning\\styles.tsx",
+  "SelectedNode": "\\yarn.lock",
   "PreviewInSolutionExplorer": false
 }

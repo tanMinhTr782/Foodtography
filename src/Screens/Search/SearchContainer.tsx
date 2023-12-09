@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Search } from './Search';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '@/Navigation';
 import { RootScreens } from '..';
+import { RootStackParamList } from '@/Navigation';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-type WelcomeScreenNavigatorProps = NativeStackScreenProps<RootStackParamList, RootScreens.WELCOME>;
+type SearchScreenNavigatorProps = NativeStackScreenProps<RootStackParamList, RootScreens.SEARCH>;
 
-export const SearchContainer = () => {
+export const SearchContainer = ({ navigation }: SearchScreenNavigatorProps) => {
+    const onNavigate = (screen: RootScreens) => {
+        navigation.navigate(screen);
+    };
+
     useEffect(() => {
     }, []);
 
-    return <Search />;
+    return <Search onNavigate={onNavigate} />;
 };
