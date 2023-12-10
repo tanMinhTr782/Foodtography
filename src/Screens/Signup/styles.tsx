@@ -9,13 +9,12 @@ export const styles = StyleSheet.create({
     },
     topContainer: {
         backgroundColor: Colors.GREENDARK,
-        height: '50%',
+        height: '62%',
         elevation: -1,
         zIndex: -1,
         padding: 25,
         paddingTop: 60,
     },
-
     backButton: {
         backgroundColor: 'transparent',
         paddingLeft: 0,
@@ -33,7 +32,8 @@ export const styles = StyleSheet.create({
     title: { paddingTop: 30, fontSize: 28, color: Colors.WHITE, fontWeight: 'bold' },
     subTitle: { paddingTop: 20, fontSize: 15, color: Colors.WHITE },
     submitButton: {
-        width: 150,
+        // padding: 100,
+        width: 175,
         marginTop: 10,
         borderRadius: 100,
         backgroundColor: Colors.GREENDARK,
@@ -46,7 +46,7 @@ export const styles = StyleSheet.create({
 
     mainContainer: {
         backgroundColor: Colors.WHITE,
-        height: '30%',
+        height: '43%',
         position: 'absolute',
         top: '30%',
         left: '6%',

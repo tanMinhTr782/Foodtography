@@ -16,7 +16,7 @@ export const Welcome = (props: { onNavigate: (string: RootScreens) => void }) =>
                 <Button onPress={() => props.onNavigate(RootScreens.LOGIN)} style={styles.welcomeButtonLogin}>
                     <Text style={styles.welcomeLoginText}>Login</Text>
                 </Button>
-                <Button onPress={() => props.onNavigate(RootScreens.MAIN)} style={styles.welcomeButtonSignup}>
+                <Button onPress={() => props.onNavigate(RootScreens.SIGNUP)} style={styles.welcomeButtonSignup}>
                     <Text style={styles.welcomeSignupText}>Sign Up</Text>
                 </Button>
             </View>
