@@ -28,7 +28,7 @@ export const Search = (props: { onNavigate: (string: RootScreens) => void }) => 
                                 </View>
                             </TouchableHighlight>
                         </View>
-                        <ScrollView horizontal={true}>
+                        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                             {
                                 ingredient.map((data, index) => {
                                     return (

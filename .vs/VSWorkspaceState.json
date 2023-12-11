@@ -3,9 +3,12 @@
     "",
     "\\src",
     "\\src\\Screens",
+    "\\src\\Screens\\Home",
     "\\src\\Screens\\Search",
-    "\\src\\Screens\\SearchByIngredients"
+    "\\src\\Screens\\SearchByIngredients",
+    "\\src\\Screens\\SearchByIngredients\\data",
+    "\\src\\Screens\\Search\\data"
   ],
-  "SelectedNode": "\\yarn.lock",
+  "SelectedNode": "\\src\\Screens\\Home\\Home.tsx",
   "PreviewInSolutionExplorer": false
 }

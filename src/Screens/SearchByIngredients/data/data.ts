@@ -1,35 +1,73 @@
 export const ingredient = [
   {
     "id": 1,
-    "ingredientName": "Tomato"
+    "ingredientName": "Tomato",
+    "selected": 1,
   },
   {
     "id": 2,
-    "ingredientName": "Tomato"
+    "ingredientName": "Tomato",
+    "selected": 1,
   },
   {
     "id": 3,
-    "ingredientName": "Tomato"
+      "ingredientName": "Tomato",
+    "selected": 0,
   },
   {
     "id": 4,
-    "ingredientName": "Tomato"
+    "ingredientName": "Tomato",
+    "selected": 0,
   },
   {
     "id": 5,
-    "ingredientName": "Tomato"
+    "ingredientName": "Tomato",
+    "selected": 0,
   },
   {
     "id": 6,
-    "ingredientName": "Tomato"
+    "ingredientName": "Tomato",
+    "selected": 0,
   },
   {
     "id": 7,
-    "ingredientName": "Tomato"
+    "ingredientName": "Tomato",
+    "selected": 0,
   },
   {
     "id": 8,
-    "ingredientName": "Tomato"
+    "ingredientName": "Tomato",
+    "selected": 0,
+  },
+  {
+    "id": 9,
+    "ingredientName": "Tomato",
+    "selected": 0,
+  },
+  {
+    "id": 10,
+    "ingredientName": "Tomato",
+    "selected": 0,
+  },
+  {
+    "id": 11,
+    "ingredientName": "Tomato",
+    "selected": 0,
+  },
+  {
+    "id": 12,
+    "ingredientName": "Tomato",
+    "selected": 0,
+  },
+  {
+    "id": 13,
+    "ingredientName": "Tomato",
+    "selected": 0,
+  },
+  {
+    "id": 14,
+    "ingredientName": "Tomato",
+    "selected": 0,
   }
 ];
 
