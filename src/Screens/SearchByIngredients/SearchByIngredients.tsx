@@ -1,16 +1,20 @@
-import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableHighlight, SafeAreaView } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, StyleSheet, Image, TouchableHighlight, SafeAreaView, Dimensions } from 'react-native';
 import { RootScreens } from '..';
 import { styles } from './styles';
 import { SearchBar } from '@/Components/SearchBar/SearchBar';
 import { ScrollView } from 'native-base';
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { ingredient } from './data/data';
+import { StatusBar } from 'expo-status-bar';
 
 export const SearchByIngredients = (props: { onNavigate: (string: RootScreens) => void }) => {
+    const [selected, setSelected] = useState(1);
+
     return (
         <View style={styles.searchByIngredientsContainer}>
             <SafeAreaView>
+                <StatusBar style="auto" />
                 <View style={styles.container}>
                     <TouchableHighlight
                         underlayColor="#3C736320"
@@ -49,7 +53,7 @@ export const SearchByIngredients = (props: { onNavigate: (string: RootScreens) =
                     <View>
                         <Text style={styles.text}>Suggested for you</Text>
                     </View>
-                    <ScrollView showsVerticalScrollIndicator={false}>
+                    <ScrollView showsVerticalScrollIndicator={false} style={{ height: (Dimensions.get('window').height - 380),}}>
                         <View style={styles.ingredientContainer}>
                             {
                                 ingredient.map((data, index) => {
@@ -68,12 +72,23 @@ export const SearchByIngredients = (props: { onNavigate: (string: RootScreens) =
                             }
                         </View>
                     </ScrollView>
-                    <TouchableHighlight
-                        underlayColor="#3C736320"
-                        onPress={() => props.onNavigate(RootScreens.SEARCH)}
-                    >
-                        <Text style={styles.onSearchText}>SEARCH WITH {0} INGREDIENT</Text>
-                    </TouchableHighlight>
+                    {
+                        selected == 0 ? (
+                            <TouchableHighlight
+                            underlayColor="#3C736320"
+                            >
+                                <Text style={[styles.onSearchText, styles.onSearchText0]}>SEARCH WITH {selected} INGREDIENT</Text>
+                            </TouchableHighlight>
+                        ) : (
+                            <TouchableHighlight
+                            underlayColor="#3C736320"
+                            onPress={() => props.onNavigate(RootScreens.SEARCH)}
+                            >
+                                <Text style={[styles.onSearchText, styles.onSearchText1]}>SEARCH WITH {selected} INGREDIENT</Text>
+                            </TouchableHighlight>
+                        )
+                    }
+                    
                 </View>
             </SafeAreaView>
         </View>

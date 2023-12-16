@@ -7,10 +7,8 @@ export const styles = StyleSheet.create({
         backgroundColor: '#ffffff',
     },
     container: {
-        position: 'relative',
         marginRight: 15,
         marginLeft: 15,
-        paddingTop: Platform.OS === "android" ? (StatusBar.currentHeight ? StatusBar.currentHeight + 10 : 50) : 0,
     },
     text: {
         fontSize: 18,
@@ -46,6 +44,17 @@ export const styles = StyleSheet.create({
     },
     onSearchText: {
         fontSize: 18,
-
+        fontWeight: 'bold',
+        borderRadius: 20,
+        padding: 10,
+        textAlign: 'center',
     },
+    onSearchText0: {
+        backgroundColor: '#d2d1d1',
+        color: '#ffffff',
+    },
+    onSearchText1: {
+        backgroundColor: Colors.GREENDARK,
+        color: '#ffffff',
+    }
 });

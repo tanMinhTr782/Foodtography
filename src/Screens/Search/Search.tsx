@@ -32,7 +32,7 @@ export const Search = (props: { onNavigate: (string: RootScreens) => void }) => 
                             {
                                 ingredient.map((data, index) => {
                                     return (
-                                        <View style={styles.itemContainer}>
+                                        <View style={styles.itemContainer} key={'ingredient-' + index}>
                                             <View style={styles.itemImageContainer}>
                                                 <Image
                                                     style={styles.ingredientsImage}
@@ -51,7 +51,7 @@ export const Search = (props: { onNavigate: (string: RootScreens) => void }) => 
                         <View style={styles.mealItemsContainer}>
                             {meal.map((data, id) => {
                                 return (
-                                    <View style={styles.mealItemContainer}>
+                                    <View style={styles.mealItemContainer} key={'meal-' + id}>
                                         <Image
                                             style={styles.mealImage}
                                             source={require('../../../assets/FoodBackground.jpg')}
@@ -67,7 +67,7 @@ export const Search = (props: { onNavigate: (string: RootScreens) => void }) => 
                         <View style={styles.mealItemsContainer}>
                             {popular.map((data, id) => {
                                 return (
-                                    <View style={styles.mealItemContainer}>
+                                    <View style={styles.mealItemContainer} key={'popular-' + id}>
                                         <Image
                                             style={styles.mealImage}
                                             source={require('../../../assets/FoodBackground.jpg')}
