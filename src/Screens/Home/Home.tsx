@@ -8,7 +8,7 @@ import { User } from "@/Services";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import AntDesign from "@expo/vector-icons/AntDesign";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 export interface IHomeProps {
   data: User | undefined;
@@ -79,36 +79,11 @@ export const Home = (props: IHomeProps) => {
         <View style={styles.imageContainer}></View>
         <View style={styles.contentContainer}>
           <View style={styles.rateContainer}>
-            <AntDesign
-              name="star"
-              size={24}
-              color="#E4D200"
-              iconStyle={{ backgroundColor: "black" }}
-            />
-            <AntDesign
-              name="star"
-              size={24}
-              color="#E4D200"
-              iconStyle={{ backgroundColor: "black" }}
-            />
-            <AntDesign
-              name="star"
-              size={24}
-              color="#E4D200"
-              iconStyle={{ backgroundColor: "black" }}
-            />
-            <AntDesign
-              name="star"
-              size={24}
-              color="#E4D200"
-              iconStyle={{ backgroundColor: "black" }}
-            />
-            <AntDesign
-              name="star"
-              size={24}
-              color="#E4D200"
-              iconStyle={{ backgroundColor: "black" }}
-            />
+            <FontAwesome name="star" size={24} color="#E4D200" />
+            <FontAwesome name="star" size={24} color="#E4D200" />
+            <FontAwesome name="star" size={24} color="#E4D200" />
+            <FontAwesome name="star" size={24} color="#E4D200" />
+            <FontAwesome name="star-half-o" size={24} color="#E4D200" />
           </View>
           <Text style={styles.recipeName}>Vietnamese Crab Noodle Soup</Text>
           <View style={styles.authorNameContainer}>
