@@ -1,0 +1,12 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\Navigation",
+    "\\src\\Navigation\\Main",
+    "\\src\\Screens",
+    "\\src\\Screens\\Search\\data"
+  ],
+  "SelectedNode": "\\src\\Navigation\\Main\\index.tsx",
+  "PreviewInSolutionExplorer": false
+}
