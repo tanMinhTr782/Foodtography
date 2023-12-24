@@ -37,34 +37,14 @@ export const MainNavigator = () => {
                     tabBarLabelPosition: 'beside-icon',
                 }}
             />
+            <Tab.Screen
+                name="CreateRecipe"
+                component={CreateRecipeContainer}
+                options={{
+                  tabBarIconStyle: { display: "none" },
+                  tabBarLabelPosition: "beside-icon",
+                }}
+              />
         </Tab.Navigator>
     );
-  return (
-    <Tab.Navigator>
-      {/* <Tab.Screen
-        name="Home"
-        component={HomeContainer}
-        options={{
-          tabBarIconStyle: { display: "none" },
-          tabBarLabelPosition: "beside-icon",
-        }}
-      /> */}
-      {/* <Tab.Screen
-        name="RecipeDetail"
-        component={RecipeDetailContainer}
-        options={{
-          tabBarIconStyle: { display: "none" },
-          tabBarLabelPosition: "beside-icon",
-        }}
-      /> */}
-      <Tab.Screen
-        name="CreateRecipe"
-        component={CreateRecipeContainer}
-        options={{
-          tabBarIconStyle: { display: "none" },
-          tabBarLabelPosition: "beside-icon",
-        }}
-      />
-    </Tab.Navigator>
-  );
 };
