@@ -1,11 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableHighlight } from 'react-native';
 import { styles } from './styles';
 import { Button, Input } from 'native-base';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { RootScreens } from '..';
+import { signup } from '@/API/auth';
 
 export const Signup = (props: { onNavigate: (string: RootScreens) => void }) => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
+    const [avatar, setAvatar] = useState('');
+    const [error, setError] = useState('');
+
+    const handleSignup = async () => {
+        const response = await signup({ email, password, name, avatar });
+        console.log(response);
+
+        if (response.statusCode === '200') {
+            props.onNavigate(RootScreens.MAIN);
+        } else {
+            setError('Username already exists');
+        }
+        // console.log(response);
+    };
+
+    // const [password, setPassword] = useState('');
     return (
         <View style={styles.container}>
             <View style={styles.topContainer}>
@@ -21,31 +41,58 @@ export const Signup = (props: { onNavigate: (string: RootScreens) => void }) => 
             </View>
             <View style={styles.mainContainer}>
                 <View style={styles.formControl}>
+                    <View style={styles.errorView}>
+                        <Text style={styles.errorText}>{error}</Text>
+                    </View>
                     <View style={styles.formField}>
-                        <Input type="text" style={styles.formInput} placeholder="Your Name" />
+                        <Input
+                            type="text"
+                            style={styles.formInput}
+                            placeholder="Your Name"
+                            value={name}
+                            onChangeText={setName}
+                        />
                         <View style={styles.formLabel}>
                             <Ionicons name="person" style={styles.formIcon} />
                         </View>
                     </View>
                     <View style={styles.formField}>
-                        <Input type="text" style={styles.formInput} placeholder="Email address" />
+                        <Input
+                            type="text"
+                            style={styles.formInput}
+                            placeholder="Email address"
+                            value={email}
+                            onChangeText={setEmail}
+                        />
                         <View style={styles.formLabel}>
                             <Ionicons name="person" style={styles.formIcon} />
                         </View>
                     </View>
                     <View style={styles.formField}>
-                        <Input type="password" style={styles.formInput} placeholder="Password" />
+                        <Input
+                            type="password"
+                            style={styles.formInput}
+                            placeholder="Password"
+                            value={password}
+                            onChangeText={setPassword}
+                        />
                         <View style={styles.formLabel}>
                             <Ionicons name="lock-closed" style={styles.formIcon} />
                         </View>
                     </View>
                     <View style={styles.formField}>
-                        <Input type="text" style={styles.formInput} placeholder="Confirm Password" />
+                        <Input
+                            type="password"
+                            style={styles.formInput}
+                            placeholder="Confirm Password"
+                            value={avatar}
+                            onChangeText={setAvatar}
+                        />
                         <View style={styles.formLabel}>
                             <Ionicons name="lock-closed" style={styles.formIcon} />
                         </View>
                     </View>
-                    <Button style={styles.submitButton} onPress={() => props.onNavigate(RootScreens.MAIN)}>
+                    <Button style={styles.submitButton} onPress={handleSignup}>
                         <Text style={styles.submitButtonText}>SIGN UP</Text>
                     </Button>
                 </View>

@@ -24,15 +24,8 @@ export const MealPlanning = (props: IHomeProps) => {
 
     const handleToggleMenu = (index: number) => {
         let newToggles = opens;
-
-        console.log(opens);
-
         newToggles[index] = !newToggles[index];
-        console.log(newToggles);
-
         setOpens(newToggles);
-        // console.log(open);
-
         setOpen(!open);
     };
 

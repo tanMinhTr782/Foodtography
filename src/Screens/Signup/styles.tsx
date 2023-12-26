@@ -152,4 +152,11 @@ export const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: Colors.GREENDARK,
     },
+    errorView: {
+        // textAlign:
+        paddingBottom: 10,
+    },
+    errorText: {
+        color: Colors.PRIMARY,
+    },
 });

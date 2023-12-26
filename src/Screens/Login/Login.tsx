@@ -1,11 +1,24 @@
-import React from 'react';
-import { View, Text, StyleSheet, TouchableHighlight } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, TouchableHighlight, TextInput } from 'react-native';
 import { styles } from './styles';
 import { Button, Input } from 'native-base';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { RootScreens } from '..';
+import { login } from '@/API/auth';
 
 export const Login = (props: { onNavigate: (string: RootScreens) => void }) => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleLogin = async () => {
+        const response = await login({ email, password });
+
+        // if (response.statusCode === 200) {
+        props.onNavigate(RootScreens.MAIN);
+        // }
+        // console.log(response);
+    };
+
     return (
         <View style={styles.container}>
             <View style={styles.topContainer}>
@@ -22,18 +35,30 @@ export const Login = (props: { onNavigate: (string: RootScreens) => void }) => {
             <View style={styles.mainContainer}>
                 <View style={styles.formControl}>
                     <View style={styles.formField}>
-                        <Input type="text" style={styles.formInput} placeholder="Email" />
+                        <Input
+                            type="text"
+                            style={styles.formInput}
+                            placeholder="Email"
+                            value={email}
+                            onChangeText={setEmail}
+                        />
                         <View style={styles.formLabel}>
                             <Ionicons name="person" style={styles.formIcon} />
                         </View>
                     </View>
                     <View style={styles.formField}>
-                        <Input type="password" style={styles.formInput} placeholder="Password" />
+                        <Input
+                            type="password"
+                            style={styles.formInput}
+                            placeholder="Password"
+                            value={password}
+                            onChangeText={setPassword}
+                        />
                         <View style={styles.formLabel}>
                             <Ionicons name="lock-closed" style={styles.formIcon} />
                         </View>
                     </View>
-                    <Button style={styles.submitButton} onPress={() => props.onNavigate(RootScreens.MAIN)}>
+                    <Button style={styles.submitButton} onPress={handleLogin}>
                         <Text style={styles.submitButtonText}>LOGIN</Text>
                     </Button>
                 </View>

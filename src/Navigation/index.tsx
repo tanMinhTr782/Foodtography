@@ -9,6 +9,7 @@ import { LoginContainer } from '@/Screens/Login';
 import { SignupContainer } from '@/Screens/Signup';
 import { SearchContainer } from '@/Screens/Search';
 import { SearchByIngredientsContainer } from '@/Screens/SearchByIngredients';
+import { LoginNavigator } from './Login';
 
 export type RootStackParamList = {
     [RootScreens.MAIN]: undefined;
