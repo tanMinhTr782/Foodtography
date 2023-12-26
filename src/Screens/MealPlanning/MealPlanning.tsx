@@ -12,13 +12,14 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 
 import { styles } from './styles';
 import daysData from './days.json';
+import { RootScreens } from '..';
 
 export interface IHomeProps {
     data: User | undefined;
     isLoading: boolean;
 }
 
-export const MealPlanning = (props: IHomeProps) => {
+export const MealPlanning = (props: { onNavigate: (string: RootScreens) => void }) => {
     const [opens, setOpens] = useState(Array.from({ length: daysData.length }, () => false));
     const [open, setOpen] = useState(true);
 
@@ -124,18 +125,33 @@ export const MealPlanning = (props: IHomeProps) => {
                                             </Button>
                                             {/* opens[index] ? styles.hide : styles.mealDropdownMenu */}
                                             <View style={opens[index] ? styles.mealDropdownMenu : styles.hide}>
-                                                <View style={styles.mealDropdownItem}>
-                                                    <Ionicons name={'bookmark'} />
-                                                    <Text style={styles.mealDropdownText}>Add Saved Recipe</Text>
-                                                </View>
-                                                <View style={styles.mealDropdownItem}>
-                                                    <Ionicons name={'bookmark'} />
-                                                    <Text style={styles.mealDropdownText}>Add Saved Recipe</Text>
-                                                </View>
-                                                <View style={styles.mealDropdownItem}>
-                                                    <Ionicons name={'bookmark'} />
-                                                    <Text style={styles.mealDropdownText}>Add Saved Recipe</Text>
-                                                </View>
+                                                <Button style={styles.mealDropdownBtn}>
+                                                    <View style={styles.mealDropdownItem}>
+                                                        <Ionicons name={'bookmark'} />
+                                                        <Text style={styles.mealDropdownText}>Add Saved Recipe</Text>
+                                                    </View>
+                                                </Button>
+                                                <Button
+                                                    style={styles.mealDropdownBtn}
+                                                    onPress={() => {
+                                                        props.onNavigate(RootScreens.ADDRECIPEFROMSEARCH);
+                                                    }}
+                                                >
+                                                    <View style={styles.mealDropdownItem}>
+                                                        <Ionicons name={'search-outline'} />
+                                                        <Text style={styles.mealDropdownText}>
+                                                            Add Recipe From Search
+                                                        </Text>
+                                                    </View>
+                                                </Button>
+                                                <Button style={styles.mealDropdownBtn}>
+                                                    <View style={styles.mealDropdownItem}>
+                                                        <Ionicons name={'search-outline'} />
+                                                        <Text style={styles.mealDropdownText}>
+                                                            Add Recipe From Search
+                                                        </Text>
+                                                    </View>
+                                                </Button>
                                             </View>
                                         </View>
                                     </View>

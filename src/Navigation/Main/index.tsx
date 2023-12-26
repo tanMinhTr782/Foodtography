@@ -4,8 +4,8 @@ import { HomeContainer } from '@/Screens/Home';
 import { MealPlanningContainer } from '@/Screens/MealPlanning';
 import { SearchContainer } from '@/Screens/Search';
 
-import { RecipeDetailContainer } from "@/Screens/RecipeDetail/RecipeDetailContainer";
-import { CreateRecipeContainer } from "@/Screens/CreateRecipe/CreateRecipeContainer";
+import { RecipeDetailContainer } from '@/Screens/RecipeDetail/RecipeDetailContainer';
+import { CreateRecipeContainer } from '@/Screens/CreateRecipe/CreateRecipeContainer';
 
 const Tab = createBottomTabNavigator();
 
@@ -41,10 +41,10 @@ export const MainNavigator = () => {
                 name="CreateRecipe"
                 component={CreateRecipeContainer}
                 options={{
-                  tabBarIconStyle: { display: "none" },
-                  tabBarLabelPosition: "beside-icon",
+                    tabBarIconStyle: { display: 'none' },
+                    tabBarLabelPosition: 'beside-icon',
                 }}
-              />
+            />
         </Tab.Navigator>
     );
 };

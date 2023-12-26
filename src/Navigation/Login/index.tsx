@@ -27,7 +27,7 @@ export const LoginNavigator = () => {
                 <RootStack.Screen name={RootScreens.WELCOME} component={WelcomeContainer} />
                 <RootStack.Screen name={RootScreens.MAIN} component={MainNavigator} options={{}} />
                 <RootStack.Screen name={RootScreens.LOGIN} component={LoginContainer} />
-                {/* <RootStack.Screen name={RootScreens.SIGNUP} component={SignupContainer} /> */}
+                <RootStack.Screen name={RootScreens.SIGNUP} component={SignupContainer} />
             </RootStack.Navigator>
         </NavigationContainer>
     );

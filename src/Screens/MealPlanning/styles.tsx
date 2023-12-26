@@ -290,7 +290,7 @@ export const styles = StyleSheet.create({
         position: 'absolute',
         top: 40,
         right: 0,
-        width: 185,
+        width: 215,
         backgroundColor: Colors.WHITE,
         borderRadius: 10,
         paddingTop: 2,
@@ -310,10 +310,20 @@ export const styles = StyleSheet.create({
         padding: 10,
         paddingLeft: 10,
         paddingRight: 10,
+        width: 215,
     },
     mealDropdownText: {
         paddingLeft: 7,
         fontWeight: 'bold',
         color: Colors.GREENDARK,
+    },
+
+    mealDropdownBtn: {
+        backgroundColor: 'transparent',
+        paddingLeft: 0,
+        paddingRight: 0,
+        paddingTop: 0,
+        paddingBottom: 0,
+        width: '100%',
     },
 });
