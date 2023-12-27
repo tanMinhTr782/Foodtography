@@ -12,6 +12,7 @@ export enum Colors {
     TRANSPARENT = 'rgba(0,0,0,0)',
     INPUT_BACKGROUND = '#FFFFFF',
     WHITE = '#ffffff',
+    BLACK = '#000000',
     TEXT = '#212529',
     PRIMARY = '#E14032',
     SUCCESS = '#28a745',
@@ -19,6 +20,8 @@ export enum Colors {
     GREENDARK = '#3D7363',
     GREEN = '#8FD8C4',
     GREENLIGHT = '#84D9BA',
+    GRAY = '#ccc',
+    GRAYDARK = '#a4a4a4',
     YELLOW = '#F1B541',
     // GREENLIGHT2 = '84D9BA',
 }
