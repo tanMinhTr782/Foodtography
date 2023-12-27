@@ -5,4 +5,5 @@ export enum RootScreens {
     SIGNUP = 'Signup',
     SEARCH = 'Search',
     SEARCHBYINGREDIENTS = 'SearchByIngredients',
+    CREATERECIPES = 'CreateRecipeContainer', 
 }
