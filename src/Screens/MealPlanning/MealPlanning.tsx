@@ -13,6 +13,9 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import { styles } from './styles';
 import daysData from './days.json';
 import { RootScreens } from '..';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getMealsByWeek } from '@/API/meals';
+import { getCurrentUserId } from '@/API/auth';
 
 export interface IHomeProps {
     data: User | undefined;
@@ -22,12 +25,76 @@ export interface IHomeProps {
 export const MealPlanning = (props: { onNavigate: (string: RootScreens) => void }) => {
     const [opens, setOpens] = useState(Array.from({ length: daysData.length }, () => false));
     const [open, setOpen] = useState(true);
+    const [currentUser, setCurrentUser] = useState(null);
+    const [data, setData] = useState([]);
 
     const handleToggleMenu = (index: number) => {
         let newToggles = opens;
         newToggles[index] = !newToggles[index];
         setOpens(newToggles);
         setOpen(!open);
+    };
+
+    const checkDay = (time: string, day: string) => {
+        let date = new Date(time);
+        if (
+            (date.getDay() === 0 && day === 'Sunday') ||
+            (date.getDay() === 1 && day === 'Monday') ||
+            (date.getDay() === 2 && day === 'Tuesday') ||
+            (date.getDay() === 3 && day === 'Wednesday') ||
+            (date.getDay() === 4 && day === 'Thursday') ||
+            (date.getDay() === 5 && day === 'Friday') ||
+            (date.getDay() === 6 && day === 'Saturday')
+        )
+            return true;
+        else return false;
+    };
+
+    useEffect(() => {
+        const checkUser = async () => {
+            await AsyncStorage.setItem('currentMealId', '');
+
+            let userId = await getCurrentUserId();
+
+            if (userId) {
+                let currentTime = new Date();
+
+                const response = await getMealsByWeek(userId, currentTime.toISOString());
+
+                console.log('Response of getMealsByWeek: ' + JSON.stringify(response.data));
+                setData(response.data);
+            }
+        };
+        checkUser();
+    }, []);
+
+    const getMeal: any = (day: string, meals: any) => {
+        for (let i = 0; i < meals.length; i++) {
+            let mealDate = new Date(meals[i].time);
+            if (
+                (mealDate.getDay() === 0 && day === 'Sunday') ||
+                (mealDate.getDay() === 1 && day === 'Monday') ||
+                (mealDate.getDay() === 2 && day === 'Tuesday') ||
+                (mealDate.getDay() === 3 && day === 'Wednesday') ||
+                (mealDate.getDay() === 4 && day === 'Thursday') ||
+                (mealDate.getDay() === 5 && day === 'Friday') ||
+                (mealDate.getDay() === 6 && day === 'Saturday')
+            ) {
+                console.log('Meals: ', meals[i]);
+
+                return meals[i];
+            }
+        }
+        return null;
+    };
+
+    const handleNavigateAddRecipeForSearch = async (day: string) => {
+        const meal = getMeal(day, data);
+        if (meal !== null) {
+            await AsyncStorage.setItem('currentMealId', meal.meal.id);
+            // console.log(meal.meal.id);
+        }
+        props.onNavigate(RootScreens.ADDRECIPEFROMSEARCH);
     };
 
     return (
@@ -123,7 +190,6 @@ export const MealPlanning = (props: { onNavigate: (string: RootScreens) => void 
                                             <Button style={styles.mealButton2} onPress={() => handleToggleMenu(index)}>
                                                 <Text style={styles.mealButton2Text}>+ ADD</Text>
                                             </Button>
-                                            {/* opens[index] ? styles.hide : styles.mealDropdownMenu */}
                                             <View style={opens[index] ? styles.mealDropdownMenu : styles.hide}>
                                                 <Button style={styles.mealDropdownBtn}>
                                                     <View style={styles.mealDropdownItem}>
@@ -134,7 +200,7 @@ export const MealPlanning = (props: { onNavigate: (string: RootScreens) => void 
                                                 <Button
                                                     style={styles.mealDropdownBtn}
                                                     onPress={() => {
-                                                        props.onNavigate(RootScreens.ADDRECIPEFROMSEARCH);
+                                                        handleNavigateAddRecipeForSearch(day.name);
                                                     }}
                                                 >
                                                     <View style={styles.mealDropdownItem}>
@@ -155,94 +221,37 @@ export const MealPlanning = (props: { onNavigate: (string: RootScreens) => void 
                                             </View>
                                         </View>
                                     </View>
-                                    <View style={styles.mealMenu}>
-                                        <ScrollView horizontal={true} style={styles.dishScroll}>
-                                            <View style={styles.dishContainer}>
-                                                <View style={styles.dishImageContainer}>
-                                                    <Image
-                                                        style={styles.dishImage}
-                                                        source={require('../../../assets/sampleDish.jpg')}
-                                                    />
-                                                    <Text style={styles.dishImageText}>30min - $4.92 / serving</Text>
-                                                </View>
-                                                <View style={styles.dishInformationContainer}>
-                                                    <View style={styles.dishInformationVotes}>
-                                                        <Ionicons name="star" style={styles.dishIconStar} />
-                                                        <Ionicons name="star" style={styles.dishIconStar} />
-                                                        <Ionicons name="star" style={styles.dishIconStar} />
-                                                        <Ionicons name="star" style={styles.dishIconStar} />
-                                                        <Ionicons name="star" style={styles.dishIconStar} />
+                                    {getMeal(day.name, data) !== null && (
+                                        <View style={styles.mealMenu}>
+                                            <ScrollView horizontal={true} style={styles.dishScroll}>
+                                                {getMeal(day.name, data).recipes.map((recipe: any) => (
+                                                    <View style={styles.dishContainer}>
+                                                        <View style={styles.dishImageContainer}>
+                                                            <Image
+                                                                style={styles.dishImage}
+                                                                source={{
+                                                                    uri: recipe.image,
+                                                                }}
+                                                            />
+                                                            <Text style={styles.dishImageText}>
+                                                                30min - $4.92 / serving
+                                                            </Text>
+                                                        </View>
+                                                        <View style={styles.dishInformationContainer}>
+                                                            <View style={styles.dishInformationVotes}>
+                                                                <Ionicons name="star" style={styles.dishIconStar} />
+                                                                <Ionicons name="star" style={styles.dishIconStar} />
+                                                                <Ionicons name="star" style={styles.dishIconStar} />
+                                                                <Ionicons name="star" style={styles.dishIconStar} />
+                                                                <Ionicons name="star" style={styles.dishIconStar} />
+                                                            </View>
+                                                            <Text style={styles.dishName}>{recipe.name}</Text>
+                                                        </View>
                                                     </View>
-                                                    <Text style={styles.dishName}>
-                                                        Shrimp with Pineapple Mayonnaise Sauce
-                                                    </Text>
-                                                </View>
-                                            </View>
-                                            <View style={styles.dishContainer}>
-                                                <View style={styles.dishImageContainer}>
-                                                    <Image
-                                                        style={styles.dishImage}
-                                                        source={require('../../../assets/sampleDish.jpg')}
-                                                    />
-                                                    <Text style={styles.dishImageText}>30min - $4.92 / serving</Text>
-                                                </View>
-                                                <View style={styles.dishInformationContainer}>
-                                                    <View style={styles.dishInformationVotes}>
-                                                        <Ionicons name="star" style={styles.dishIconStar} />
-                                                        <Ionicons name="star" style={styles.dishIconStar} />
-                                                        <Ionicons name="star" style={styles.dishIconStar} />
-                                                        <Ionicons name="star" style={styles.dishIconStar} />
-                                                        <Ionicons name="star" style={styles.dishIconStar} />
-                                                    </View>
-                                                    <Text style={styles.dishName}>
-                                                        Shrimp with Pineapple Mayonnaise Sauce
-                                                    </Text>
-                                                </View>
-                                            </View>
-                                            <View style={styles.dishContainer}>
-                                                <View style={styles.dishImageContainer}>
-                                                    <Image
-                                                        style={styles.dishImage}
-                                                        source={require('../../../assets/sampleDish.jpg')}
-                                                    />
-                                                    <Text style={styles.dishImageText}>30min - $4.92 / serving</Text>
-                                                </View>
-                                                <View style={styles.dishInformationContainer}>
-                                                    <View style={styles.dishInformationVotes}>
-                                                        <Ionicons name="star" style={styles.dishIconStar} />
-                                                        <Ionicons name="star" style={styles.dishIconStar} />
-                                                        <Ionicons name="star" style={styles.dishIconStar} />
-                                                        <Ionicons name="star" style={styles.dishIconStar} />
-                                                        <Ionicons name="star" style={styles.dishIconStar} />
-                                                    </View>
-                                                    <Text style={styles.dishName}>
-                                                        Shrimp with Pineapple Mayonnaise Sauce
-                                                    </Text>
-                                                </View>
-                                            </View>
-                                            <View style={styles.dishContainer}>
-                                                <View style={styles.dishImageContainer}>
-                                                    <Image
-                                                        style={styles.dishImage}
-                                                        source={require('../../../assets/sampleDish.jpg')}
-                                                    />
-                                                    <Text style={styles.dishImageText}>30min - $4.92 / serving</Text>
-                                                </View>
-                                                <View style={styles.dishInformationContainer}>
-                                                    <View style={styles.dishInformationVotes}>
-                                                        <Ionicons name="star" style={styles.dishIconStar} />
-                                                        <Ionicons name="star" style={styles.dishIconStar} />
-                                                        <Ionicons name="star" style={styles.dishIconStar} />
-                                                        <Ionicons name="star" style={styles.dishIconStar} />
-                                                        <Ionicons name="star" style={styles.dishIconStar} />
-                                                    </View>
-                                                    <Text style={styles.dishName}>
-                                                        Shrimp with Pineapple Mayonnaise Sauce
-                                                    </Text>
-                                                </View>
-                                            </View>
-                                        </ScrollView>
-                                    </View>
+                                                ))}
+                                            </ScrollView>
+                                        </View>
+                                    )}
                                 </View>
                             );
                         })}

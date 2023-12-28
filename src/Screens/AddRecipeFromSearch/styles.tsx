@@ -67,7 +67,8 @@ export const styles = StyleSheet.create({
         width: '20%',
     },
     col5: {
-        width: '50%',
+        // width: '50%',
+        flex: 1,
     },
     row: {
         flexDirection: 'row',
@@ -78,17 +79,15 @@ export const styles = StyleSheet.create({
         justifyContent: 'flex-end',
     },
     dishContainer: {
-        // width: 230,
         borderRadius: 16,
         backgroundColor: Colors.WHITE,
         shadowColor: 'black',
         shadowOpacity: 0.1,
         shadowOffset: { width: 15, height: 15 },
         shadowRadius: 10,
-        elevation: -1,
-        marginBottom: 10,
-        marginLeft: 5,
-        marginRight: 5,
+        width: '100%',
+        padding: 0,
+        flex: 1,
     },
     dishImageContainer: {
         position: 'relative',
@@ -114,6 +113,7 @@ export const styles = StyleSheet.create({
         paddingTop: 5,
         paddingBottom: 5,
         paddingLeft: 10,
+        height: 80,
     },
     dishInformationVotes: {
         flexDirection: 'row',
@@ -135,5 +135,14 @@ export const styles = StyleSheet.create({
     py5: {
         paddingTop: 20,
         paddingBottom: 20,
+    },
+    btnClear: {
+        // backgroundColor: 'transparent',
+        paddingTop: 0,
+        paddingBottom: 10,
+        paddingLeft: 5,
+        paddingRight: 5,
+        width: '100%',
+        // flexDirection: undefined,
     },
 });

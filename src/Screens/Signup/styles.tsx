@@ -9,11 +9,11 @@ export const styles = StyleSheet.create({
     },
     topContainer: {
         backgroundColor: Colors.GREENDARK,
-        height: '62%',
+        height: '60%',
         elevation: -1,
         zIndex: -1,
         padding: 25,
-        paddingTop: 60,
+        paddingTop: 30,
     },
     backButton: {
         backgroundColor: 'transparent',
@@ -21,15 +21,15 @@ export const styles = StyleSheet.create({
         paddingRight: 0,
         paddingTop: 0,
         paddingBottom: 0,
-        width: 35,
+        justifyContent: 'flex-start',
     },
 
     backItem: {
-        fontSize: 30,
+        fontSize: 35,
         color: Colors.WHITE,
     },
 
-    title: { paddingTop: 30, fontSize: 28, color: Colors.WHITE, fontWeight: 'bold' },
+    title: { paddingTop: 20, fontSize: 28, color: Colors.WHITE, fontWeight: 'bold' },
     subTitle: { paddingTop: 20, fontSize: 15, color: Colors.WHITE },
     submitButton: {
         // padding: 100,
@@ -46,7 +46,8 @@ export const styles = StyleSheet.create({
 
     mainContainer: {
         backgroundColor: Colors.WHITE,
-        height: '43%',
+        height: '55%',
+        // height: 400,
         position: 'absolute',
         top: '30%',
         left: '6%',
@@ -77,7 +78,7 @@ export const styles = StyleSheet.create({
     formLabel: {
         position: 'absolute',
         left: 15,
-        top: 9,
+        top: '32%',
     },
     formIcon: {
         fontSize: 14,
@@ -85,11 +86,14 @@ export const styles = StyleSheet.create({
 
     bottomContainer: {
         backgroundColor: Colors.WHITE,
-        height: '50%',
+        height: '40%',
         elevation: -1,
         zIndex: -1,
-        padding: 25,
-        paddingTop: 125,
+        padding: 40,
+        // paddingTop: 200,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'flex-end',
     },
 
     bottomInnerContainer: {

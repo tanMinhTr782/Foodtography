@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
 export const login = async (info: Object) => {
@@ -21,7 +22,7 @@ export const signup = async (info: Object) => {
     console.log(info);
 
     return await axios
-        .post('https://foodtography-backend.vercel.app/auth/', info)
+        .post('https://foodtography-backend.vercel.app/auth', info)
         .then((response) => {
             console.log(response.data);
             return response.data;
@@ -31,4 +32,14 @@ export const signup = async (info: Object) => {
             return error.response;
         });
     // return response;
+};
+
+export const getCurrentUserId: any = async () => {
+    const user = await AsyncStorage.getItem('user');
+    if (user) {
+        let userId = JSON.parse(user).id;
+        console.log('UserId: ', userId);
+
+        return JSON.parse(user).id;
+    } else return '';
 };

@@ -195,8 +195,12 @@ export const styles = StyleSheet.create({
     // Menu
     mealPlanningContainer: {
         paddingTop: 5,
+        elevation: -1,
+        zIndex: -1,
     },
-    mealItemContainer: {},
+    mealItemContainer: {
+        elevation: -1,
+    },
     mealItem: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -238,7 +242,6 @@ export const styles = StyleSheet.create({
         shadowOpacity: 0.1,
         shadowOffset: { width: 15, height: 15 },
         shadowRadius: 10,
-        elevation: -1,
         marginBottom: 10,
         marginLeft: 5,
         marginRight: 5,
@@ -283,23 +286,26 @@ export const styles = StyleSheet.create({
         paddingBottom: 10,
     },
     mealDropdown: {
-        elevation: 100,
-        zIndex: 100,
+        // elevation: 6,
+        // zIndex: 6,
     },
     mealDropdownMenu: {
         position: 'absolute',
         top: 40,
         right: 0,
         width: 215,
-        backgroundColor: Colors.WHITE,
+        backgroundColor: Colors.GRAY,
         borderRadius: 10,
         paddingTop: 2,
         paddingBottom: 2,
         shadowColor: 'black',
         shadowOpacity: 0.2,
         shadowOffset: { width: 1, height: -1 },
-        shadowRadius: 10,
-        elevation: 10,
+        // shadowRadius: 10,
+        // elevation: -2,
+        elevation: 1000,
+        zIndex: 1000,
+        flex: 1,
     },
     hide: {
         display: 'none',

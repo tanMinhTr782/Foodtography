@@ -2,8 +2,14 @@ import { StyleSheet } from 'react-native';
 import { Colors } from '@/Theme/Variables';
 
 export const styles = StyleSheet.create({
+    container: {
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     welcomeImageContainer: {
-        width: 375,
+        width: '100%',
+        height: '70%',
     },
     welcomeImage: {
         width: '100%',
@@ -14,11 +20,14 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 40,
         backgroundColor: Colors.WHITE,
-        height: 240,
+        width: '100%',
+        height: '30%',
+        // height: 240,
+        // width: '40%',
     },
     welcomeButtonLogin: {
-        paddingLeft: 50,
-        paddingRight: 50,
+        // paddingLeft: 50,
+        // paddingRight: 50,
         borderRadius: 100,
         width: '100%',
         marginBottom: 20,
@@ -29,8 +38,6 @@ export const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     welcomeButtonSignup: {
-        paddingLeft: 50,
-        paddingRight: 50,
         borderRadius: 100,
         width: '100%',
         backgroundColor: Colors.WHITE,

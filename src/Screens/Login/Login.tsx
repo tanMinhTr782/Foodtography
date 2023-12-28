@@ -5,18 +5,26 @@ import { Button, Input } from 'native-base';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { RootScreens } from '..';
 import { login } from '@/API/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const Login = (props: { onNavigate: (string: RootScreens) => void }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [error, setError] = useState('');
 
     const handleLogin = async () => {
         const response = await login({ email, password });
+        if (response.statusCode === 200) {
+            await AsyncStorage.setItem('accessToken', response.data.accessToken);
+            await AsyncStorage.setItem('user', JSON.stringify(response.data));
+            props.onNavigate(RootScreens.MAIN);
+        } else if (response.statusCode === 401) {
+            setError('Wrong password');
+        } else if (response.statusCode === 404) {
+            setError('This email is not available');
+        }
 
-        // if (response.statusCode === 200) {
-        props.onNavigate(RootScreens.MAIN);
-        // }
-        // console.log(response);
+        console.log(response);
     };
 
     return (
@@ -34,6 +42,11 @@ export const Login = (props: { onNavigate: (string: RootScreens) => void }) => {
             </View>
             <View style={styles.mainContainer}>
                 <View style={styles.formControl}>
+                    {error && (
+                        <View style={styles.errorField}>
+                            <Text style={styles.errorText}>{error}</Text>
+                        </View>
+                    )}
                     <View style={styles.formField}>
                         <Input
                             type="text"

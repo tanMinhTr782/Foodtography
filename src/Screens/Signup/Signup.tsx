@@ -41,9 +41,11 @@ export const Signup = (props: { onNavigate: (string: RootScreens) => void }) => 
             </View>
             <View style={styles.mainContainer}>
                 <View style={styles.formControl}>
-                    <View style={styles.errorView}>
-                        <Text style={styles.errorText}>{error}</Text>
-                    </View>
+                    {error && (
+                        <View style={styles.errorView}>
+                            <Text style={styles.errorText}>{error}</Text>
+                        </View>
+                    )}
                     <View style={styles.formField}>
                         <Input
                             type="text"

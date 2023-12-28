@@ -13,7 +13,7 @@ export const styles = StyleSheet.create({
         elevation: -1,
         zIndex: -1,
         padding: 25,
-        paddingTop: 60,
+        paddingTop: 30,
     },
 
     backButton: {
@@ -22,19 +22,19 @@ export const styles = StyleSheet.create({
         paddingRight: 0,
         paddingTop: 0,
         paddingBottom: 0,
-        width: 35,
+        justifyContent: 'flex-start',
     },
 
     backItem: {
-        fontSize: 30,
+        fontSize: 35,
         color: Colors.WHITE,
     },
 
-    title: { paddingTop: 30, fontSize: 28, color: Colors.WHITE, fontWeight: 'bold' },
+    title: { paddingTop: 20, fontSize: 28, color: Colors.WHITE, fontWeight: 'bold' },
     subTitle: { paddingTop: 20, fontSize: 15, color: Colors.WHITE },
     submitButton: {
         width: 150,
-        marginTop: 10,
+        // marginTop: 10,
         borderRadius: 100,
         backgroundColor: Colors.GREENDARK,
     },
@@ -46,7 +46,7 @@ export const styles = StyleSheet.create({
 
     mainContainer: {
         backgroundColor: Colors.WHITE,
-        height: '30%',
+        height: 260,
         position: 'absolute',
         top: '30%',
         left: '6%',
@@ -77,10 +77,18 @@ export const styles = StyleSheet.create({
     formLabel: {
         position: 'absolute',
         left: 15,
-        top: 9,
+        top: '35%',
+        // transform: [{ translateY: -10 }],
     },
     formIcon: {
         fontSize: 14,
+    },
+    errorField: {
+        paddingBottom: 15,
+    },
+    errorText: {
+        color: Colors.PRIMARY,
+        fontWeight: 'bold',
     },
 
     bottomContainer: {
