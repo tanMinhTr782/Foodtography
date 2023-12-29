@@ -66,7 +66,6 @@ export const styles = StyleSheet.create({
         color: Colors.GREENDARK,
         fontWeight: 'bold',
         fontSize: 18, 
-        fontFamily: 'Poppins'
     },
     container: {
         flex: 1, 
