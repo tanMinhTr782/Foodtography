@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StatusBar } from 'react-native';
 import { NativeStackScreenProps, createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
@@ -10,6 +11,8 @@ import { SignupContainer } from '@/Screens/Signup';
 import { SearchContainer } from '@/Screens/Search';
 import { SearchByIngredientsContainer } from '@/Screens/SearchByIngredients';
 import { CreateRecipeContainer } from '@/Screens/CreateRecipe/CreateRecipeContainer';
+import { OnboardingContainer } from '@/Screens/Onboarding/OnboardingContainer';
+
 export type RootStackParamList = {
     [RootScreens.MAIN]: undefined;
     [RootScreens.WELCOME]: undefined;
@@ -18,17 +21,32 @@ export type RootStackParamList = {
     [RootScreens.SEARCH]: undefined;
     [RootScreens.SEARCHBYINGREDIENTS]: undefined;
     [RootScreens.CREATERECIPES]: undefined;
-
+    [RootScreens.ONBOARDING]: undefined;
 };
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 // @refresh reset
 const ApplicationNavigator = () => {
-    return (
-        <NavigationContainer>
+    const [firstLaunch, setFirstLaunch] = useState<Boolean>(true); 
+    useEffect (() => {
+        async function setData()  {
+            const appData = await AsyncStorage.getItem("appLaunched"); 
+            if (appData == null) {
+                setFirstLaunch(true); 
+                AsyncStorage.setItem("appLaunched", "true"); 
+            }
+            else {
+                setFirstLaunch(false); 
+            }
+        }
+        setData(); 
+    }, []); 
+        return (
+            <NavigationContainer>
             <StatusBar />
             <RootStack.Navigator screenOptions={{ headerShown: false }}>
+                {firstLaunch && <RootStack.Screen name={RootScreens.ONBOARDING} component={OnboardingContainer}/>}
                 <RootStack.Screen name={RootScreens.WELCOME} component={WelcomeContainer} />
                 <RootStack.Screen name={RootScreens.MAIN} component={MainNavigator} options={{}} />
                 <RootStack.Screen name={RootScreens.LOGIN} component={LoginContainer} />
@@ -38,7 +56,8 @@ const ApplicationNavigator = () => {
                 <RootStack.Screen name={RootScreens.CREATERECIPES} component={CreateRecipeContainer} />
             </RootStack.Navigator>
         </NavigationContainer>
-    );
+        )
+
 };
 
 export { ApplicationNavigator };

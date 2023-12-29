@@ -4,6 +4,7 @@ import { Colors } from '@/Theme/Variables';
 export const styles = StyleSheet.create({
     welcomeImageContainer: {
         width: 375,
+        marginTop: -40,
     },
     welcomeImage: {
         width: '100%',
@@ -12,9 +13,10 @@ export const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 40,
+        paddingLeft: 40,
+        paddingRight: 40,
+        paddingTop: 30,
         backgroundColor: Colors.WHITE,
-        height: 240,
     },
     welcomeButtonLogin: {
         paddingLeft: 50,

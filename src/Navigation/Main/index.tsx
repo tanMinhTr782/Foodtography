@@ -8,8 +8,7 @@ import { MealPlanningContainer } from '@/Screens/MealPlanning';
 import { SearchContainer } from '@/Screens/Search';
 
 import {MaterialIcons} from '@expo/vector-icons'; 
-import { RecipeDetailContainer } from "@/Screens/RecipeDetail/RecipeDetailContainer";
-import { CreateRecipeContainer } from "@/Screens/CreateRecipe/CreateRecipeContainer";
+import { OnboardingContainer } from "@/Screens/Onboarding/OnboardingContainer";
 
 // import {
 //   Menu,
