@@ -15,7 +15,7 @@ export const Login = (props: { onNavigate: (string: RootScreens) => void }) => {
     const handleLogin = async () => {
         const response = await login({ email, password });
         if (response.statusCode === 200) {
-            await AsyncStorage.setItem('accessToken', response.data.accessToken);
+            // await AsyncStorage.setItem('accessToken', response.data.accessToken);
             await AsyncStorage.setItem('user', JSON.stringify(response.data));
             props.onNavigate(RootScreens.MAIN);
         } else if (response.statusCode === 401) {

@@ -164,6 +164,17 @@ export const styles = StyleSheet.create({
         marginTop: 5,
     },
     mealSubHeaderDayContainer: {
+        backgroundColor: Colors.WHITE,
+        padding: 4,
+        borderRadius: 100,
+        width: 40,
+        height: 40,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        cursor: 'pointer',
+    },
+    mealSubHeaderDayContainerActive: {
         backgroundColor: Colors.GREENDARK,
         padding: 4,
         borderRadius: 100,
@@ -172,8 +183,14 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
+        cursor: 'pointer',
     },
     mealSubHeaderDay: {
+        color: Colors.GREENDARK,
+        textAlign: 'center',
+        fontWeight: 'bold',
+    },
+    mealSubHeaderDayActive: {
         color: Colors.WHITE,
         textAlign: 'center',
         fontWeight: 'bold',

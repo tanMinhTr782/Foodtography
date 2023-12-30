@@ -1,6 +1,6 @@
 import { i18n, LocalizationKey } from '@/Localization';
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TouchableHighlight, SafeAreaView, Image } from 'react-native';
+import { View, Text, StyleSheet, TouchableHighlight, SafeAreaView, Image, TouchableOpacity } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { HStack, Spinner, Heading, Button, ScrollView } from 'native-base';
 import { User } from '@/Services';
@@ -8,65 +8,62 @@ import { User } from '@/Services';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
-import AntDesign from '@expo/vector-icons/AntDesign';
 
 import { styles } from './styles';
 import daysData from './days.json';
 import { RootScreens } from '..';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { getMealsByWeek } from '@/API/meals';
+import { createMealPlanning, getMealsByWeek } from '@/API/meals';
 import { getCurrentUserId } from '@/API/auth';
 
-export interface IHomeProps {
-    data: User | undefined;
-    isLoading: boolean;
-}
-
-export const MealPlanning = (props: { onNavigate: (string: RootScreens) => void }) => {
-    const [opens, setOpens] = useState(Array.from({ length: daysData.length }, () => false));
-    const [open, setOpen] = useState(true);
-    const [currentUser, setCurrentUser] = useState(null);
+export const MealPlanning = (props: {
+    onNavigate: (string: RootScreens) => void;
+    onReplace: (string: RootScreens) => void;
+}) => {
     const [data, setData] = useState([]);
-
-    const handleToggleMenu = (index: number) => {
-        let newToggles = opens;
-        newToggles[index] = !newToggles[index];
-        setOpens(newToggles);
-        setOpen(!open);
-    };
-
-    const checkDay = (time: string, day: string) => {
-        let date = new Date(time);
-        if (
-            (date.getDay() === 0 && day === 'Sunday') ||
-            (date.getDay() === 1 && day === 'Monday') ||
-            (date.getDay() === 2 && day === 'Tuesday') ||
-            (date.getDay() === 3 && day === 'Wednesday') ||
-            (date.getDay() === 4 && day === 'Thursday') ||
-            (date.getDay() === 5 && day === 'Friday') ||
-            (date.getDay() === 6 && day === 'Saturday')
-        )
-            return true;
-        else return false;
-    };
+    const [times, setTimes] = useState<string[]>([]);
+    const [nowDate, setNowDate] = useState<string>('2023-12-30');
 
     useEffect(() => {
-        const checkUser = async () => {
-            await AsyncStorage.setItem('currentMealId', '');
+        const handleData = async () => {
+            // await AsyncStorage.removeItem('currentMealId');
 
             let userId = await getCurrentUserId();
 
             if (userId) {
-                let currentTime = new Date();
+                let currentTime = new Date(nowDate);
 
                 const response = await getMealsByWeek(userId, currentTime.toISOString());
 
-                console.log('Response of getMealsByWeek: ' + JSON.stringify(response.data));
                 setData(response.data);
             }
         };
-        checkUser();
-    }, []);
+        const intervalId = setInterval(async () => {
+            handleData();
+        }, 3000);
+
+        return () => {
+            clearInterval(intervalId);
+        };
+    }, [nowDate]);
+
+    const getTime: (dayIndex: number) => any = (dayIndex: number) => {
+        let currentDate = new Date(nowDate);
+
+        if (currentDate.getDay() === dayIndex) {
+            return currentDate.toISOString();
+        } else if (currentDate.getDay() === 0) {
+            currentDate.setDate(currentDate.getDate() - (7 - dayIndex));
+        } else if (dayIndex === 0) {
+            currentDate.setDate(currentDate.getDate() + (7 - currentDate.getDay()));
+        } else if (currentDate.getDay() < dayIndex) {
+            currentDate.setDate(currentDate.getDate() + (dayIndex - currentDate.getDay()));
+        } else if (currentDate.getDay() > dayIndex) {
+            currentDate.setDate(currentDate.getDate() - (-dayIndex + currentDate.getDay()));
+        }
+
+        return currentDate.toISOString();
+    };
 
     const getMeal: any = (day: string, meals: any) => {
         for (let i = 0; i < meals.length; i++) {
@@ -80,21 +77,169 @@ export const MealPlanning = (props: { onNavigate: (string: RootScreens) => void 
                 (mealDate.getDay() === 5 && day === 'Friday') ||
                 (mealDate.getDay() === 6 && day === 'Saturday')
             ) {
-                console.log('Meals: ', meals[i]);
-
                 return meals[i];
             }
         }
         return null;
     };
 
-    const handleNavigateAddRecipeForSearch = async (day: string) => {
+    const handleNavigateAddRecipeForSearch = async (day: string, dayIndex: number) => {
+        console.log('day: ', day);
+        console.log('date: ', getTime(dayIndex));
+        await AsyncStorage.setItem('mealTime', getTime(dayIndex));
+
         const meal = getMeal(day, data);
+        console.log('Check meal at navigation: ', meal);
+
         if (meal !== null) {
-            await AsyncStorage.setItem('currentMealId', meal.meal.id);
-            // console.log(meal.meal.id);
+            await AsyncStorage.setItem('currentMealId', meal.id);
+        } else {
+            await AsyncStorage.removeItem('currentMealId');
         }
+        const checkMeal = await AsyncStorage.getItem('currentMealId');
+        console.log('checkMeal: ', checkMeal);
         props.onNavigate(RootScreens.ADDRECIPEFROMSEARCH);
+    };
+
+    const handleCreatePlanning = async () => {
+        let userId = (await getCurrentUserId()) || '';
+
+        const response = await createMealPlanning(userId, times);
+        console.log(response);
+    };
+
+    const handleChooseTime = (dayIndex: number) => {
+        let time: string = getTime(dayIndex).split('T')[0];
+
+        let index = times.indexOf(time);
+
+        if (index === -1) {
+            setTimes((prev) => [...prev, time]);
+        } else {
+            setTimes((prev) => prev.filter((t) => t !== time));
+        }
+    };
+
+    const checkTime = (dayIndex: number) => {
+        let time: string = getTime(dayIndex).split('T')[0];
+
+        if (times.indexOf(time) === -1) {
+            return false;
+        } else return true;
+    };
+
+    const handlePrevWeek = () => {
+        let prevWeek = new Date(nowDate);
+        prevWeek.setDate(prevWeek.getDate() - 7);
+        setNowDate(prevWeek.toISOString());
+    };
+
+    const handleNextWeek = () => {
+        let nextWeek = new Date(nowDate);
+        nextWeek.setDate(nextWeek.getDate() + 7);
+        setNowDate(nextWeek.toISOString());
+    };
+
+    const getStartTime: (time: string) => any = (time: string) => {
+        const thisTime = new Date(time);
+
+        if (thisTime.getDay() === 0) {
+            thisTime.setDate(thisTime.getDate() - 6);
+            return thisTime.toISOString();
+        } else if (thisTime.getDay() === 1) return time;
+        else if (thisTime.getDay() === 2) {
+            thisTime.setDate(thisTime.getDate() - 1);
+            return thisTime.toISOString();
+        } else if (thisTime.getDay() === 3) {
+            thisTime.setDate(thisTime.getDate() - 2);
+            return thisTime.toISOString();
+        } else if (thisTime.getDay() === 4) {
+            thisTime.setDate(thisTime.getDate() - 3);
+            return thisTime.toISOString();
+        } else if (thisTime.getDay() === 5) {
+            thisTime.setDate(thisTime.getDate() - 4);
+            return thisTime.toISOString();
+        } else if (thisTime.getDay() === 6) {
+            thisTime.setDate(thisTime.getDate() - 5);
+            return thisTime.toISOString();
+        }
+    };
+
+    const getEndTime: (time: string) => any = (time: string) => {
+        const thisTime = new Date(time);
+
+        if (thisTime.getDay() === 0) {
+            return time;
+        } else if (thisTime.getDay() === 1) {
+            thisTime.setDate(thisTime.getDate() + 6);
+            return thisTime.toISOString();
+        } else if (thisTime.getDay() === 2) {
+            thisTime.setDate(thisTime.getDate() + 5);
+            return thisTime.toISOString();
+        } else if (thisTime.getDay() === 3) {
+            thisTime.setDate(thisTime.getDate() + 4);
+            return thisTime.toISOString();
+        } else if (thisTime.getDay() === 4) {
+            thisTime.setDate(thisTime.getDate() + 3);
+            return thisTime.toISOString();
+        } else if (thisTime.getDay() === 5) {
+            thisTime.setDate(thisTime.getDate() + 2);
+            return thisTime.toISOString();
+        } else if (thisTime.getDay() === 6) {
+            thisTime.setDate(thisTime.getDate() + 1);
+            return thisTime.toISOString();
+        }
+    };
+
+    const monthNames = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
+    ];
+
+    const handleNameOfWeek = () => {
+        const thisDate = new Date();
+        let startDate = new Date(getStartTime(thisDate.toISOString()));
+        let endDate = new Date(getEndTime(thisDate.toISOString()));
+        const currentDate = new Date(nowDate);
+        console.log('--------------');
+
+        if (currentDate >= startDate && currentDate <= endDate) return 'This Week';
+        else if (currentDate < startDate) {
+            startDate.setDate(startDate.getDate() - 7);
+            endDate.setDate(endDate.getDate() - 7);
+            if (currentDate >= startDate && currentDate <= endDate) return 'Last Week';
+            else {
+                startDate = new Date(getStartTime(nowDate));
+                endDate = new Date(getEndTime(nowDate));
+                return `${monthNames[startDate.getMonth()]} ${startDate.getDate()} - ${
+                    monthNames[endDate.getMonth()]
+                } ${endDate.getDate()}`;
+            }
+        } else if (currentDate > endDate) {
+            startDate.setDate(startDate.getDate() + 7);
+            endDate.setDate(endDate.getDate() + 7);
+            if (currentDate >= startDate && currentDate <= endDate) return 'Next Week';
+            else {
+                startDate = new Date(getStartTime(nowDate));
+                endDate = new Date(getEndTime(nowDate));
+                console.log('startDate: ', startDate.getMonth());
+                console.log('endDate: ', endDate.toISOString());
+
+                return `${monthNames[startDate.getMonth()]} ${startDate.getDate()} - ${
+                    monthNames[endDate.getMonth()]
+                } ${endDate.getDate()}`;
+            }
+        }
     };
 
     return (
@@ -156,29 +301,49 @@ export const MealPlanning = (props: { onNavigate: (string: RootScreens) => void 
 
                     <View style={styles.mealHeader}>
                         <View style={styles.mealHeaderIcon}>
-                            <Ionicons name="chevron-back-outline" size={25} color="#3d7363" />
-                            <Text style={styles.mealHeaderTitle}>This Week</Text>
-                            <Ionicons name="chevron-forward-outline" size={25} color="#3d7363" />
+                            <TouchableOpacity onPress={handlePrevWeek}>
+                                <Ionicons name="chevron-back-outline" size={25} color="#3d7363" />
+                            </TouchableOpacity>
+                            <Text style={styles.mealHeaderTitle}>{handleNameOfWeek()}</Text>
+                            <TouchableOpacity onPress={handleNextWeek}>
+                                <Ionicons name="chevron-forward-outline" size={25} color="#3d7363" />
+                            </TouchableOpacity>
                         </View>
                     </View>
 
-                    <View style={styles.mealSubHeader}>
-                        <Text style={styles.mealSubHeaderTitle}>Ready to plan this week?</Text>
-                        <View style={styles.mealSubHeaderDays}>
-                            {daysData.map((day, index) => {
-                                return (
-                                    <View style={styles.mealSubHeaderDayContainer}>
-                                        <Text key={index} style={styles.mealSubHeaderDay}>
-                                            {day.shortName}
-                                        </Text>
-                                    </View>
-                                );
-                            })}
+                    {data.length === 0 && (
+                        <View style={styles.mealSubHeader}>
+                            <Text style={styles.mealSubHeaderTitle}>Ready to plan this week?</Text>
+                            <View style={styles.mealSubHeaderDays}>
+                                {daysData.map((day, index) => {
+                                    return (
+                                        <TouchableOpacity
+                                            style={
+                                                checkTime(day.id)
+                                                    ? styles.mealSubHeaderDayContainerActive
+                                                    : styles.mealSubHeaderDayContainer
+                                            }
+                                            onPress={() => handleChooseTime(day.id)}
+                                        >
+                                            <Text
+                                                key={day.id}
+                                                style={
+                                                    checkTime(day.id)
+                                                        ? styles.mealSubHeaderDayActive
+                                                        : styles.mealSubHeaderDay
+                                                }
+                                            >
+                                                {day.shortName}
+                                            </Text>
+                                        </TouchableOpacity>
+                                    );
+                                })}
+                            </View>
+                            <Button style={styles.mealSubHeaderButton1} onPress={handleCreatePlanning}>
+                                <Text style={styles.mealSubHeaderButton1Text}>START MY PLAN</Text>
+                            </Button>
                         </View>
-                        <Button style={styles.mealSubHeaderButton1}>
-                            <Text style={styles.mealSubHeaderButton1Text}>START MY PLAN</Text>
-                        </Button>
-                    </View>
+                    )}
 
                     <View style={styles.mealPlanningContainer}>
                         {daysData.map((day, index) => {
@@ -187,38 +352,14 @@ export const MealPlanning = (props: { onNavigate: (string: RootScreens) => void 
                                     <View style={styles.mealItem}>
                                         <Text style={styles.mealText}>{day.name}</Text>
                                         <View style={styles.mealDropdown}>
-                                            <Button style={styles.mealButton2} onPress={() => handleToggleMenu(index)}>
+                                            <Button
+                                                style={styles.mealButton2}
+                                                onPress={() => {
+                                                    handleNavigateAddRecipeForSearch(day.name, day.id);
+                                                }}
+                                            >
                                                 <Text style={styles.mealButton2Text}>+ ADD</Text>
                                             </Button>
-                                            <View style={opens[index] ? styles.mealDropdownMenu : styles.hide}>
-                                                <Button style={styles.mealDropdownBtn}>
-                                                    <View style={styles.mealDropdownItem}>
-                                                        <Ionicons name={'bookmark'} />
-                                                        <Text style={styles.mealDropdownText}>Add Saved Recipe</Text>
-                                                    </View>
-                                                </Button>
-                                                <Button
-                                                    style={styles.mealDropdownBtn}
-                                                    onPress={() => {
-                                                        handleNavigateAddRecipeForSearch(day.name);
-                                                    }}
-                                                >
-                                                    <View style={styles.mealDropdownItem}>
-                                                        <Ionicons name={'search-outline'} />
-                                                        <Text style={styles.mealDropdownText}>
-                                                            Add Recipe From Search
-                                                        </Text>
-                                                    </View>
-                                                </Button>
-                                                <Button style={styles.mealDropdownBtn}>
-                                                    <View style={styles.mealDropdownItem}>
-                                                        <Ionicons name={'search-outline'} />
-                                                        <Text style={styles.mealDropdownText}>
-                                                            Add Recipe From Search
-                                                        </Text>
-                                                    </View>
-                                                </Button>
-                                            </View>
                                         </View>
                                     </View>
                                     {getMeal(day.name, data) !== null && (

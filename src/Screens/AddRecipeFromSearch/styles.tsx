@@ -67,8 +67,8 @@ export const styles = StyleSheet.create({
         width: '20%',
     },
     col5: {
-        // width: '50%',
-        flex: 1,
+        width: '50%',
+        // flex: 1,
     },
     row: {
         flexDirection: 'row',

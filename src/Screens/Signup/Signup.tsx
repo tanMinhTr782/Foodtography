@@ -5,6 +5,7 @@ import { Button, Input } from 'native-base';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { RootScreens } from '..';
 import { signup } from '@/API/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const Signup = (props: { onNavigate: (string: RootScreens) => void }) => {
     const [email, setEmail] = useState('');
@@ -17,7 +18,8 @@ export const Signup = (props: { onNavigate: (string: RootScreens) => void }) => 
         const response = await signup({ email, password, name, avatar });
         console.log(response);
 
-        if (response.statusCode === '200') {
+        if (response.statusCode === 200) {
+            await AsyncStorage.setItem('user', JSON.stringify(response.data));
             props.onNavigate(RootScreens.MAIN);
         } else {
             setError('Username already exists');

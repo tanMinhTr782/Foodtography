@@ -10,7 +10,9 @@ export const MealPlanningContainer = (props: any) => {
         props.navigation.navigate(screen);
     };
 
-    useEffect(() => {}, []);
+    const onReplace = (screen: RootScreens) => {
+        props.navigation.replace(screen);
+    };
 
-    return <MealPlanning onNavigate={onNavigate} />;
+    return <MealPlanning onNavigate={onNavigate} onReplace={onReplace} />;
 };

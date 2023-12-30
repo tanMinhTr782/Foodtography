@@ -11,8 +11,11 @@ import { getRecipes } from '@/API/recipes';
 import { getCurrentUserId } from '@/API/auth';
 import { addNewMealRecipe } from '@/API/meals';
 
-export const AddRecipeFromSearch = (props: { onNavigate: (string: RootScreens) => void }) => {
-    const [mealId, setMealId] = useState('');
+export const AddRecipeFromSearch = (props: {
+    onNavigate: (string: RootScreens) => void;
+    onGoBack: () => void;
+    onReplace: (string: RootScreens) => void;
+}) => {
     const [recipes, setRecipes] = useState([
         {
             id: 'f9851b03-8d74-472e-8e2f-3e105c178673',
@@ -29,12 +32,7 @@ export const AddRecipeFromSearch = (props: { onNavigate: (string: RootScreens) =
 
     useEffect(() => {
         const handleData = async () => {
-            const checkMealId = await AsyncStorage.getItem('currentMealId');
-            console.log('MealId: ', checkMealId);
-            if (checkMealId) setMealId(checkMealId);
-
             const response = await getRecipes();
-            console.log(response);
             setRecipes(response);
         };
         handleData();
@@ -42,12 +40,23 @@ export const AddRecipeFromSearch = (props: { onNavigate: (string: RootScreens) =
 
     const handleAddNewRecipe = async (recipeId: string) => {
         const userId = await getCurrentUserId();
-        console.log('RecipeId: ', recipeId);
+        let mealId = await AsyncStorage.getItem('currentMealId');
+        let mealTime = await AsyncStorage.getItem('mealTime');
 
-        const response = await addNewMealRecipe(userId, mealId, recipeId);
+        console.log('RecipeId: ', recipeId);
+        console.log('MealId: ', mealId);
+        console.log('MealTime: ', mealTime);
+
+        if (!mealId) mealId = '';
+        if (!mealTime) mealTime = '';
+
+        const response = await addNewMealRecipe(userId, mealId, recipeId, mealTime);
         console.log(response);
         if (response.statusCode === 200) {
-            props.onNavigate(RootScreens.MEALPLANNING);
+            await AsyncStorage.removeItem('currentMealId');
+            await AsyncStorage.removeItem('mealTime');
+            props.onGoBack();
+            // props.onReplace(RootScreens.MEALPLANNING);
         }
     };
 
@@ -76,8 +85,11 @@ export const AddRecipeFromSearch = (props: { onNavigate: (string: RootScreens) =
                         <View style={styles.closeContainer}>
                             <Button
                                 style={styles.closeButton}
-                                onPress={() => {
-                                    props.onNavigate(RootScreens.MEALPLANNING);
+                                onPress={async () => {
+                                    await AsyncStorage.removeItem('currentMealId');
+                                    await AsyncStorage.removeItem('mealTime');
+                                    // props.onReplace(RootScreens.MEALPLANNING);
+                                    props.onGoBack();
                                 }}
                             >
                                 <View>

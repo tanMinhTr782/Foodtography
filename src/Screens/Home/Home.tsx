@@ -18,10 +18,8 @@ export interface IHomeProps {
 }
 
 export const Home = (props: { onNavigate: (string: RootScreens) => void }) => {
-    // const { data, isLoading } = props;
     const handleLogout = async () => {
-        await AsyncStorage.setItem('user', '');
-        await AsyncStorage.setItem('accessToken', '');
+        await AsyncStorage.removeItem('user');
         props.onNavigate(RootScreens.LOGIN);
     };
 
