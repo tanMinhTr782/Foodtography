@@ -1,22 +1,33 @@
 import { i18n, LocalizationKey } from "@/Localization";
 import React from "react";
-import { View, Text, StyleSheet, TouchableHighlight } from "react-native";
+import { View, Text, StyleSheet, TouchableHighlight, TouchableOpacity} from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { HStack, Spinner, Heading } from "native-base";
 import { User } from "@/Services";
-
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { useNavigation } from "@react-navigation/native";
+import { RootScreens } from '..';
+import { RootStackParamList } from '@/Navigation';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+
+type CreateRecipeNavigatorProps = NativeStackNavigationProp<RootStackParamList, RootScreens.CREATERECIPES>;
+type CreateSettingsNavigatorProps = NativeStackNavigationProp<RootStackParamList, RootScreens.SETTINGS>;
 
 export interface IHomeProps {
   data: User | undefined;
   isLoading: boolean;
+  
 }
 
 export const Home = (props: IHomeProps) => {
   const { data, isLoading } = props;
+  const navigation1 = useNavigation<CreateRecipeNavigatorProps>(); 
+  const navigation2 = useNavigation<CreateSettingsNavigatorProps>(); 
+
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
@@ -24,10 +35,18 @@ export const Home = (props: IHomeProps) => {
       <View style={styles.headerContainer}>
         <View style={styles.iconsWrap}>
           <View style={styles.iconContainer}>
+          <TouchableOpacity
+                onPress = {() => navigation2.navigate(RootScreens.SETTINGS)}
+              >
             <Ionicons name="person-circle-sharp" size={40} color="black" />
+            </TouchableOpacity>
           </View>
           <View style={styles.iconContainer}>
-            <MaterialCommunityIcons name="bell" size={32} color="black" />
+              <TouchableOpacity
+                onPress = {() => navigation1.navigate(RootScreens.CREATERECIPES)}
+              >
+                <Ionicons name="create" size={32} color="black" />
+              </TouchableOpacity>
           </View>
         </View>
         <View style={styles.bookmarkCartContainer}>

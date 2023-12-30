@@ -20,6 +20,9 @@ export enum Colors {
     GREEN = '#8FD8C4',
     GREENLIGHT = '#84D9BA',
     YELLOW = '#F1B541',
+    GREENLIGHT_MORELIGHT = '#99FF33', 
+    BLACK = '#FFFFFF'
+
     // GREENLIGHT2 = '84D9BA',
 }
 
