@@ -15,7 +15,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 
 type CreateRecipeNavigatorProps = NativeStackNavigationProp<RootStackParamList, RootScreens.CREATERECIPES>;
-type CreateOnboardingProps = NativeStackNavigationProp<RootStackParamList, RootScreens.ONBOARDING>;
+type CreateSettingsNavigatorProps = NativeStackNavigationProp<RootStackParamList, RootScreens.SETTINGS>;
 
 export interface IHomeProps {
   data: User | undefined;
@@ -26,7 +26,7 @@ export interface IHomeProps {
 export const Home = (props: IHomeProps) => {
   const { data, isLoading } = props;
   const navigation1 = useNavigation<CreateRecipeNavigatorProps>(); 
-  const navigation2 = useNavigation<CreateRecipeNavigatorProps>(); 
+  const navigation2 = useNavigation<CreateSettingsNavigatorProps>(); 
 
   return (
     <View style={styles.container}>
@@ -35,7 +35,11 @@ export const Home = (props: IHomeProps) => {
       <View style={styles.headerContainer}>
         <View style={styles.iconsWrap}>
           <View style={styles.iconContainer}>
+          <TouchableOpacity
+                onPress = {() => navigation2.navigate(RootScreens.SETTINGS)}
+              >
             <Ionicons name="person-circle-sharp" size={40} color="black" />
+            </TouchableOpacity>
           </View>
           <View style={styles.iconContainer}>
               <TouchableOpacity
