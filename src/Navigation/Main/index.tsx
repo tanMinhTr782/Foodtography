@@ -40,7 +40,7 @@ export const MainNavigator = () => {
                 } else if (route.name === "Meal Plan") {
                   iconName = focused ? "calendar-today": "calendar-today";
                 }
-                else if (route.name === 'Photo To Recipe') {
+                else if (route.name === 'Search by Photo') {
                   iconName = focused ? "image-search": "image-search";
                 }
                 else if (route.name === 'Search') {
@@ -78,7 +78,7 @@ export const MainNavigator = () => {
                 }}
             />
             <Tab.Screen
-                name="Photo To Recipe"
+                name="Search by Photo"
                 component={SearchContainer}
                 options={{
                   // tabBarIconStyle: { display: "none" },

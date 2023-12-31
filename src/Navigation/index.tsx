@@ -13,6 +13,7 @@ import { SearchByIngredientsContainer } from '@/Screens/SearchByIngredients';
 import { CreateRecipeContainer } from '@/Screens/CreateRecipe/CreateRecipeContainer';
 import { OnboardingContainer } from '@/Screens/Onboarding/OnboardingContainer';
 import { SettingsContainer } from '@/Screens/Settings/SettingsContainer';
+import {EditProfileContainer} from '@/Screens/EditProfile/EditProfileContainer'; 
 export type RootStackParamList = {
     [RootScreens.MAIN]: undefined;
     [RootScreens.WELCOME]: undefined;
@@ -23,6 +24,7 @@ export type RootStackParamList = {
     [RootScreens.CREATERECIPES]: undefined;
     [RootScreens.ONBOARDING]: undefined;
     [RootScreens.SETTINGS]: undefined;
+    [RootScreens.EDITPROFILE]: undefined;
 };
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
@@ -56,6 +58,7 @@ const ApplicationNavigator = () => {
                 <RootStack.Screen name={RootScreens.SEARCHBYINGREDIENTS} component={SearchByIngredientsContainer} />
                 <RootStack.Screen name={RootScreens.CREATERECIPES} component={CreateRecipeContainer} />
                 <RootStack.Screen name={RootScreens.SETTINGS} component={SettingsContainer} />
+                <RootStack.Screen name={RootScreens.EDITPROFILE} component={EditProfileContainer} />
             </RootStack.Navigator>
         </NavigationContainer>
         )

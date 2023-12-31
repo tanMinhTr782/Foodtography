@@ -55,7 +55,7 @@ export const Settings = () => {
           <Text style={styles.userName}>Lê Văn Bằng </Text>
         </View>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate(RootScreens.EDITPROFILE)}>
           <View style={styles.componentContainers}>
             <Ionicons name="md-person-outline" size={24} color="black" />
             <Text style={styles.componentText}> Edit profile </Text>
