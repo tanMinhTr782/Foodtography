@@ -31,6 +31,11 @@ export const EditProfile = () => {
   const [password, setPassword] = useState('#thisis2024');
   const imageDataURL = 'https://res.cloudinary.com/dwfejy00u/image/upload/v1704003579/sampleDish_ovn9ux.jpg';
   const [selectedImage, setSelectedImage] = useState(imageDataURL);
+
+  const getUser = async () => {
+    console.log(await AsyncStorage.getItem('user'))
+  }
+
   const handleSubmit = async () => {
     const user = { name: name }
     const pw = { password: password }
@@ -39,6 +44,7 @@ export const EditProfile = () => {
     AsyncStorage.setItem('pw', JSON.stringify(pw))
     AsyncStorage.setItem('avatar', JSON.stringify(avatar))
   }
+
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
     // No permissions request is necessary for launching the image library
@@ -86,6 +92,10 @@ export const EditProfile = () => {
     );
 
   const navigation = useNavigation<CreateSettingsNavigatorProps>();
+
+  React.useEffect(() => {
+    getUser()
+  }, [])
   return (
     <>
       <View style={styles.createRecipeContainer}>
