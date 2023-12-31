@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { ImagePicker } from 'expo-image-picker'
+import * as ImagePicker from 'expo-image-picker';
 
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { RootScreens } from '..';
@@ -50,7 +50,8 @@ export const CreateRecipe = (props: CreateRecipeProps) => {
     });
 
     if (!result.canceled) {
-      setSelectedImage(result.assets[0].uri);
+      setRecipeImage(result.assets[0].uri);
+      console.log(result.assets[0].uri)
     }
   };
 
@@ -77,8 +78,7 @@ export const CreateRecipe = (props: CreateRecipeProps) => {
             <Text style={styles.addRecipeTitle}>Recipe image</Text>
             <Text style={styles.optionalText}> (Optional)</Text>
           </Text>
-
-          <TextInput style={styles.input} placeholder="Add recipe title" />
+          <TextInput style={styles.input} placeholder="Add recipe title" value={recipeImage} onChangeText={(value) => setRecipeImage(value)} />
         </View>
 
         <View>
@@ -309,4 +309,9 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 14,
   },
+  imagePicker: {
+    width: 200,
+    height: 200,
+    backgroundColor: 'gray'
+  }
 });
