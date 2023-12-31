@@ -65,20 +65,20 @@ export const Settings = () => {
           </View>
         </TouchableOpacity>
 
-          <View style={styles.componentContainers}>
-            <Ionicons name="md-notifications-outline" size={24} color="black" />
-            <Text style={styles.componentText}> Push Notification </Text>
-            <View style={styles.componentSwitch}>
-              <Switch
-                trackColor={{ false: '#767577', true: '#81b0ff' }}
-                thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
-                ios_backgroundColor="#3e3e3e"
-                onValueChange={toggleSwitch}
-                value={isEnabled}
+        <View style={styles.componentContainers}>
+          <Ionicons name="md-notifications-outline" size={24} color="black" />
+          <Text style={styles.componentText}> Push Notification </Text>
+          <View style={styles.componentSwitch}>
+            <Switch
+              trackColor={{ false: '#767577', true: '#81b0ff' }}
+              thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
+              ios_backgroundColor="#3e3e3e"
+              onValueChange={toggleSwitch}
+              value={isEnabled}
 
-              />
-            </View>
+            />
           </View>
+        </View>
 
         <TouchableOpacity>
           <View style={styles.componentContainers}>
@@ -90,7 +90,7 @@ export const Settings = () => {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress = {showAlert}>
+        <TouchableOpacity onPress={showAlert}>
           <View style={styles.componentContainers}>
             <MaterialIcons name="logout" size={24} color="black" />
             <Text style={styles.componentText}> Log Out </Text>
@@ -101,9 +101,9 @@ export const Settings = () => {
         </TouchableOpacity>
 
         <View style={styles.logoGroup}>
-        <TouchableOpacity><MaterialIcons style = {styles.logoSocial} name="facebook" size={24} color="black" /></TouchableOpacity>
-        <TouchableOpacity><Ionicons style = {styles.logoSocial}  name="md-logo-instagram" size={24} color="black" /></TouchableOpacity>
-          <TouchableOpacity><Ionicons  name="logo-linkedin" size={24} color="black" /></TouchableOpacity>
+          <TouchableOpacity><MaterialIcons style={styles.logoSocial} name="facebook" size={24} color="black" /></TouchableOpacity>
+          <TouchableOpacity><Ionicons style={styles.logoSocial} name="md-logo-instagram" size={24} color="black" /></TouchableOpacity>
+          <TouchableOpacity><Ionicons name="logo-linkedin" size={24} color="black" /></TouchableOpacity>
         </View>
         <Text style={styles.version}> Version 1.1.0 </Text>
         {/* 

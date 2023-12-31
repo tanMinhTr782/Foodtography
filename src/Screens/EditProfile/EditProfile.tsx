@@ -6,7 +6,7 @@ import {
   TouchableHighlight,
   TextInput,
   TouchableOpacity,
-  Alert
+  Alert,
 } from "react-native";
 import * as ImagePicker from 'expo-image-picker';
 import { useNavigation } from "@react-navigation/native";

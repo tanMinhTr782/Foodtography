@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { StatusBar } from 'react-native';
 import { NativeStackScreenProps, createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -13,7 +13,8 @@ import { SearchByIngredientsContainer } from '@/Screens/SearchByIngredients';
 import { CreateRecipeContainer } from '@/Screens/CreateRecipe/CreateRecipeContainer';
 import { OnboardingContainer } from '@/Screens/Onboarding/OnboardingContainer';
 import { SettingsContainer } from '@/Screens/Settings/SettingsContainer';
-import {EditProfileContainer} from '@/Screens/EditProfile/EditProfileContainer'; 
+import { EditProfileContainer } from '@/Screens/EditProfile/EditProfileContainer';
+
 export type RootStackParamList = {
     [RootScreens.MAIN]: undefined;
     [RootScreens.WELCOME]: undefined;
@@ -31,25 +32,25 @@ const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 // @refresh reset
 const ApplicationNavigator = () => {
-    const [firstLaunch, setFirstLaunch] = useState<Boolean>(true); 
-    useEffect (() => {
-        async function setData()  {
-            const appData = await AsyncStorage.getItem("appLaunched"); 
+    const [firstLaunch, setFirstLaunch] = useState<Boolean>(true);
+    useEffect(() => {
+        async function setData() {
+            const appData = await AsyncStorage.getItem("appLaunched");
             if (appData == null) {
-                setFirstLaunch(true); 
-                AsyncStorage.setItem("appLaunched", "true"); 
+                setFirstLaunch(true);
+                AsyncStorage.setItem("appLaunched", "true");
             }
             else {
-                setFirstLaunch(false); 
+                setFirstLaunch(false);
             }
         }
-        setData(); 
-    }, []); 
-        return (
-            <NavigationContainer>
+        setData();
+    }, []);
+    return (
+        <NavigationContainer>
             <StatusBar />
             <RootStack.Navigator screenOptions={{ headerShown: false }}>
-                {firstLaunch && <RootStack.Screen name={RootScreens.ONBOARDING} component={OnboardingContainer}/>}
+                {firstLaunch && <RootStack.Screen name={RootScreens.ONBOARDING} component={OnboardingContainer} />}
                 <RootStack.Screen name={RootScreens.WELCOME} component={WelcomeContainer} />
                 <RootStack.Screen name={RootScreens.MAIN} component={MainNavigator} options={{}} />
                 <RootStack.Screen name={RootScreens.LOGIN} component={LoginContainer} />
@@ -61,7 +62,7 @@ const ApplicationNavigator = () => {
                 <RootStack.Screen name={RootScreens.EDITPROFILE} component={EditProfileContainer} />
             </RootStack.Navigator>
         </NavigationContainer>
-        )
+    )
 
 };
 
