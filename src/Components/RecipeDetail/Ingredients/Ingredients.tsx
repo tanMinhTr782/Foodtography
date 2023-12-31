@@ -5,7 +5,7 @@ import { IngredientItem } from "./IngredientItem";
 
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-export interface IngredientsProps {}
+export interface IngredientsProps { }
 
 export const Ingredients = (props: IngredientsProps) => {
   return (
