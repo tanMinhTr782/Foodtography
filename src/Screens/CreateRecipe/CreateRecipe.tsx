@@ -16,39 +16,44 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { RootScreens } from '..';
 import { RootStackParamList } from '@/Navigation';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-export interface CreateRecipeProps {}
+export interface CreateRecipeProps { }
 
 type CreateRecipeNavigatorProps = NativeStackNavigationProp<RootStackParamList, RootScreens>;
 
 export const CreateRecipe = (props: CreateRecipeProps) => {
+  const [recipeTitle, setRecipeTitle] = useState('')
+  const [recipeImage, setRecipeImage] = useState('')
+  const [ingredients, setIngredients] = useState<{ name: String, count: String }[]>([])
+  const [instructions, setInstructions] = useState('')
+  const [notes, setNotes] = useState('')
   const [sharingOption, setSharingOption] = useState("Private");
-  const [ingredients, setIngredients] = useState([
-    {
-      name: "Onion",
-      count: "50",
-    },
-    {
-      name: "Salt",
-      count: "2",
-    },
-  ]);
+  // const [ingredients, setIngredients] = useState([
+  //   {
+  //     name: "Onion",
+  //     count: "50",
+  //   },
+  //   {
+  //     name: "Salt",
+  //     count: "2",
+  //   },
+  // ]);
 
   const removeIngredient = (name: String) => {
     setIngredients(ingredients.filter((item) => item.name !== name));
   };
-  const navigation = useNavigation<CreateRecipeNavigatorProps>(); 
+  const navigation = useNavigation<CreateRecipeNavigatorProps>();
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <View style={styles.createRecipeContainer}>
-        <View style={{flexDirection: 'row'}}>
-      <TouchableOpacity onPress={() => navigation.goBack()}>
-         <Ionicons name="chevron-back" size={35} color="#3C7363" />
-         </TouchableOpacity>
-         <Text style={styles.title}>Create recipe</Text>
-          </View>
+        <View style={{ flexDirection: 'row' }}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Ionicons name="chevron-back" size={35} color="#3C7363" />
+          </TouchableOpacity>
+          <Text style={styles.title}>Create recipe</Text>
+        </View>
         <View>
           <Text style={styles.addRecipeTitle}>Recipe title</Text>
-          <TextInput style={styles.input} placeholder="Add recipe title" />
+          <TextInput style={styles.input} placeholder="Add recipe title" value={recipeTitle} onChangeText={(value) => setRecipeTitle(value)} />
         </View>
 
         <View>
@@ -79,7 +84,7 @@ export const CreateRecipe = (props: CreateRecipeProps) => {
           <TouchableHighlight
             style={styles.ingredientContainer}
             underlayColor="#3C736310"
-            onPress={() => {}}
+            onPress={() => { }}
           >
             <Text style={styles.addIngredientText}>+ Add more ingredients</Text>
           </TouchableHighlight>
@@ -92,6 +97,8 @@ export const CreateRecipe = (props: CreateRecipeProps) => {
             placeholder="Add cooking instructions"
             multiline={true}
             numberOfLines={4}
+            value={instructions}
+            onChangeText={(value) => setInstructions(value)}
           />
         </View>
 
@@ -102,6 +109,8 @@ export const CreateRecipe = (props: CreateRecipeProps) => {
             placeholder="Add cooking instructions"
             multiline={true}
             numberOfLines={2}
+            value={notes}
+            onChangeText={(value) => setNotes(value)}
           />
         </View>
 
@@ -140,6 +149,7 @@ export const CreateRecipe = (props: CreateRecipeProps) => {
           onPress={() => console.log("a")}
           style={styles.doneBtn}
           underlayColor="#3C7363AA"
+
         >
           <Text style={styles.doneText}>DONE</Text>
         </TouchableHighlight>
