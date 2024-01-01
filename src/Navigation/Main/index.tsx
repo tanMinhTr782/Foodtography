@@ -7,8 +7,8 @@ import { HomeContainer } from '@/Screens/Home';
 import { MealPlanningContainer } from '@/Screens/MealPlanning';
 import { SearchContainer } from '@/Screens/Search';
 
-import {MaterialIcons} from '@expo/vector-icons'; 
-import { OnboardingContainer } from "@/Screens/Onboarding/OnboardingContainer";
+import { MaterialIcons } from '@expo/vector-icons';
+import { SearchByPhotoContainer } from "@/Screens/SearchByPhoto/SearchByPhotoContainer";
 
 // import {
 //   Menu,
@@ -27,73 +27,76 @@ const Tab = createBottomTabNavigator();
 
 export const MainNavigator = () => {
 
-    return (
-        <Tab.Navigator
-            screenOptions = { ({ route }) => ({
-              tabBarIcon: ({ focused, color, size }) => {
-                let iconName; 
+  return (
+    <Tab.Navigator
 
-                if (route.name === 'Home') {
-                  iconName = focused
-                    ? "home-filled"
-                    : "home-filled";
-                } else if (route.name === "Meal Plan") {
-                  iconName = focused ? "calendar-today": "calendar-today";
-                }
-                else if (route.name === 'Search by Photo') {
-                  iconName = focused ? "image-search": "image-search";
-                }
-                else if (route.name === 'Search') {
-                  iconName = focused ? "search" : "search";
-                }
-                
-                else if (route.name === 'More') {
-                  iconName = focused ? "more-horiz": "more-horiz";
-                }
-                
-                // You can return any component that you like here!
-                return <MaterialIcons name={iconName as any} size={size} color={color} />;
-              },
-              tabBarActiveTintColor: 'black',
-              tabBarInactiveTintColor: 'white',
-              tabBarStyle: { backgroundColor: '#3C7363'},
-            
-            })}
-            >
+      screenOptions={({ route }) => ({
 
-            <Tab.Screen
-                name="Home"
-                component={HomeContainer}
-                options={{
-                    // tabBarIconStyle: { display: 'none' },
-                    // tabBarLabelPosition: 'beside-icon',
-                }}
-            />
-                <Tab.Screen
-                name="Meal Plan"
-                component={MealPlanningContainer}
-                options={{
-                    // tabBarIconStyle: { display: 'none' },
-                    // tabBarLabelPosition: 'beside-icon',
-                }}
-            />
-            <Tab.Screen
-                name="Search by Photo"
-                component={SearchContainer}
-                options={{
-                  // tabBarIconStyle: { display: "none" },
-                  // tabBarLabelPosition: "beside-icon",
-                }}
-              />
-            <Tab.Screen
-                name="Search"
-                component={SearchContainer}
-                options={{
-                    // tabBarIconStyle: { display: 'none' },
-                    // tabBarLabelPosition: 'beside-icon',
-                }}
-            />
-        </Tab.Navigator>
+        tabBarIcon: ({ focused, color, size }) => {
+          let iconName;
 
-    );
+          if (route.name === 'Home') {
+            iconName = focused
+              ? "home-filled"
+              : "home-filled";
+          } else if (route.name === "Meal Plan") {
+            iconName = focused ? "calendar-today" : "calendar-today";
+          }
+          else if (route.name === 'Search by Photo') {
+            iconName = focused ? "image-search" : "image-search";
+          }
+          else if (route.name === 'Search') {
+            iconName = focused ? "search" : "search";
+          }
+
+          else if (route.name === 'More') {
+            iconName = focused ? "more-horiz" : "more-horiz";
+          }
+
+          // You can return any component that you like here!
+          return <MaterialIcons name={iconName as any} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: 'black',
+        tabBarInactiveTintColor: 'white',
+        tabBarStyle: { backgroundColor: '#3C7363' },
+
+
+      })}
+    >
+
+      <Tab.Screen
+        name="Home"
+        component={HomeContainer}
+        options={{
+          // tabBarIconStyle: { display: 'none' },
+          // tabBarLabelPosition: 'beside-icon',
+        }}
+      />
+      <Tab.Screen
+        name="Meal Plan"
+        component={MealPlanningContainer}
+        options={{
+          // tabBarIconStyle: { display: 'none' },
+          // tabBarLabelPosition: 'beside-icon',
+        }}
+      />
+      <Tab.Screen
+        name="Search by Photo"
+        
+        component={SearchByPhotoContainer}
+        options={{
+          headerShown: false, 
+        }}
+      />
+      <Tab.Screen
+        name="Search"
+        component={SearchContainer}
+        options={{
+          // tabBarIconStyle: { display: 'none' },
+          // tabBarLabelPosition: 'beside-icon',
+        }}
+      />
+    </Tab.Navigator>
+
+  );
 };
