@@ -2,71 +2,71 @@ export const ingredient = [
   {
     "id": 1,
     "ingredientName": "Tomato",
-    "selected": 1,
+    "selected": 0,
   },
   {
     "id": 2,
-    "ingredientName": "Tomato",
-    "selected": 1,
+    "ingredientName": "Onion",
+    "selected": 0,
   },
   {
     "id": 3,
-      "ingredientName": "Tomato",
+      "ingredientName": "Beef",
     "selected": 0,
   },
   {
     "id": 4,
-    "ingredientName": "Tomato",
+    "ingredientName": "Butter",
     "selected": 0,
   },
   {
     "id": 5,
-    "ingredientName": "Tomato",
+    "ingredientName": "Oil",
     "selected": 0,
   },
   {
     "id": 6,
-    "ingredientName": "Tomato",
+    "ingredientName": "Sugar",
     "selected": 0,
   },
   {
     "id": 7,
-    "ingredientName": "Tomato",
+    "ingredientName": "Salt",
     "selected": 0,
   },
   {
     "id": 8,
-    "ingredientName": "Tomato",
+    "ingredientName": "Fish",
     "selected": 0,
   },
   {
     "id": 9,
-    "ingredientName": "Tomato",
+    "ingredientName": "Soy",
     "selected": 0,
   },
   {
     "id": 10,
-    "ingredientName": "Tomato",
+    "ingredientName": "Olive",
     "selected": 0,
   },
   {
     "id": 11,
-    "ingredientName": "Tomato",
+    "ingredientName": "Banana",
     "selected": 0,
   },
   {
     "id": 12,
-    "ingredientName": "Tomato",
+    "ingredientName": "Cucumber",
     "selected": 0,
   },
   {
     "id": 13,
-    "ingredientName": "Tomato",
+    "ingredientName": "Pasta",
     "selected": 0,
   },
   {
     "id": 14,
-    "ingredientName": "Tomato",
+    "ingredientName": "Chili",
     "selected": 0,
   }
 ];
