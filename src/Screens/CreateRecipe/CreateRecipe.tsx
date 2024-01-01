@@ -8,11 +8,17 @@ import {
   ScrollView,
   TextInput,
   Pressable,
+  TouchableOpacity,
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import Ionicons from "@expo/vector-icons/Ionicons";
-
+import { RootScreens } from '..';
+import { RootStackParamList } from '@/Navigation';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 export interface CreateRecipeProps {}
+
+type CreateRecipeNavigatorProps = NativeStackNavigationProp<RootStackParamList, RootScreens>;
 
 export const CreateRecipe = (props: CreateRecipeProps) => {
   const [sharingOption, setSharingOption] = useState("Private");
@@ -30,11 +36,16 @@ export const CreateRecipe = (props: CreateRecipeProps) => {
   const removeIngredient = (name: String) => {
     setIngredients(ingredients.filter((item) => item.name !== name));
   };
-
+  const navigation = useNavigation<CreateRecipeNavigatorProps>(); 
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <View style={styles.createRecipeContainer}>
-        <Text style={styles.title}>Create recipe</Text>
+        <View style={{flexDirection: 'row'}}>
+      <TouchableOpacity onPress={() => navigation.goBack()}>
+         <Ionicons name="chevron-back" size={35} color="#3C7363" />
+         </TouchableOpacity>
+         <Text style={styles.title}>Create recipe</Text>
+          </View>
         <View>
           <Text style={styles.addRecipeTitle}>Recipe title</Text>
           <TextInput style={styles.input} placeholder="Add recipe title" />
@@ -148,6 +159,7 @@ const styles = StyleSheet.create({
     fontSize: 27,
     fontWeight: "bold",
     marginBottom: 20,
+    paddingLeft: 18,
   },
   addRecipeTitle: {
     fontSize: 22,
