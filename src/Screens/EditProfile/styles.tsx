@@ -4,17 +4,33 @@ import { Colors } from '@/Theme/Variables';
 export const styles = StyleSheet.create({
   createRecipeContainer: {
     backgroundColor: "white",
+    minHeight: '100%',
     paddingLeft: 18,
     paddingRight: 18,
     paddingTop: 21,
     borderColor: Colors.BLACK
   },
   title: {
-    fontSize: 27,
+    fontSize: 20,
     fontWeight: "bold",
-    paddingBottom: 18,
-    marginTop: 3,
-    paddingLeft: 18,
+    marginTop: 5,
+    flex: 1,
+    textAlign: 'center',
+    alignItems: 'center',
+    marginRight: 36
+  },
+  firstComponentContainers: {
+    width: "100%",
+    height: 48,
+    borderRadius: 10,
+    backgroundColor: Colors.WHITE,
+    paddingLeft: 12,
+    paddingRight: 12,
+    fontSize: 18,
+    marginBottom: 5,
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 20,
   },
   componentContainers: {
     width: "100%",
@@ -24,13 +40,13 @@ export const styles = StyleSheet.create({
     paddingLeft: 12,
     paddingRight: 12,
     fontSize: 18,
-    marginBottom: 10,
+    marginBottom: 5,
     flexDirection: "row",
     alignItems: "center",
+    marginTop: 5
   },
   componentText: {
     fontSize: 16,
-    margin: 10,
     alignItems: 'center',
     fontWeight: 'bold'
   },
@@ -44,30 +60,38 @@ export const styles = StyleSheet.create({
     alignItems: "flex-end",
   },
   userInfoContainer: {
-    flexDirection: "column",
-    justifyContent: "space-between",
+    flexDirection: "row",
+    justifyContent: "center",
     alignItems: "center",
   },
   imageFrame: {
-    width: 80,
-    height: 80,
+    width: 120,
+    height: 120,
     borderRadius: 60,
     alignItems: "center",
     marginTop: 21,
   },
   imageFrame2: {
-    width: 80,
-    height: 80,
+    width: 120,
+    height: 120,
     borderRadius: 60,
     alignItems: "center",
     marginTop: 21,
-    borderWidth: 1,
-    borderColor: 'black'
+    borderColor: 'black',
+    borderWidth: 1
   },
   logoGroup: {
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
+    backgroundColor: Colors.GREENDARK,
+    borderRadius: 100,
+    width: 30,
+    height: 30,
+    position: 'absolute',
+    bottom: 0,
+    right: 10,
+    zIndex: 9999
   },
   userName: {
     color: "black",
@@ -159,18 +183,30 @@ export const styles = StyleSheet.create({
     marginLeft: 8,
     marginBottom: 2,
   },
-  doneBtn: {
+  saveBtn: {
     backgroundColor: "#3C7363",
-    width: "100%",
+    width: 160,
     height: 47,
-    marginTop: 60,
+    marginTop: 30,
     alignItems: "center",
+    alignSelf: 'center',
     justifyContent: "center",
-    borderRadius: 10,
+    borderRadius: 34,
   },
   doneText: {
     color: "white",
     fontWeight: "bold",
     fontSize: 14,
   },
+  saveText: {
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 14,
+  },
+  line: {
+    marginLeft: 12,
+    marginRight: 12,
+    height: 1,
+    backgroundColor: '#D9D9D9'
+  }
 });
