@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, SetStateAction } from "react";
 import {
   View,
   Text,
@@ -23,7 +23,6 @@ type CreateScannerNavitgatorProps = NativeStackNavigationProp<RootStackParamList
 
 
 
-
 export const SearchByPhoto = () => {
   let cameraRef = useRef<any>();
   const reference = useRef<any>();
@@ -43,7 +42,7 @@ export const SearchByPhoto = () => {
       base64: true,
     });
     if (!result.canceled) {
-      setPhoto(result.assets[0]);
+      setPhoto(result.assets[0] as unknown as SetStateAction<string>);
     }
   };
   const captureImage = async () => {
@@ -93,7 +92,7 @@ export const SearchByPhoto = () => {
     for (var i = 0; i < 5; ++i) {
       ret.push(parsedData.outputs[0].data.concepts[i]["name"]);
     }
-    setResult(ret);
+    setResult(ret as unknown as SetStateAction<never[]>);
   }
   useEffect(() => {
     (async () => {
@@ -110,13 +109,13 @@ export const SearchByPhoto = () => {
     return <Text>Permission for camera is not granted. Please change this on "Settings".</Text>
   }
   if (photo) {
-    getIngredients(photo.base64);
+    getIngredients(photo['base64' as any]);
     return (
       <SafeAreaView style={styles.cameraContainer}>
         <Text style={styles.resultTitle}> Scan Result </Text>
         <Text style={styles.result}>1. {result[0]} | 2. {result[1]}</Text>
         <Text style={styles.result}>3. {result[2]} | 4. {result[3]} | 5. {result[4]}</Text>
-        <Image style={styles.preview} source={{ uri: "data:image/jpg;base64," + photo.base64 }} />
+        <Image style={styles.preview} source={{ uri: "data:image/jpg;base64," + photo['base64' as any] }} />
         <SafeAreaView style={{ flexDirection: 'row' }}>
           <Button title="Discard" onPress={() => setPhoto("")} />
           <Button title="Search With Scan Result" color='red' onPress={() => setPhoto("")} />
