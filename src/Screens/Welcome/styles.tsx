@@ -3,6 +3,11 @@ import { Colors } from '@/Theme/Variables';
 import { transparentize } from 'native-base/lib/typescript/theme/tools';
 import { useFonts } from 'expo-font';
 export const styles = StyleSheet.create({
+    container: {
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     welcomeImageContainer: {
         width: 375,
         marginTop: -40,
@@ -18,22 +23,22 @@ export const styles = StyleSheet.create({
         paddingTop: 30,
         paddingRight: 50,
         backgroundColor: 'transparent',
-        position: 'absolute', 
-        bottom: 10, 
-        left: 0, 
+        position: 'absolute',
+        bottom: 10,
+        left: 0,
         right: 0,
         textAlign: 'center',
         margin: 'auto'
     },
     welcomeButtonLogin: {
-        paddingLeft: 50,
-        paddingRight: 50,
+        // paddingLeft: 50,
+        // paddingRight: 50,
         borderRadius: 100,
         width: '100%',
         marginBottom: 20,
         backgroundColor: Colors.GREENDARK,
         borderColor: 'white'
-   },
+    },
     welcomeLoginText: {
         color: Colors.WHITE,
         fontWeight: 'bold',
@@ -54,8 +59,6 @@ export const styles = StyleSheet.create({
 
     },
     welcomeButtonSignup: {
-        paddingLeft: 50,
-        paddingRight: 50,
         borderRadius: 100,
         width: '100%',
         backgroundColor: Colors.WHITE,
@@ -65,9 +68,9 @@ export const styles = StyleSheet.create({
     welcomeSignupText: {
         color: Colors.GREENDARK,
         fontWeight: 'bold',
-        fontSize: 18, 
+        fontSize: 18,
     },
     container: {
-        flex: 1, 
-      },
+        flex: 1,
+    },
 });

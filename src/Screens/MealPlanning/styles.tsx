@@ -164,6 +164,17 @@ export const styles = StyleSheet.create({
         marginTop: 5,
     },
     mealSubHeaderDayContainer: {
+        backgroundColor: Colors.WHITE,
+        padding: 4,
+        borderRadius: 100,
+        width: 40,
+        height: 40,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        cursor: 'pointer',
+    },
+    mealSubHeaderDayContainerActive: {
         backgroundColor: Colors.GREENDARK,
         padding: 4,
         borderRadius: 100,
@@ -172,8 +183,14 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
+        cursor: 'pointer',
     },
     mealSubHeaderDay: {
+        color: Colors.GREENDARK,
+        textAlign: 'center',
+        fontWeight: 'bold',
+    },
+    mealSubHeaderDayActive: {
         color: Colors.WHITE,
         textAlign: 'center',
         fontWeight: 'bold',
@@ -195,8 +212,12 @@ export const styles = StyleSheet.create({
     // Menu
     mealPlanningContainer: {
         paddingTop: 5,
+        elevation: -1,
+        zIndex: -1,
     },
-    mealItemContainer: {},
+    mealItemContainer: {
+        elevation: -1,
+    },
     mealItem: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -238,7 +259,6 @@ export const styles = StyleSheet.create({
         shadowOpacity: 0.1,
         shadowOffset: { width: 15, height: 15 },
         shadowRadius: 10,
-        elevation: -1,
         marginBottom: 10,
         marginLeft: 5,
         marginRight: 5,
@@ -283,23 +303,26 @@ export const styles = StyleSheet.create({
         paddingBottom: 10,
     },
     mealDropdown: {
-        elevation: 100,
-        zIndex: 100,
+        // elevation: 6,
+        // zIndex: 6,
     },
     mealDropdownMenu: {
         position: 'absolute',
         top: 40,
         right: 0,
-        width: 185,
-        backgroundColor: Colors.WHITE,
+        width: 215,
+        backgroundColor: Colors.GRAY,
         borderRadius: 10,
         paddingTop: 2,
         paddingBottom: 2,
         shadowColor: 'black',
         shadowOpacity: 0.2,
         shadowOffset: { width: 1, height: -1 },
-        shadowRadius: 10,
-        elevation: 10,
+        // shadowRadius: 10,
+        // elevation: -2,
+        elevation: 1000,
+        zIndex: 1000,
+        flex: 1,
     },
     hide: {
         display: 'none',
@@ -310,10 +333,20 @@ export const styles = StyleSheet.create({
         padding: 10,
         paddingLeft: 10,
         paddingRight: 10,
+        width: 215,
     },
     mealDropdownText: {
         paddingLeft: 7,
         fontWeight: 'bold',
         color: Colors.GREENDARK,
+    },
+
+    mealDropdownBtn: {
+        backgroundColor: 'transparent',
+        paddingLeft: 0,
+        paddingRight: 0,
+        paddingTop: 0,
+        paddingBottom: 0,
+        width: '100%',
     },
 });

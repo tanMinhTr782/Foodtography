@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { SearchBar } from './SearchBar';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '@/Navigation';
 
-export const SearchBarContainer = () => {
+export const SearchBarContainer = (props : any) => {
     useEffect(() => {
     }, []);
 
-    return <SearchBar />;
+    return <SearchBar icon={props.icon} goBack={props.goBack} process={props.process} clear={props.clear} />;
 };
