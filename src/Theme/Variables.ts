@@ -24,9 +24,7 @@ export enum Colors {
     GRAY = '#ccc',
     GRAYDARK = '#a4a4a4',
     YELLOW = '#F1B541',
-    GREENLIGHT_MORELIGHT = '#99FF33', 
-    BLACK = '#FFFFFF'
-
+    GREENLIGHT_MORELIGHT = '#99FF33',
     // GREENLIGHT2 = '84D9BA',
 }
 

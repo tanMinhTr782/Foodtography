@@ -101,10 +101,6 @@ export const AddRecipeFromSearch = (props: {
                 </View>
             </View>
 
-            <View>
-                <SearchBar></SearchBar>
-            </View>
-
             <View style={styles.py5}>
                 <View style={styles.row}>
                     {recipes.map((recipe, index) => {

@@ -14,5 +14,5 @@ export const SearchByIngredientsContainer = (props: any) => {
     useEffect(() => {
     }, []);
 
-    return <SearchByIngredients onNavigate={onNavigate} goBack={goBack} />;
+    return <SearchByIngredients onNavigate={onNavigate} goBack={goBack} previousData={props.route.params.data ? props.route.params.data : {}} />;
 };

@@ -84,15 +84,6 @@ export const EditProfile = () => {
     }
   }
 
-  const handleSubmit = async () => {
-    const user = { name: name }
-    const pw = { password: password }
-    const avatar = { selectedImage: selectedImage }
-    AsyncStorage.setItem('user', JSON.stringify(user))
-    AsyncStorage.setItem('pw', JSON.stringify(pw))
-    AsyncStorage.setItem('avatar', JSON.stringify(avatar))
-  }
-
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
     // No permissions request is necessary for launching the image library
@@ -158,7 +149,7 @@ export const EditProfile = () => {
         <View style={styles.userInfoContainer}>
           <TouchableOpacity onPress={pickImage}>
             {
-              imageUrl ? (
+              !(imageUrl === '123456' || !imageUrl) ? (
                 <Image source={{ uri: imageUrl }} style={styles.imageFrame} />
               ) : (
                 <View style={styles.imageFrame2}></View>
