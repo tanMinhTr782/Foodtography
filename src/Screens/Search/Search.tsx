@@ -21,7 +21,6 @@ export const Search = (props: {
         try {
             let ingredients = await getIngredients();
             if (ingredients) {
-                console.log(ingredients);
                 setData(ingredients);
                 setLoading(false);
             };  
@@ -87,7 +86,7 @@ export const Search = (props: {
                                                 )
                                             })
                                         ) : (
-                                            <Text style={{ fontSize: 16, color: 'red', marginTop: 15 }}>No ingredient were found that matched your request!!</Text>
+                                            <Text style={{ fontSize: 16, color: 'red', marginTop: 10, marginBottom: 5 }}>No ingredient were found that matched your request!!</Text>
                                         )
                                     }
                                 </ScrollView>

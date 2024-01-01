@@ -68,37 +68,37 @@ export const SearchResult = (props: {
                 let recipes;
                 switch (type) {
                     case "Breakfast":
-                        recipes = await getRecipesByIngredients(["egg", "sandwich", "tomato", "salt"], 20);
+                        recipes = await getRecipesByIngredients(["egg", "sandwich", "tomato", "salt"], 30);
                         break;
                     case "Brunch":
-                        recipes = await getRecipesByIngredients(["yogurt", "chia seeds", "tomato", "quinoa"], 20);
+                        recipes = await getRecipesByIngredients(["yogurt", "chia seeds", "tomato", "quinoa"], 30);
                         break;
                     case "Lunch":
-                        recipes = await getRecipesByIngredients(["chicken", "salad", "quinoa", "milk"], 20);
+                        recipes = await getRecipesByIngredients(["chicken", "salad", "quinoa", "milk"], 30);
                         break;
                     case "Snack":
-                        recipes = await getRecipesByIngredients(["raspberries", "chestnut", "almond", "oil"], 20);
+                        recipes = await getRecipesByIngredients(["raspberries", "chestnut", "almond", "oil"], 30);
                         break;
                     case "Dinner":
-                        recipes = await getRecipesByIngredients(["beff", "egg", "onion", "rice", "oil"], 20);
+                        recipes = await getRecipesByIngredients(["beff", "egg", "onion", "rice", "oil"], 30);
                         break;
                     case "Dessert":
-                        recipes = await getRecipesByIngredients(["butter", "strawberry", "banana", "chocolate", "milk"], 20);
+                        recipes = await getRecipesByIngredients(["butter", "strawberry", "banana", "chocolate", "milk"], 30);
                         break;
                     case "BBQ":
-                        recipes = await getRecipesByIngredients(["beef", "soy", "chili pepper", "olive", "salt"], 20);
+                        recipes = await getRecipesByIngredients(["beef", "soy", "chili pepper", "olive", "salt"], 30);
                         break;
                     case "Healthy":
-                        recipes = await getRecipesByIngredients(["banana", "tomato", "quinoa", "barley", "olive"], 20);
+                        recipes = await getRecipesByIngredients(["banana", "tomato", "quinoa", "barley", "olive"], 30);
                         break;
                     case "Soup":
-                        recipes = await getRecipesByIngredients(["beef broth", "beef", "carrot", "salt", "pepper"], 20);
+                        recipes = await getRecipesByIngredients(["beef broth", "beef", "carrot", "salt", "pepper"], 30);
                         break;
                     case "Salad":
-                        recipes = await getRecipesByIngredients(["salad romaine", "cucumber", "tomato", "almond", "yogurt souce"], 20);
+                        recipes = await getRecipesByIngredients(["salad romaine", "cucumber", "tomato", "almond", "yogurt souce"], 30);
                         break;
                     case "SearchByIngredients":
-                        recipes = await getRecipesByIngredients(props.ingredients, 20);
+                        recipes = await getRecipesByIngredients(props.ingredients, 30);
                         break;
                 }
 
@@ -204,7 +204,7 @@ export const SearchResult = (props: {
                                             image={item.image}
                                             whereToNav={() => {
                                                 return props.onNavigate(RootScreens.RECIPEDETAIL, item)
-                                            }} key={"Recipe-Detail" + item.id}
+                                            }} 
                                         />
                                     )
                                 })

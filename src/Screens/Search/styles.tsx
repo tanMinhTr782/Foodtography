@@ -44,7 +44,7 @@ export const styles = StyleSheet.create({
         borderRadius: 35,
     },
     mealContainer: {
-        marginTop: 20
+        marginTop: 5
     },
     mealItemsContainer: {
         display: 'flex',
