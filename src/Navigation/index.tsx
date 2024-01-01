@@ -24,7 +24,7 @@ export type RootStackParamList = {
     [RootScreens.CREATERECIPES]: undefined;
     [RootScreens.ONBOARDING]: undefined;
     [RootScreens.SETTINGS]: undefined;
-    [RootScreens.ADDINGREDIENTS]: undefined;
+    [RootScreens.ADDINGREDIENTS]: {};
 };
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();

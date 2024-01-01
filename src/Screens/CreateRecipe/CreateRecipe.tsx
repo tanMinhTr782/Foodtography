@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import * as ImagePicker from 'expo-image-picker';
+import axios from 'axios'
 
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { RootScreens } from '..';
@@ -19,15 +19,17 @@ import { RootStackParamList } from '@/Navigation';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 export interface CreateRecipeProps { }
 
-type CreateRecipeNavigatorProps = NativeStackNavigationProp<RootStackParamList, RootScreens>;
+type CreateRecipeNavigatorProps = NativeStackNavigationProp<RootStackParamList, RootScreens.CREATERECIPES>;
 
 export const CreateRecipe = (props: CreateRecipeProps) => {
   const [recipeTitle, setRecipeTitle] = useState('')
   const [recipeImage, setRecipeImage] = useState('')
-  const [ingredients, setIngredients] = useState<{ name: String, count: String }[]>([])
+  const [ingredients, setIngredients] = useState<{ name: String, quantity: String }[]>([])
   const [instructions, setInstructions] = useState('')
   const [notes, setNotes] = useState('')
   const [sharingOption, setSharingOption] = useState("Private");
+  const [ingredientsList, setIngredientsList] = useState<String[]>([])
+  const [quantitiesList, setQuantitiesList] = useState<Number[]>([])
   // const [ingredients, setIngredients] = useState([
   //   {
   //     name: "Onion",
@@ -39,25 +41,32 @@ export const CreateRecipe = (props: CreateRecipeProps) => {
   //   },
   // ]);
 
-  const pickImage = async () => {
-    // No permissions request is necessary for launching the image library
-    // No permissions request is necessary for launching the image library
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-
-    if (!result.canceled) {
-      setRecipeImage(result.assets[0].uri);
-      console.log(result.assets[0].uri)
-    }
-  };
-
   const removeIngredient = (name: String) => {
     setIngredients(ingredients.filter((item) => item.name !== name));
   };
+
+  const handleSave = (value: any) => {
+    setIngredients([...ingredients, value])
+    setIngredientsList([...ingredientsList, value.name])
+    setQuantitiesList([...quantitiesList, Number(value.quantity)])
+  }
+
+  const handleCreate = () => {
+    const body = {
+      name: recipeTitle,
+      image: recipeImage,
+      instructions: instructions,
+      authorNote: notes,
+      isPublic: sharingOption === 'Public',
+      ingredients: ingredientsList,
+      quantities: quantitiesList
+    }
+    axios.post('/recipes', {
+      body
+    }).then(res => console.log(res))
+      .catch(error => console.log(error))
+  }
+
   const navigation = useNavigation<CreateRecipeNavigatorProps>();
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -90,7 +99,7 @@ export const CreateRecipe = (props: CreateRecipeProps) => {
                 <Text style={styles.ingredientName}>{ingredient.name}</Text>
               </Text>
               <View style={styles.countTrashContainer}>
-                <Text style={styles.ingredientCount}>{ingredient.count}</Text>
+                <Text style={styles.ingredientCount}>{ingredient.quantity}</Text>
                 <Pressable onPress={() => removeIngredient(ingredient.name)}>
                   <Ionicons name="trash-outline" size={24} />
                 </Pressable>
@@ -100,7 +109,7 @@ export const CreateRecipe = (props: CreateRecipeProps) => {
           <TouchableHighlight
             style={styles.ingredientContainer}
             underlayColor="#3C736310"
-            onPress={() => { }}
+            onPress={() => navigation.navigate(RootScreens.ADDINGREDIENTS, { handleSave: (value: any) => handleSave(value) })}
           >
             <Text style={styles.addIngredientText}>+ Add more ingredients</Text>
           </TouchableHighlight>
@@ -162,7 +171,7 @@ export const CreateRecipe = (props: CreateRecipeProps) => {
         </View>
 
         <TouchableHighlight
-          onPress={() => console.log("a")}
+          onPress={() => handleCreate()}
           style={styles.doneBtn}
           underlayColor="#3C7363AA"
 
@@ -309,9 +318,4 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 14,
   },
-  imagePicker: {
-    width: 200,
-    height: 200,
-    backgroundColor: 'gray'
-  }
 });
