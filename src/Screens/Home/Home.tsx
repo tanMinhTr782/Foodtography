@@ -1,32 +1,45 @@
-import { i18n, LocalizationKey } from "@/Localization";
-import React from "react";
-import { View, Text, StyleSheet, TouchableHighlight, TouchableOpacity } from "react-native";
-import { StatusBar } from "expo-status-bar";
-import { HStack, Spinner, Heading } from "native-base";
-import { User } from "@/Services";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { useNavigation } from "@react-navigation/native";
+import { i18n, LocalizationKey } from '@/Localization';
+import React, { useEffect } from 'react';
+import { View, Text, StyleSheet, TouchableHighlight, TouchableOpacity } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import { HStack, Spinner, Heading } from 'native-base';
+import { User } from '@/Services';
+
+import Ionicons from '@expo/vector-icons/Ionicons';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { RootScreens } from '..';
+
+import { useNavigation } from "@react-navigation/native";
 import { RootStackParamList } from '@/Navigation';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-
 
 type CreateRecipeNavigatorProps = NativeStackNavigationProp<RootStackParamList, RootScreens.CREATERECIPES>;
 type CreateSettingsNavigatorProps = NativeStackNavigationProp<RootStackParamList, RootScreens.SETTINGS>;
 
-export interface IHomeProps {
-    data: User | undefined;
-    isLoading: boolean;
 
-}
-
-export const Home = (props: IHomeProps) => {
-    const { data, isLoading } = props;
+export const Home = (props: { onNavigate: (string: RootScreens) => void }) => {
     const navigation1 = useNavigation<CreateRecipeNavigatorProps>();
     const navigation2 = useNavigation<CreateSettingsNavigatorProps>();
+
+    const handleLogout = async () => {
+        await AsyncStorage.removeItem('user');
+        props.onNavigate(RootScreens.LOGIN);
+    };
+
+    useEffect(() => {
+        const checkLogin = async () => {
+            let user = await AsyncStorage.getItem('user');
+            console.log(user);
+
+            if (!user) {
+                props.onNavigate(RootScreens.LOGIN);
+            }
+        };
+        checkLogin();
+    });
 
     return (
         <View style={styles.container}>

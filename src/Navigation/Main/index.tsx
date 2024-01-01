@@ -7,10 +7,10 @@ import { HomeContainer } from '@/Screens/Home';
 import { MealPlanningContainer } from '@/Screens/MealPlanning';
 import { SearchContainer } from '@/Screens/Search';
 
-import { MaterialIcons } from '@expo/vector-icons';
-import { OnboardingContainer } from "@/Screens/Onboarding/OnboardingContainer";
 import { RecipeDetailContainer } from '@/Screens/RecipeDetail/RecipeDetailContainer';
 import { CreateRecipeContainer } from '@/Screens/CreateRecipe/CreateRecipeContainer';
+import { MaterialIcons } from '@expo/vector-icons';
+import { OnboardingContainer } from "@/Screens/Onboarding/OnboardingContainer";
 
 // import {
 //   Menu,
@@ -23,8 +23,6 @@ const Tab = createBottomTabNavigator();
 
 
 // @refresh reset
-
-
 // export default PopupMenu; 
 
 export const MainNavigator = () => {
@@ -96,7 +94,7 @@ export const MainNavigator = () => {
         }}
       />
       {/* <Tab.Screen
-        name="CreateRecipe"
+        name="Create Recipe"
         component={CreateRecipeContainer}
         options={{
           // tabBarIconStyle: { display: 'none' },
