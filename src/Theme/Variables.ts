@@ -18,6 +18,7 @@ export enum Colors {
     SUCCESS = '#28a745',
     ERROR = '#dc3545',
     GREENDARK = '#3D7363',
+    GREENSUPERDARK = '#4C6836',
     GREEN = '#8FD8C4',
     GREENLIGHT = '#84D9BA',
     GRAY = '#ccc',

@@ -10,4 +10,8 @@ export enum RootScreens {
     CREATERECIPES = 'CreateRecipeContainer',
     ONBOARDING = 'Onboarding',
     SETTINGS = 'Settings',
+    ADDINGREDIENTS = 'AddIngredients',
+    SEARCHRESULT = 'SearchResult',
+    ENHANCESKILL = 'EnhanceSkill',
+    ENHANCEDETAIL = 'EnhanceDetail',
 }

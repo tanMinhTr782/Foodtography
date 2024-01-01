@@ -9,46 +9,96 @@ import {
   TextInput,
   Pressable,
   TouchableOpacity,
+  Alert
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import axios from 'axios'
+import { createRecipe } from '@/API/recipes'
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { RootScreens } from '..';
 import { RootStackParamList } from '@/Navigation';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-export interface CreateRecipeProps {}
+export interface CreateRecipeProps { }
 
-type CreateRecipeNavigatorProps = NativeStackNavigationProp<RootStackParamList, RootScreens>;
+type CreateRecipeNavigatorProps = NativeStackNavigationProp<RootStackParamList, RootScreens.CREATERECIPES>;
 
 export const CreateRecipe = (props: CreateRecipeProps) => {
+  const [authorId, setAuthorId] = useState<string>('')
+  const [recipeTitle, setRecipeTitle] = useState('')
+  const [recipeImage, setRecipeImage] = useState('')
+  const [ingredients, setIngredients] = useState<{ name: String, quantity: String, id: String, unit: String }[]>([])
+  const [instructions, setInstructions] = useState('')
+  const [notes, setNotes] = useState('')
   const [sharingOption, setSharingOption] = useState("Private");
-  const [ingredients, setIngredients] = useState([
-    {
-      name: "Onion",
-      count: "50",
-    },
-    {
-      name: "Salt",
-      count: "2",
-    },
-  ]);
 
-  const removeIngredient = (name: String) => {
-    setIngredients(ingredients.filter((item) => item.name !== name));
+  const showAlert = () =>
+    Alert.alert(
+      'Alert',
+      'Create recipe successfully!!',
+      [
+        {
+          text: 'OK',
+          onPress: () => navigation.goBack(),
+          style: 'cancel',
+        },
+      ],
+
+    );
+
+  const removeIngredient = (id: String) => {
+    setIngredients(ingredients.filter((item) => item.id !== id));
   };
-  const navigation = useNavigation<CreateRecipeNavigatorProps>(); 
+
+  const handleSave = (value: any) => {
+    setIngredients([...ingredients, value])
+  }
+
+  const handleCreate = async () => {
+    let ingredientsList = ingredients.map(item => { return item.id })
+    let quantitiesList = ingredients.map(item => { return item.quantity })
+    const body = {
+      name: recipeTitle,
+      image: recipeImage,
+      instructions: instructions,
+      authorNote: notes,
+      isPublic: sharingOption === 'Public',
+      ingredients: ingredientsList,
+      quantities: quantitiesList,
+      authorId: authorId
+    }
+    // createRecipe(body).then(res => {
+
+    // })
+    showAlert()
+  }
+
+  const getUser = async () => {
+    const user = await AsyncStorage.getItem('user');
+    if (user) {
+      setAuthorId(user.substring(user.indexOf("id") + 5, user.indexOf(',', user.indexOf("id") + 5) - 1))
+    }
+  }
+
+  React.useEffect(() => {
+    getUser()
+  }, [])
+
+  const navigation = useNavigation<CreateRecipeNavigatorProps>();
   return (
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
       <View style={styles.createRecipeContainer}>
-        <View style={{flexDirection: 'row'}}>
-      <TouchableOpacity onPress={() => navigation.goBack()}>
-         <Ionicons name="chevron-back" size={35} color="#3C7363" />
-         </TouchableOpacity>
-         <Text style={styles.title}>Create recipe</Text>
-          </View>
+        <View style={{ flexDirection: 'row' }}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Ionicons name="chevron-back" size={35} color="#3C7363" />
+          </TouchableOpacity>
+          <Text style={styles.title}>Create recipe</Text>
+        </View>
         <View>
           <Text style={styles.addRecipeTitle}>Recipe title</Text>
-          <TextInput style={styles.input} placeholder="Add recipe title" />
+          <TextInput style={styles.input} placeholder="Add recipe title" value={recipeTitle} onChangeText={(value) => setRecipeTitle(value)} />
         </View>
 
         <View>
@@ -56,8 +106,7 @@ export const CreateRecipe = (props: CreateRecipeProps) => {
             <Text style={styles.addRecipeTitle}>Recipe image</Text>
             <Text style={styles.optionalText}> (Optional)</Text>
           </Text>
-
-          <TextInput style={styles.input} placeholder="Add recipe title" />
+          <TextInput style={styles.input} placeholder="Add recipe title" value={recipeImage} onChangeText={(value) => setRecipeImage(value)} />
         </View>
 
         <View>
@@ -69,8 +118,9 @@ export const CreateRecipe = (props: CreateRecipeProps) => {
                 <Text style={styles.ingredientName}>{ingredient.name}</Text>
               </Text>
               <View style={styles.countTrashContainer}>
-                <Text style={styles.ingredientCount}>{ingredient.count}</Text>
-                <Pressable onPress={() => removeIngredient(ingredient.name)}>
+                <Text style={styles.ingredientCount}>{ingredient.quantity}</Text>
+                <Text style={styles.ingredientCount}>{ingredient.unit}</Text>
+                <Pressable onPress={() => removeIngredient(ingredient.id)}>
                   <Ionicons name="trash-outline" size={24} />
                 </Pressable>
               </View>
@@ -79,7 +129,7 @@ export const CreateRecipe = (props: CreateRecipeProps) => {
           <TouchableHighlight
             style={styles.ingredientContainer}
             underlayColor="#3C736310"
-            onPress={() => {}}
+            onPress={() => navigation.navigate(RootScreens.ADDINGREDIENTS, { handleSave: (value: any) => handleSave(value) })}
           >
             <Text style={styles.addIngredientText}>+ Add more ingredients</Text>
           </TouchableHighlight>
@@ -92,6 +142,8 @@ export const CreateRecipe = (props: CreateRecipeProps) => {
             placeholder="Add cooking instructions"
             multiline={true}
             numberOfLines={4}
+            value={instructions}
+            onChangeText={(value) => setInstructions(value)}
           />
         </View>
 
@@ -102,6 +154,8 @@ export const CreateRecipe = (props: CreateRecipeProps) => {
             placeholder="Add cooking instructions"
             multiline={true}
             numberOfLines={2}
+            value={notes}
+            onChangeText={(value) => setNotes(value)}
           />
         </View>
 
@@ -137,9 +191,10 @@ export const CreateRecipe = (props: CreateRecipeProps) => {
         </View>
 
         <TouchableHighlight
-          onPress={() => console.log("a")}
+          onPress={() => handleCreate()}
           style={styles.doneBtn}
           underlayColor="#3C7363AA"
+
         >
           <Text style={styles.doneText}>DONE</Text>
         </TouchableHighlight>
@@ -179,9 +234,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   addIngredientText: {
-    color: "#707070",
+    color: "#707070aa",
     fontSize: 18,
-    fontWeight: "bold",
   },
   countTrashContainer: {
     flex: 1,

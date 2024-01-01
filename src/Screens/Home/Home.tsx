@@ -66,7 +66,7 @@ export const Home = (props: { onNavigate: (string: RootScreens) => void }) => {
                     <TouchableHighlight
                         style={styles.bookmarkWrap}
                         underlayColor="#CFCFCF"
-                        onPress={() => console.log('a')}
+                        onPress={() => console.log("a")}
                     >
                         <View>
                             <View style={styles.cartContainer}>
@@ -75,7 +75,7 @@ export const Home = (props: { onNavigate: (string: RootScreens) => void }) => {
                                         name="bookmark"
                                         size={16}
                                         color="black"
-                                        iconStyle={{ backgroundColor: 'black' }}
+                                        iconStyle={{ backgroundColor: "black" }}
                                     />
                                 </View>
                                 <Text style={styles.bookmarkText}>0</Text>
@@ -86,7 +86,7 @@ export const Home = (props: { onNavigate: (string: RootScreens) => void }) => {
                     <TouchableHighlight
                         style={styles.cartWrap}
                         underlayColor="#2A5D4E"
-                        onPress={() => console.log('a')}
+                        onPress={() => console.log("a")}
                     >
                         <View>
                             <View style={styles.cartContainer}>
@@ -95,7 +95,7 @@ export const Home = (props: { onNavigate: (string: RootScreens) => void }) => {
                                         name="shopping-cart"
                                         size={16}
                                         color="white"
-                                        iconStyle={{ backgroundColor: 'black' }}
+                                        iconStyle={{ backgroundColor: "black" }}
                                     />
                                 </View>
                                 <Text style={styles.cartText}>0</Text>
@@ -106,10 +106,6 @@ export const Home = (props: { onNavigate: (string: RootScreens) => void }) => {
             </View>
 
             <Text style={styles.title}>Daily Inspriation</Text>
-
-            <TouchableOpacity onPress={handleLogout}>
-                <Text>Logout</Text>
-            </TouchableOpacity>
 
             <View style={styles.dailyInspiationCard}>
                 <View style={styles.imageContainer}></View>
@@ -131,9 +127,9 @@ export const Home = (props: { onNavigate: (string: RootScreens) => void }) => {
                     <TouchableHighlight
                         underlayColor="#3C736320"
                         style={styles.addIngredientsBtn}
-                        onPress={() => console.log('a')}
+                        onPress={() => console.log("a")}
                     >
-                        <View style={{ flexDirection: 'row', gap: 12 }}>
+                        <View style={{ flexDirection: "row", gap: 12 }}>
                             <View>
                                 <FontAwesome5 name="shopping-cart" size={16} color="black" />
                             </View>
@@ -149,129 +145,129 @@ export const Home = (props: { onNavigate: (string: RootScreens) => void }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#fff',
+        backgroundColor: "#fff",
         padding: 18,
         paddingTop: 0,
     },
     headerContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+        flexDirection: "row",
+        justifyContent: "space-between",
     },
     iconsWrap: {
-        flexDirection: 'row',
+        flexDirection: "row",
     },
     iconContainer: {
         width: 40,
         height: 40,
-        justifyContent: 'center',
-        alignItems: 'center',
+        justifyContent: "center",
+        alignItems: "center",
         marginRight: 23,
     },
     bookmarkCartContainer: {
-        flexDirection: 'row',
+        flexDirection: "row",
     },
     bookmarkWrap: {
         width: 65,
         height: 40,
-        borderColor: 'black',
+        borderColor: "black",
         borderWidth: 1,
         borderRadius: 20,
-        justifyContent: 'center',
-        alignItems: 'center',
+        justifyContent: "center",
+        alignItems: "center",
         marginRight: 10,
     },
     cartWrap: {
         width: 65,
         height: 40,
-        backgroundColor: '#3C7363',
+        backgroundColor: "#3C7363",
         borderRadius: 20,
-        justifyContent: 'center',
-        alignItems: 'center',
+        justifyContent: "center",
+        alignItems: "center",
     },
     cartContainer: {
-        flexDirection: 'row',
+        flexDirection: "row",
     },
     bookmarkText: {
         fontSize: 16,
-        fontWeight: 'bold',
-        color: 'black',
+        fontWeight: "bold",
+        color: "black",
         marginLeft: 6,
     },
     cartText: {
         fontSize: 16,
-        fontWeight: 'bold',
-        color: 'white',
+        fontWeight: "bold",
+        color: "white",
         marginLeft: 4,
     },
     title: {
         fontSize: 25,
-        fontWeight: 'bold',
+        fontWeight: "bold",
         lineHeight: 30,
         marginBottom: 19,
         marginTop: 32,
     },
     dailyInspiationCard: {
-        width: '100%',
+        width: "100%",
         height: 560,
         // #3C736336
         borderRadius: 10,
-        backgroundColor: 'white',
+        backgroundColor: "white",
         elevation: 10,
-        shadowColor: '#3C7363AA',
+        shadowColor: "#3C7363AA",
         shadowOffset: { width: -5, height: 8 },
         shadowOpacity: 100,
         shadowRadius: 10,
     },
     imageContainer: {
-        width: '100%',
+        width: "100%",
         height: 350,
-        backgroundColor: 'gray',
+        backgroundColor: "gray",
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
     },
     contentContainer: {
-        width: '100%',
+        width: "100%",
         height: 210,
-        backgroundColor: '#3C736318',
+        backgroundColor: "#3C736318",
         borderBottomLeftRadius: 10,
         borderBottomRightRadius: 10,
         padding: 10,
     },
     recipeName: {
         fontSize: 20,
-        fontWeight: 'bold',
+        fontWeight: "bold",
         marginTop: 10,
     },
     rateContainer: {
-        flexDirection: 'row',
+        flexDirection: "row",
         gap: 3,
         marginTop: 5,
     },
     authorNameContainer: {
-        flexDirection: 'row',
+        flexDirection: "row",
         marginTop: 16,
     },
     authorName: {
-        color: '#3D7363',
+        color: "#3D7363",
         fontSize: 18,
-        fontWeight: 'bold',
+        fontWeight: "bold",
         marginLeft: 5,
     },
     addIngredientsBtn: {
-        alignSelf: 'center',
+        alignSelf: "center",
         marginTop: 20,
-        flexDirection: 'row',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderColor: 'black',
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        borderColor: "black",
         borderWidth: 2,
-        width: '70%',
+        width: "70%",
         height: 40,
         borderRadius: 10,
         gap: 10,
     },
     addIngredientsText: {
         fontSize: 13,
-        fontWeight: 'bold',
+        fontWeight: "bold",
     },
 });

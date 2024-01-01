@@ -11,3 +11,14 @@ export const getRecipes = async () => {
             return error.response;
         });
 };
+
+export const createRecipe = async (body: any) => {
+    console.log(body);
+    return await axios
+        .post(`${URL}/recipes`, body)
+        .then((response) => console.log(response.data))
+        .catch(function (error) {
+            console.log(error);
+            return error.response;
+        });
+};

@@ -71,4 +71,7 @@ export const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 18,
     },
+    // container: {
+    //     flex: 1,
+    // },
 });

@@ -10,13 +10,17 @@ import { LoginContainer } from '@/Screens/Login';
 import { SignupContainer } from '@/Screens/Signup';
 import { SearchContainer } from '@/Screens/Search';
 import { SearchByIngredientsContainer } from '@/Screens/SearchByIngredients';
-import { LoginNavigator } from './Login';
-import { MealPlanningContainer } from '@/Screens/MealPlanning';
-import { AddRecipeFromSearchContainer } from '@/Screens/AddRecipeFromSearch';
-
 import { CreateRecipeContainer } from '@/Screens/CreateRecipe/CreateRecipeContainer';
 import { OnboardingContainer } from '@/Screens/Onboarding/OnboardingContainer';
 import { SettingsContainer } from '@/Screens/Settings/SettingsContainer';
+import { AddIngredientContainer } from '@/Screens/CreateRecipe/AddIngredientContainer';
+import { LoginNavigator } from './Login';
+import { MealPlanningContainer } from '@/Screens/MealPlanning';
+import { AddRecipeFromSearchContainer } from '@/Screens/AddRecipeFromSearch';
+import { SearchResultContainer } from '@/Screens/SearchResult';
+import { EnhanceSkillContainer } from '@/Screens/EnhanceSkill';
+import { EnhanceDetailContainer } from '@/Screens/EnhanceDetail';
+
 export type RootStackParamList = {
     [RootScreens.MAIN]: undefined;
     [RootScreens.WELCOME]: undefined;
@@ -24,11 +28,15 @@ export type RootStackParamList = {
     [RootScreens.SIGNUP]: undefined;
     [RootScreens.SEARCH]: undefined;
     [RootScreens.SEARCHBYINGREDIENTS]: undefined;
-    [RootScreens.MEALPLANNING]: undefined;
-    [RootScreens.ADDRECIPEFROMSEARCH]: undefined;
     [RootScreens.CREATERECIPES]: undefined;
     [RootScreens.ONBOARDING]: undefined;
     [RootScreens.SETTINGS]: undefined;
+    [RootScreens.ADDINGREDIENTS]: {};
+    [RootScreens.SEARCHRESULT]: undefined;
+    [RootScreens.ENHANCESKILL]: undefined;
+    [RootScreens.ENHANCEDETAIL]: undefined;
+    [RootScreens.MEALPLANNING]: undefined;
+    [RootScreens.ADDRECIPEFROMSEARCH]: undefined;
 };
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
@@ -64,6 +72,10 @@ const ApplicationNavigator = () => {
                 <RootStack.Screen name={RootScreens.SEARCHBYINGREDIENTS} component={SearchByIngredientsContainer} />
                 <RootStack.Screen name={RootScreens.CREATERECIPES} component={CreateRecipeContainer} />
                 <RootStack.Screen name={RootScreens.SETTINGS} component={SettingsContainer} />
+                <RootStack.Screen name={RootScreens.ADDINGREDIENTS} component={AddIngredientContainer} />
+                <RootStack.Screen name={RootScreens.SEARCHRESULT} component={SearchResultContainer} />
+                <RootStack.Screen name={RootScreens.ENHANCESKILL} component={EnhanceSkillContainer} />
+                <RootStack.Screen name={RootScreens.ENHANCEDETAIL} component={EnhanceDetailContainer} />
             </RootStack.Navigator>
         </NavigationContainer>
     )

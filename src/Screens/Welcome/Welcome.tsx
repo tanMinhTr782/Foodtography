@@ -20,7 +20,9 @@ export const Welcome = (props: { onNavigate: (string: RootScreens) => void }) =>
         checkLogin();
     }, []);
     return (
+        // <View>
         <>
+
             <ImageBackground source={require('../../../assets/Welcome_background.png')} resizeMode="cover" style={styles.container}>
 
                 <View style={styles.welcomeMain}>
@@ -35,6 +37,12 @@ export const Welcome = (props: { onNavigate: (string: RootScreens) => void }) =>
                     </Button>
                 </View>
             </ImageBackground>
+
         </>
     );
 };
+
+{/* <View style={styles.welcomeImageContainer}>
+            </View> */}
+
+// </View>
