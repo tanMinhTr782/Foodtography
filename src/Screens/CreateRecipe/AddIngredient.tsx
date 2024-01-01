@@ -13,6 +13,8 @@ import {
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
+import { getIngredients } from "@/API/ingredients";
+
 import Ionicons from "@expo/vector-icons/Ionicons";
 export interface AddIngredientsProps { }
 LogBox.ignoreLogs([
@@ -20,11 +22,13 @@ LogBox.ignoreLogs([
 ]);
 export const AddIngredients = (props: any) => {
     const { handleSave } = props
-    const [data, setData] = useState(['a', 'ab', 'ac', 'b', 'bc', 'bcd'])
-    const [ingredientName, setIngredientName] = useState<string>('')
+    const [data, setData] = useState([])
+    const [ingredientName, setIngredientName] = useState<String>('')
+    const [unit, setUnit] = useState<String>('')
     const [quantity, setQuantity] = useState('')
-    const [ingredients, setIngredients] = useState<{ name: string, count: string }[]>([])
-    const [recommendList, setRecommendList] = useState<string[]>([])
+    const [id, setId] = useState<String>('')
+    const [ingredients, setIngredients] = useState<{ name: String, count: String }[]>([])
+    const [recommendList, setRecommendList] = useState<String[]>([])
     const [showFullScreen, setShowFullScreen] = useState(false)
     const [sharingOption, setSharingOption] = useState("Private");
     // const [ingredients, setIngredients] = useState([
@@ -38,10 +42,21 @@ export const AddIngredients = (props: any) => {
     //   },
     // ]);
 
+    const getIngredientsList = () => {
+        getIngredients().then(res => {
+            setData(res)
+        })
+    }
+
     React.useEffect(() => {
+        getIngredientsList()
+    }, [])
+
+    React.useEffect(() => {
+
         if (ingredientName === '')
             setRecommendList([])
-        else setRecommendList(data.filter(item => item.toUpperCase().includes(ingredientName.toUpperCase())))
+        else setRecommendList(data.filter(item => item.name.toUpperCase().includes(ingredientName.toUpperCase())))
     }, [ingredientName])
     const navigation = useNavigation();
     return (
@@ -61,7 +76,14 @@ export const AddIngredients = (props: any) => {
                         </TouchableOpacity>
                         <Text style={styles.title}>Add ingredients</Text>
                     </View>
-                    <Pressable style={styles.saveBtn} onPress={() => { handleSave({ name: ingredientName, quantity: quantity }); navigation.goBack() }}>
+                    <Pressable style={styles.saveBtn} onPress={() => {
+                        handleSave({
+                            name: ingredientName,
+                            quantity: quantity,
+                            unit: unit,
+                            id: id
+                        }); navigation.goBack()
+                    }}>
                         <Text style={{ fontStyle: 'italic' }}>SAVE</Text>
                     </Pressable>
                 </View>
@@ -80,13 +102,18 @@ export const AddIngredients = (props: any) => {
                                 {
                                     recommendList.map((item, key) => (
                                         <TouchableHighlight
-                                            onPress={() => { setIngredientName(item); setRecommendList([]) }}
+                                            onPress={() => {
+                                                setIngredientName(item.name);
+                                                setRecommendList([]);
+                                                setUnit(item.unit);
+                                                setId(item.id)
+                                            }}
                                             style={styles.recommendItem}
                                             key={key}
                                             underlayColor="#3C736320"
 
                                         >
-                                            <Text>{item}</Text>
+                                            <Text>{item.name}</Text>
                                         </TouchableHighlight>
                                         // <View style={styles.recommendItem} key={key}>
                                         //     <Text>{item}</Text>
@@ -108,7 +135,7 @@ export const AddIngredients = (props: any) => {
                     />
                     <View style={styles.line}></View>
                     <View style={styles.unitWrap}>
-                        <Text style={{ fontSize: 18 }}>-- --</Text>
+                        <Text style={{ fontSize: 18 }}>{unit ? unit : "-- --"}</Text>
                     </View>
                 </View>
             </View>

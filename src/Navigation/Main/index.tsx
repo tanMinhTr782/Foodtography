@@ -95,14 +95,14 @@ export const MainNavigator = () => {
           // tabBarLabelPosition: 'beside-icon',
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="CreateRecipe"
         component={CreateRecipeContainer}
         options={{
-          tabBarIconStyle: { display: 'none' },
-          tabBarLabelPosition: 'beside-icon',
+          // tabBarIconStyle: { display: 'none' },
+          // tabBarLabelPosition: 'beside-icon',
         }}
-      />
+      /> */}
     </Tab.Navigator>
 
   );

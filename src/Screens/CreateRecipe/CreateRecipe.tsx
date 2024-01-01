@@ -9,9 +9,13 @@ import {
   TextInput,
   Pressable,
   TouchableOpacity,
+  Alert
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import axios from 'axios'
+import { createRecipe } from '@/API/recipes'
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { RootScreens } from '..';
@@ -22,36 +26,39 @@ export interface CreateRecipeProps { }
 type CreateRecipeNavigatorProps = NativeStackNavigationProp<RootStackParamList, RootScreens.CREATERECIPES>;
 
 export const CreateRecipe = (props: CreateRecipeProps) => {
+  const [authorId, setAuthorId] = useState<string>('')
   const [recipeTitle, setRecipeTitle] = useState('')
   const [recipeImage, setRecipeImage] = useState('')
-  const [ingredients, setIngredients] = useState<{ name: String, quantity: String }[]>([])
+  const [ingredients, setIngredients] = useState<{ name: String, quantity: String, id: String, unit: String }[]>([])
   const [instructions, setInstructions] = useState('')
   const [notes, setNotes] = useState('')
   const [sharingOption, setSharingOption] = useState("Private");
-  const [ingredientsList, setIngredientsList] = useState<String[]>([])
-  const [quantitiesList, setQuantitiesList] = useState<Number[]>([])
-  // const [ingredients, setIngredients] = useState([
-  //   {
-  //     name: "Onion",
-  //     count: "50",
-  //   },
-  //   {
-  //     name: "Salt",
-  //     count: "2",
-  //   },
-  // ]);
 
-  const removeIngredient = (name: String) => {
-    setIngredients(ingredients.filter((item) => item.name !== name));
+  const showAlert = () =>
+    Alert.alert(
+      'Alert',
+      'Create recipe successfully!!',
+      [
+        {
+          text: 'OK',
+          onPress: () => navigation.goBack(),
+          style: 'cancel',
+        },
+      ],
+
+    );
+
+  const removeIngredient = (id: String) => {
+    setIngredients(ingredients.filter((item) => item.id !== id));
   };
 
   const handleSave = (value: any) => {
     setIngredients([...ingredients, value])
-    setIngredientsList([...ingredientsList, value.name])
-    setQuantitiesList([...quantitiesList, Number(value.quantity)])
   }
 
-  const handleCreate = () => {
+  const handleCreate = async () => {
+    let ingredientsList = ingredients.map(item => { return item.id })
+    let quantitiesList = ingredients.map(item => { return item.quantity })
     const body = {
       name: recipeTitle,
       image: recipeImage,
@@ -59,13 +66,25 @@ export const CreateRecipe = (props: CreateRecipeProps) => {
       authorNote: notes,
       isPublic: sharingOption === 'Public',
       ingredients: ingredientsList,
-      quantities: quantitiesList
+      quantities: quantitiesList,
+      authorId: authorId
     }
-    axios.post('/recipes', {
-      body
-    }).then(res => console.log(res))
-      .catch(error => console.log(error))
+    // createRecipe(body).then(res => {
+
+    // })
+    showAlert()
   }
+
+  const getUser = async () => {
+    const user = await AsyncStorage.getItem('user');
+    if (user) {
+      setAuthorId(user.substring(user.indexOf("id") + 5, user.indexOf(',', user.indexOf("id") + 5) - 1))
+    }
+  }
+
+  React.useEffect(() => {
+    getUser()
+  }, [])
 
   const navigation = useNavigation<CreateRecipeNavigatorProps>();
   return (
@@ -100,7 +119,8 @@ export const CreateRecipe = (props: CreateRecipeProps) => {
               </Text>
               <View style={styles.countTrashContainer}>
                 <Text style={styles.ingredientCount}>{ingredient.quantity}</Text>
-                <Pressable onPress={() => removeIngredient(ingredient.name)}>
+                <Text style={styles.ingredientCount}>{ingredient.unit}</Text>
+                <Pressable onPress={() => removeIngredient(ingredient.id)}>
                   <Ionicons name="trash-outline" size={24} />
                 </Pressable>
               </View>
@@ -214,9 +234,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   addIngredientText: {
-    color: "#707070",
+    color: "#707070aa",
     fontSize: 18,
-    fontWeight: "bold",
   },
   countTrashContainer: {
     flex: 1,
