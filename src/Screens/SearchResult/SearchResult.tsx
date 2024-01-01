@@ -16,7 +16,7 @@ export const SearchResult = (props: {
     const [type] = useState(props.type);
     const [data, setData] = useState([]);
     const [previousData, setPreviousData] = useState([]);
-    const [isLoading, setLoading] = useState(false);
+    const [isLoading, setLoading] = useState(true);
 
     const handleSearch = (newDataSearch: any) => {
         const newArray = data.filter((item: any) => {
@@ -25,7 +25,7 @@ export const SearchResult = (props: {
             }
         });
         setData(newArray);
-        setLoading(true);
+        setLoading(false);
     };
 
     const handleClear = () => {
@@ -50,12 +50,10 @@ export const SearchResult = (props: {
         }
     };
 
-    console.log(props.ingredients);
-
     const fetchData = async () => {
         try {
             if (props.dataSearch) {
-                let recipes = await getRecipesByIngredients(["beef", "chicken", "soy", "salt", "sugar", "fish", "egg"], 100);
+                let recipes = await getRecipesByIngredients(["beef", "chicken", "soy", "salt", "sugar", "fish", "egg"], 500);
                 if (recipes) {
                     const newArray = recipes.filter((item: any) => {
                         if (checkSubstring(item.title, props.dataSearch)) {
@@ -64,7 +62,7 @@ export const SearchResult = (props: {
                     });
                     setData(newArray);
                     setPreviousData(newArray);
-                    setLoading(true);
+                    setLoading(false);
                 };
             } else {
                 let recipes;
@@ -107,7 +105,7 @@ export const SearchResult = (props: {
                 if (recipes) {
                     setData(recipes);
                     setPreviousData(recipes);
-                    setLoading(true);
+                    setLoading(false);
                 }
             }
         } catch (error: any) {
@@ -128,7 +126,7 @@ export const SearchResult = (props: {
                     return props.goBack();
                 }}
                     process={(newDataSearch: any) => {
-                        setLoading(false);
+                        setLoading(true);
                         return handleSearch(newDataSearch);
                     }}
                     clear={() => {
@@ -199,7 +197,7 @@ export const SearchResult = (props: {
                     }
                     <View style={styles.recipeDetailWrapper}>
                         {
-                            isLoading ? data.length !== 0 ? (
+                            !isLoading ? data.length !== 0 ? (
                                 data.map((item: any, id: number) => {
                                     return (
                                         <SearchRecipeDetailContainer favorite={0} star={item.likes < 6 ? item.likes : 5} name={item.title ? item.title : "Not found"}
