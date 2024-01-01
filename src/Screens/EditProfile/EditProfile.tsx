@@ -41,12 +41,14 @@ export const EditProfile = () => {
 
   const getUser = async () => {
     await AsyncStorage.getItem('user').then(res => {
-      console.log(res)
-      setUser(res)
-      setId(res.substring(res.indexOf("id") + 5, res.indexOf(',', res.indexOf("id") + 5) - 1));
-      setName(res.substring(res.indexOf("name") + 7, res.indexOf(',', res.indexOf("name") + 7) - 1))
-      setEmail(res.substring(res.indexOf("email") + 8, res.indexOf(',', res.indexOf("email") + 8) - 1))
-      setImageUrl(res.substring(res.indexOf("avatar") + 9, res.indexOf(',', res.indexOf("avatar") + 9) - 1))
+      if (res) {
+        setUser(res)
+        setId(res.substring(res.indexOf("id") + 5, res.indexOf(',', res.indexOf("id") + 5) - 1));
+        setName(res.substring(res.indexOf("name") + 7, res.indexOf(',', res.indexOf("name") + 7) - 1))
+        setEmail(res.substring(res.indexOf("email") + 8, res.indexOf(',', res.indexOf("email") + 8) - 1))
+        setImageUrl(res.substring(res.indexOf("avatar") + 9, res.indexOf(',', res.indexOf("avatar") + 9) - 1))
+      }
+
     })
   }
 
@@ -191,7 +193,6 @@ export const EditProfile = () => {
           onPress={() => {
             setSaveChange(true);
             updateInfo(id, { name: name, avatar: imageUrl }).then(res => {
-              console.log(res)
               if (res.message === "Update user successfully") {
                 showSuccessAlert();
                 handleSetUser()
