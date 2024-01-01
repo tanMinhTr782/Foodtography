@@ -9,6 +9,8 @@ import { SearchContainer } from '@/Screens/Search';
 
 import { MaterialIcons } from '@expo/vector-icons';
 import { OnboardingContainer } from "@/Screens/Onboarding/OnboardingContainer";
+import { RecipeDetailContainer } from '@/Screens/RecipeDetail/RecipeDetailContainer';
+import { CreateRecipeContainer } from '@/Screens/CreateRecipe/CreateRecipeContainer';
 
 // import {
 //   Menu,
@@ -93,6 +95,14 @@ export const MainNavigator = () => {
           // tabBarLabelPosition: 'beside-icon',
         }}
       />
+      {/* <Tab.Screen
+        name="CreateRecipe"
+        component={CreateRecipeContainer}
+        options={{
+          // tabBarIconStyle: { display: 'none' },
+          // tabBarLabelPosition: 'beside-icon',
+        }}
+      /> */}
     </Tab.Navigator>
 
   );

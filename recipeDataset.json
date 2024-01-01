@@ -1,0 +1,42 @@
+[
+    {
+        "name": "Fish with tomato sauce",
+        "image": "https://th.bing.com/th/id/R.86ff7ea27cab940f2b915e12278959e4?rik=WCkHdnJA2yDuUA&pid=ImgRaw&r=0",
+        "ingredients": ["58502902-8d5d-4d1b-8777-d1bcdda35ae1", "81c5b12e-4041-4b6f-b4aa-16a08b487524"],
+        "quantities": ["2", "3"],
+        "instructions": "Bước 1: Nấu này. Bước 2: Nấu kia",
+        "authorNote": "Món này nên ăn hết trong 1 bữa, để tủ lạnh mất ngon",
+        "isPublic": false,
+        "authorId": "6b0a5886-7d72-4cef-a98e-9bc44473b11c"
+    },
+    {
+        "name": "Dried Chicken",
+        "image": "https://cdn.tgdd.vn/2020/12/CookProduct/2-1200x676-1.jpg",
+        "ingredients": ["58502902-8d5d-4d1b-8777-d1bcdda35ae1", "81c5b12e-4041-4b6f-b4aa-16a08b487524"],
+        "quantities": ["2", "3"],
+        "instructions": "Bước 1: Nấu này. Bước 2: Nấu kia",
+        "authorNote": "Món này nên ăn hết trong 1 bữa, để tủ lạnh mất ngon",
+        "isPublic": false,
+        "authorId": "6b0a5886-7d72-4cef-a98e-9bc44473b11c"
+    },
+    {
+        "name": "Dried Squid",
+        "image": "https://doiduavang.vn/wp-content/uploads/2021/09/thanh-pham-mon-muc-chien-xu.jpg",
+        "ingredients": ["58502902-8d5d-4d1b-8777-d1bcdda35ae1", "81c5b12e-4041-4b6f-b4aa-16a08b487524"],
+        "quantities": ["2", "3"],
+        "instructions": "Bước 1: Nấu này. Bước 2: Nấu kia",
+        "authorNote": "Món này nên ăn hết trong 1 bữa, để tủ lạnh mất ngon",
+        "isPublic": false,
+        "authorId": "6b0a5886-7d72-4cef-a98e-9bc44473b11c"
+    },
+    {
+        "name": "Crab Hotpot",
+        "image": "https://cdn.tgdd.vn/Files/2019/10/19/1210128/3-cach-nau-lau-cua-dong-thom-ngon-ngot-nuoc-don-gian-tai-nha-202203161313406573.jpg",
+        "ingredients": ["58502902-8d5d-4d1b-8777-d1bcdda35ae1", "81c5b12e-4041-4b6f-b4aa-16a08b487524"],
+        "quantities": ["2", "3"],
+        "instructions": "Bước 1: Nấu này. Bước 2: Nấu kia",
+        "authorNote": "Món này nên ăn hết trong 1 bữa, để tủ lạnh mất ngon",
+        "isPublic": false,
+        "authorId": "6b0a5886-7d72-4cef-a98e-9bc44473b11c"
+    }
+]

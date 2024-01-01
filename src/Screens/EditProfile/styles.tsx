@@ -71,6 +71,15 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 21,
   },
+  imageFrame2: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    alignItems: "center",
+    marginTop: 21,
+    borderColor: 'black',
+    borderWidth: 1
+  },
   logoGroup: {
     alignItems: 'center',
     justifyContent: 'center',

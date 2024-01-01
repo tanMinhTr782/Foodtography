@@ -14,6 +14,13 @@ import { CreateRecipeContainer } from '@/Screens/CreateRecipe/CreateRecipeContai
 import { OnboardingContainer } from '@/Screens/Onboarding/OnboardingContainer';
 import { SettingsContainer } from '@/Screens/Settings/SettingsContainer';
 import { EditProfileContainer } from '@/Screens/EditProfile/EditProfileContainer';
+import { AddIngredientContainer } from '@/Screens/CreateRecipe/AddIngredientContainer';
+import { LoginNavigator } from './Login';
+import { MealPlanningContainer } from '@/Screens/MealPlanning';
+import { AddRecipeFromSearchContainer } from '@/Screens/AddRecipeFromSearch';
+import { SearchResultContainer } from '@/Screens/SearchResult';
+import { EnhanceSkillContainer } from '@/Screens/EnhanceSkill';
+import { EnhanceDetailContainer } from '@/Screens/EnhanceDetail';
 
 export type RootStackParamList = {
     [RootScreens.MAIN]: undefined;
@@ -26,6 +33,12 @@ export type RootStackParamList = {
     [RootScreens.ONBOARDING]: undefined;
     [RootScreens.SETTINGS]: undefined;
     [RootScreens.EDITPROFILE]: undefined;
+    [RootScreens.ADDINGREDIENTS]: {};
+    [RootScreens.SEARCHRESULT]: undefined;
+    [RootScreens.ENHANCESKILL]: undefined;
+    [RootScreens.ENHANCEDETAIL]: undefined;
+    [RootScreens.MEALPLANNING]: undefined;
+    [RootScreens.ADDRECIPEFROMSEARCH]: undefined;
 };
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
@@ -54,12 +67,18 @@ const ApplicationNavigator = () => {
                 <RootStack.Screen name={RootScreens.WELCOME} component={WelcomeContainer} />
                 <RootStack.Screen name={RootScreens.MAIN} component={MainNavigator} options={{}} />
                 <RootStack.Screen name={RootScreens.LOGIN} component={LoginContainer} />
+                <RootStack.Screen name={RootScreens.MEALPLANNING} component={MealPlanningContainer} />
+                <RootStack.Screen name={RootScreens.ADDRECIPEFROMSEARCH} component={AddRecipeFromSearchContainer} />
                 <RootStack.Screen name={RootScreens.SIGNUP} component={SignupContainer} />
                 <RootStack.Screen name={RootScreens.SEARCH} component={SearchContainer} />
                 <RootStack.Screen name={RootScreens.SEARCHBYINGREDIENTS} component={SearchByIngredientsContainer} />
                 <RootStack.Screen name={RootScreens.CREATERECIPES} component={CreateRecipeContainer} />
                 <RootStack.Screen name={RootScreens.SETTINGS} component={SettingsContainer} />
                 <RootStack.Screen name={RootScreens.EDITPROFILE} component={EditProfileContainer} />
+                <RootStack.Screen name={RootScreens.ADDINGREDIENTS} component={AddIngredientContainer} />
+                <RootStack.Screen name={RootScreens.SEARCHRESULT} component={SearchResultContainer} />
+                <RootStack.Screen name={RootScreens.ENHANCESKILL} component={EnhanceSkillContainer} />
+                <RootStack.Screen name={RootScreens.ENHANCEDETAIL} component={EnhanceDetailContainer} />
             </RootStack.Navigator>
         </NavigationContainer>
     )
