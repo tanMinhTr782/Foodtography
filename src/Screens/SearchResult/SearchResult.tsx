@@ -201,7 +201,7 @@ export const SearchResult = (props: {
                                 data.map((item: any, id: number) => {
                                     return (
                                         <SearchRecipeDetailContainer favorite={0} star={item.likes < 6 ? item.likes : 5} name={item.title ? item.title : "Not found"}
-                                            image={item.image} key={"Recipe-Detail-" + id}
+                                            image={item.image}
                                         />
                                     )
                                 })

@@ -14,6 +14,7 @@ export const SearchRecipeDetail = (props: {
             underlayColor="#CTCTCT"
             onPress={() => props.whereToNav()}
             style={styles.cardItemContainer}
+            key={"Recipe-Detail-" + props.name + props.specialMode}
         >
             <View>
                 <Image

@@ -3,10 +3,10 @@
     "",
     "\\src",
     "\\src\\Components",
+    "\\src\\Components\\SearchRecipeDetail",
     "\\src\\Screens",
-    "\\src\\Screens\\SearchByIngredients\\data",
-    "\\src\\Screens\\Search\\data"
+    "\\src\\Screens\\SearchResult"
   ],
-  "SelectedNode": "\\src\\Screens\\SearchResult",
+  "SelectedNode": "\\src\\Components\\SearchRecipeDetail\\SearchRecipeDetail.tsx",
   "PreviewInSolutionExplorer": false
 }
