@@ -12,6 +12,9 @@ import { SearchByIngredientsContainer } from '@/Screens/SearchByIngredients';
 import { LoginNavigator } from './Login';
 import { MealPlanningContainer } from '@/Screens/MealPlanning';
 import { AddRecipeFromSearchContainer } from '@/Screens/AddRecipeFromSearch';
+import { SearchResultContainer } from '@/Screens/SearchResult';
+import { EnhanceSkillContainer } from '@/Screens/EnhanceSkill';
+import { EnhanceDetailContainer } from '@/Screens/EnhanceDetail';
 
 export type RootStackParamList = {
     [RootScreens.MAIN]: undefined;
@@ -20,6 +23,9 @@ export type RootStackParamList = {
     [RootScreens.SIGNUP]: undefined;
     [RootScreens.SEARCH]: undefined;
     [RootScreens.SEARCHBYINGREDIENTS]: undefined;
+    [RootScreens.SEARCHRESULT]: undefined;
+    [RootScreens.ENHANCESKILL]: undefined;
+    [RootScreens.ENHANCEDETAIL]: undefined;
     [RootScreens.MEALPLANNING]: undefined;
     [RootScreens.ADDRECIPEFROMSEARCH]: undefined;
 };
@@ -40,6 +46,9 @@ const ApplicationNavigator = () => {
                 <RootStack.Screen name={RootScreens.SIGNUP} component={SignupContainer} />
                 <RootStack.Screen name={RootScreens.SEARCH} component={SearchContainer} />
                 <RootStack.Screen name={RootScreens.SEARCHBYINGREDIENTS} component={SearchByIngredientsContainer} />
+                <RootStack.Screen name={RootScreens.SEARCHRESULT} component={SearchResultContainer} />
+                <RootStack.Screen name={RootScreens.ENHANCESKILL} component={EnhanceSkillContainer} />
+                <RootStack.Screen name={RootScreens.ENHANCEDETAIL} component={EnhanceDetailContainer} />
             </RootStack.Navigator>
         </NavigationContainer>
     );

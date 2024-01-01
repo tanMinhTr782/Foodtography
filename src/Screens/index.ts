@@ -5,6 +5,9 @@ export enum RootScreens {
     SIGNUP = 'Signup',
     SEARCH = 'Search',
     SEARCHBYINGREDIENTS = 'SearchByIngredients',
+    SEARCHRESULT = 'SearchResult',
+    ENHANCESKILL = 'EnhanceSkill',
+    ENHANCEDETAIL = 'EnhanceDetail',
     ADDRECIPEFROMSEARCH = 'AddRecipeFromSearch',
     MEALPLANNING = 'MealPlanning',
 }
