@@ -13,7 +13,7 @@ export const EnhanceSkill = (props: {
     goBack: () => void, title: any
 }) => {
     const [data, setData] = useState([]);
-    const [isLoading, setLoading] = useState(false);
+    const [isLoading, setLoading] = useState(true);
 
     const fetchData = async () => {
         try {
@@ -22,14 +22,14 @@ export const EnhanceSkill = (props: {
                 if (recipes) {
                     console.log(recipes);
                     setData(recipes);
-                    setLoading(true);
+                    setLoading(false);
                 };
             } else {
                 let ingredients = await getIngredients();
                 if (ingredients) {
                     console.log(ingredients);
                     setData(ingredients);
-                    setLoading(true);
+                    setLoading(false);
                 };
             }
         } catch (error: any) {
@@ -45,14 +45,14 @@ export const EnhanceSkill = (props: {
     return (
         <SafeAreaView style={styles.searchContainer}>
             <View style={styles.container}>
-                <MaterialIcons name="arrow-back-ios" size={28} onPress={() => props.goBack()} />
+                <MaterialIcons name="arrow-back-ios" size={32} onPress={() => props.goBack()} />
                 <Text style={styles.title}>{props.title}</Text>
                 <ScrollView showsVerticalScrollIndicator={false}>
                     {
                         props.title === "Essential Skills" ? (
                             <View style={styles.detailWrapper}>
                                 {
-                                    isLoading ? data.length !== 0 ? (
+                                    !isLoading ? data.length !== 0 ? (
                                         data.map((data: any, id: number) => {
                                             return (
                                                 <SearchRecipeDetailContainer specialMode={1} favorite={0} noneStar={data ? data.isPublic === false ? 1 : 0 : 0} star={0} name={data ? data.name ? data.name : "Failed to load" : "Failed to load"}
@@ -84,7 +84,7 @@ export const EnhanceSkill = (props: {
                         ) : (
                             <View style={styles.detailWrapper}>
                                 {
-                                    isLoading ? data.length !== 0 ? (
+                                    !isLoading ? data.length !== 0 ? (
                                         data.map((data: any, id: number) => {
                                             return (
                                                 <SearchRecipeDetailContainer specialMode={2} favorite={1} noneStar={1} star={0} name={data ? data.name ? data.name : "Failed to load" : "Failed to load"}

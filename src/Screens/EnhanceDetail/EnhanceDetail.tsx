@@ -55,7 +55,7 @@ export const EnhanceDetail = (props: { onNavigate: (string: RootScreens) => void
                                     style={styles.image}
                                     source={{ uri: props.data.image }}
                                 />
-                                <MaterialIcons name="arrow-back-ios" size={32} onPress={() => props.goBack()} style={{ position: 'absolute', top: 20, left: 20, opacity: 0.8 }} color="white" />
+                                <MaterialIcons name="arrow-back-ios" size={32} onPress={() => props.goBack()} style={{ position: 'absolute', top: 20, left: 20, opacity: 0.7 }} color="red" />
                                 <View style={styles.titleWrapper}>
                                     <Text style={{ fontSize: 14, color: Colors.GREENSUPERDARK, fontWeight: 'bold', paddingBottom: 5, fontStyle: 'italic' }}>WIKI</Text>
                                     <Text style={{ fontSize: 18, color: Colors.GREENSUPERDARK, fontWeight: 'bold' }}>{props.data.name}</Text>
