@@ -3,8 +3,8 @@ import { SearchResult } from './SearchResult';
 import { RootScreens } from '..';
 
 export const SearchResultContainer = (props: any) => {
-    const onNavigate = (screen: RootScreens) => {
-        props.navigation.navigate(screen);
+    const onNavigate = (screen: RootScreens, resultData: any) => {
+        props.navigation.navigate(screen, {resultData});
     };
 
     const goBack = () => {

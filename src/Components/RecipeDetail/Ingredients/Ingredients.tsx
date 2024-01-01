@@ -5,31 +5,32 @@ import { IngredientItem } from "./IngredientItem";
 
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-export interface IngredientsProps { }
-
-export const Ingredients = (props: IngredientsProps) => {
+export const Ingredients = (props: any) => {
   return (
     <View style={styles.ingredientsContainer}>
       <Text style={styles.title}>Ingredients</Text>
       <View style={styles.servesContainer}>
         <View style={styles.serves}>
           <Ionicons name="remove-circle-outline" size={24} />
-          <Text style={styles.servesCount}>Serves 4</Text>
+          <Text style={styles.servesCount}>Serves {props.usedIngredientCount}</Text>
           <Ionicons name="add-circle-outline" size={24} />
         </View>
         <Text style={styles.USPerServing}>US/Serving</Text>
       </View>
       <View style={styles.ingredients}>
-        <IngredientItem
-          name="Salt"
-          count="20"
-          image="https://th.bing.com/th/id/R.e55bdaa86eea8a83d725cfe0d02a80f9?rik=TT6LcOoxbyv3IA&riu=http%3a%2f%2fwww.mastersinhealthcare.com%2fwp-content%2fuploads%2fsalt.jpg&ehk=u4UXsYS7BJZHei5Gb86djUCFlZ7xoUVyz43j%2frAITgs%3d&risl=&pid=ImgRaw&r=0"
-        />
-        <IngredientItem
-          name="Sugar"
-          count="40"
-          image="https://th.bing.com/th/id/OIP.6YI_7Zq0Psa2XsMTdSuLHAHaE7?rs=1&pid=ImgDetMain"
-        />
+        {
+            props.data.usedIngredients.map((item: any, id: number) => {
+                return (
+                    <IngredientItem
+                        name={item.name}
+                        count={item.amount}
+                        image={item.image}
+                        unit={item.unit}
+                        key={"Ingredient-Item-To-Cooking-" + id}
+                    />
+                )
+            })
+        }
       </View>
       <TouchableHighlight
         onPress={() => console.log("a")}

@@ -6,5 +6,5 @@ export const SearchRecipeDetailContainer = (props : any) => {
     }, []);
 
     return <SearchRecipeDetail specialMode={props.specialMode ? props.specialMode : 0} favorite={props.favorite} star={props.star}
-        name={props.name} image={props.image} whereToNav={props.whereToNav} noneStar={props.noneStar} />;
+        name={props.name} image={props.image} whereToNav={props.whereToNav} noneStar={props.noneStar} key={"Recipe-Detail-" + props.name + '-' + props.specialMode} />;
 };

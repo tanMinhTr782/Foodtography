@@ -65,7 +65,7 @@ export const EnhanceSkill = (props: {
                                             )
                                         })
                                     ) : (
-                                        <Text style={{ fontSize: 16, color: 'red' }}>No ingredient guides were found that matched your request!!</Text>
+                                        <Text style={{ fontSize: 16, color: 'red' }}>No essential skills were found that matched your request!!</Text>
                                     ) : (
                                         <Center w="100%" h="100%">
                                             <VStack w="90%" maxW="400" borderWidth="1" space={8} overflow="hidden" rounded="md" _dark={{

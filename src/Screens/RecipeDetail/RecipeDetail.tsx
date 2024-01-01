@@ -9,27 +9,31 @@ import {
 } from "react-native";
 
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import AntDesign from "@expo/vector-icons/AntDesign";
 
 import { Ingredients } from "@/Components/RecipeDetail/Ingredients/Ingredients";
 import { Nutrition } from "@/Components/RecipeDetail/Nutrition/Nutrition";
 import { Directions } from "@/Components/RecipeDetail/Directions/Directions";
 import { RatingComments } from "@/Components/RecipeDetail/RatingComments/RatingComments";
 
-export interface RecipeDetailProps {}
 
-export const RecipeDetail = (props: RecipeDetailProps) => {
-  return (
+export const RecipeDetail = (props: {goBack: () => void, data: any}) => {
+    const renderStarArray = Array.from({ length: (props.data.likes < 6 ? props.data.likes : 5) }, (_, index) => index);
+    const renderUnStarArray = Array.from({ length: (5 - (props.data.likes < 6 ? props.data.likes : 5)) }, (_, index) => index);
+    return (
     <ScrollView style={styles.recipeDetailContainer}>
       <View style={styles.imageContainer}>
         <Image
           source={{
-            uri: "https://i.pinimg.com/originals/cc/61/5f/cc615f9cd92e13a89592475d5475df1a.jpg",
+            uri: props.data.image,
           }}
           style={styles.image}
         />
+        <MaterialIcons name="arrow-back-ios" size={32} onPress={() => props.goBack()} style={{ position: 'absolute', top: 60, left: 30, opacity: 0.7 }} color="red" />
         <View style={styles.recipeNameContainer}>
           <Text style={styles.recipeText}>RECIPE</Text>
-          <Text style={styles.recipeName}>Vietnamese Crab Noodle Soup </Text>
+          <Text style={styles.recipeName}>{props.data.title}</Text>
           <Text style={styles.authorName}>
             <Text style={{ fontWeight: "bold" }}>by </Text>
             <Text style={{ fontStyle: "italic" }}>Tan Tran</Text>
@@ -38,37 +42,45 @@ export const RecipeDetail = (props: RecipeDetailProps) => {
       </View>
       <View style={styles.ratingContainer}>
         <View style={styles.ratingStars}>
-          <Text style={styles.rating}>4.2</Text>
+          <Text style={styles.rating}>{props.data.likes < 6 ? props.data.likes : 5}</Text>
           <View style={styles.starsContainer}>
-            <FontAwesome name="star" size={24} color="#E4D200" />
-            <FontAwesome name="star" size={24} color="#E4D200" />
-            <FontAwesome name="star" size={24} color="#E4D200" />
-            <FontAwesome name="star" size={24} color="#E4D200" />
-            <FontAwesome name="star-half-o" size={24} color="#E4D200" />
+                        {
+                            renderStarArray.map((index) => (
+                                <AntDesign name="star" size={24} color="#E4D200" />
+                            ))
+                        }
+                        {
+                            renderUnStarArray.map((index) => (
+                                <AntDesign name="staro" size={24} />
+                            ))
+                        }
           </View>
         </View>
-        <Text style={styles.ratingCount}>8 Ratings</Text>
+        <Text style={styles.ratingCount}>{props.data.likes} {props.data.likes === 1 ? "Rating" : "Ratings"}</Text>
       </View>
       <Text style={styles.description}>
-        Many variations of bún riêu can be sampled all throughout Vietnam, but
-        with a homemade verison, you can adjust the spices and seasonings to
-        your liking. It usually features a tomato broth, noodles, and crab. This
-        recipe is more of a weekend project that's perfect to take on during the
-        cold winter months, and the combination of flavors is simply
-        unforgettable
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin maximus sagittis dictum.
+                Sed in velit at mi lobortis fermentum accumsan et dui. Class aptent taciti sociosqu ad litora torquent per conubia nostra,
+                per inceptos himenaeos. Curabitur laoreet condimentum sodales. Maecenas odio leo, faucibus eget nulla et, aliquet dictum felis.
+                Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque fermentum augue id nisl ornare,
+                vel consectetur urna molestie. Praesent vehicula sit amet dui a pretium. Ut eu est non nibh lobortis efficitur.
+                Nunc id magna sagittis, tincidunt odio sed, elementum ante. Vivamus bibendum sapien ac lorem tincidunt tempus.
+                Suspendisse potenti. Suspendisse tincidunt, elit et tristique tempor, dolor augue tempus turpis, et facilisis mi nisi et ligula.
+                Morbi sit amet mi blandit, viverra purus sit amet, tincidunt nunc.
       </Text>
       <View style={styles.timeToCook}>
-        <Text style={styles.time}>2 hours 30 mins</Text>
+        <Text style={styles.time}>1 hours 30 mins</Text>
         <Text style={styles.totalTimeText}>Total time</Text>
       </View>
 
-      <Ingredients />
+      <Ingredients data={props.data}/>
 
       <Nutrition />
 
       <Directions />
 
       <RatingComments />
+      <View style={{marginTop: 50}}></View>
     </ScrollView>
   );
 };

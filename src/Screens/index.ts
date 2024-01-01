@@ -15,4 +15,5 @@ export enum RootScreens {
     ENHANCEDETAIL = 'EnhanceDetail',
     ADDRECIPEFROMSEARCH = 'AddRecipeFromSearch',
     MEALPLANNING = 'MealPlanning',
+    RECIPEDETAIL = 'RecipeDetail',
 }

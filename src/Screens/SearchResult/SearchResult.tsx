@@ -10,7 +10,7 @@ import { SearchBarContainer } from '@/Components/SearchBar'
 import { getRecipesByIngredients } from '@/API/spoonacular';
 
 export const SearchResult = (props: {
-    onNavigate: (string: RootScreens) => void, type: any, count: number, ingredients: string[],
+    onNavigate: (string: RootScreens, resultData: any) => void, type: any, count: number, ingredients: string[],
     goBack: () => void, dataSearch: any
 }) => {
     const [type] = useState(props.type);
@@ -202,6 +202,9 @@ export const SearchResult = (props: {
                                     return (
                                         <SearchRecipeDetailContainer favorite={0} star={item.likes < 6 ? item.likes : 5} name={item.title ? item.title : "Not found"}
                                             image={item.image}
+                                            whereToNav={() => {
+                                                return props.onNavigate(RootScreens.RECIPEDETAIL, item)
+                                            }} key={"Recipe-Detail" + item.id}
                                         />
                                     )
                                 })

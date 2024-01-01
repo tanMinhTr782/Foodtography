@@ -87,7 +87,7 @@ export const Search = (props: {
                                                 )
                                             })
                                         ) : (
-                                            <Text style={{ fontSize: 16, color: 'red' }}>No ingredient were found that matched your request!!</Text>
+                                            <Text style={{ fontSize: 16, color: 'red', marginTop: 15 }}>No ingredient were found that matched your request!!</Text>
                                         )
                                     }
                                 </ScrollView>

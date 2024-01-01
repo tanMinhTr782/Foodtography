@@ -21,6 +21,7 @@ import { AddRecipeFromSearchContainer } from '@/Screens/AddRecipeFromSearch';
 import { SearchResultContainer } from '@/Screens/SearchResult';
 import { EnhanceSkillContainer } from '@/Screens/EnhanceSkill';
 import { EnhanceDetailContainer } from '@/Screens/EnhanceDetail';
+import { RecipeDetailContainer } from '@/Screens/RecipeDetail';
 
 export type RootStackParamList = {
     [RootScreens.MAIN]: undefined;
@@ -39,6 +40,7 @@ export type RootStackParamList = {
     [RootScreens.ENHANCEDETAIL]: undefined;
     [RootScreens.MEALPLANNING]: undefined;
     [RootScreens.ADDRECIPEFROMSEARCH]: undefined;
+    [RootScreens.RECIPEDETAIL]: undefined;
 };
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
@@ -79,6 +81,7 @@ const ApplicationNavigator = () => {
                 <RootStack.Screen name={RootScreens.SEARCHRESULT} component={SearchResultContainer} />
                 <RootStack.Screen name={RootScreens.ENHANCESKILL} component={EnhanceSkillContainer} />
                 <RootStack.Screen name={RootScreens.ENHANCEDETAIL} component={EnhanceDetailContainer} />
+                <RootStack.Screen name={RootScreens.RECIPEDETAIL} component={RecipeDetailContainer} />
             </RootStack.Navigator>
         </NavigationContainer>
     )

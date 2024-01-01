@@ -2,12 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\src",
+    "\\src\\API",
+    "\\src\\Components\\SearchRecipeDetail",
     "\\src\\Screens",
-    "\\src\\Screens\\SearchByIngredients",
-    "\\src\\Screens\\SearchByIngredients\\data",
-    "\\src\\Screens\\SearchResult",
-    "\\src\\Screens\\SearchResult\\data"
+    "\\src\\Screens\\EnhanceDetail",
+    "\\src\\Screens\\EnhanceSkill",
+    "\\src\\Screens\\RecipeDetail",
+    "\\src\\Screens\\Search",
+    "\\src\\Screens\\SearchResult"
   ],
-  "SelectedNode": "\\src\\Screens\\EnhanceSkill",
+  "SelectedNode": "\\src\\API\\ingredients.ts",
   "PreviewInSolutionExplorer": false
 }
