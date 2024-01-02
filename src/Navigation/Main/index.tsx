@@ -77,8 +77,7 @@ export const MainNavigator = () => {
                 component={SearchByPhotoContainer}
                 options={
                     {
-                        // tabBarIconStyle: { display: "none" },
-                        // tabBarLabelPosition: "beside-icon",
+                        headerShown: false, 
                     }
                 }
             />
