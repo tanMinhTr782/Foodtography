@@ -4,8 +4,8 @@ import { useLazyGetUserQuery } from '@/Services';
 import { RootScreens } from '..';
 
 export const HomeContainer = (props: any) => {
-    const onNavigate = (screen: RootScreens) => {
-        props.navigation.navigate(screen);
+    const onNavigate = (screen: RootScreens, resultData: any) => {
+        props.navigation.navigate(screen, {resultData});
     };
     return <Home onNavigate={onNavigate} />;
 };

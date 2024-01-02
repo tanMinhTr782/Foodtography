@@ -2,11 +2,11 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\Components",
-    "\\src\\Components\\SearchBar",
+    "\\src\\Components\\RecipeDetail\\Ingredients",
     "\\src\\Screens",
-    "\\src\\Screens\\SearchResult"
+    "\\src\\Screens\\SearchResult",
+    "\\src\\Screens\\Search\\data"
   ],
-  "SelectedNode": "\\src\\Components\\SearchBar\\SearchBar.tsx",
+  "SelectedNode": "\\src\\Screens\\SearchResult\\SearchResult.tsx",
   "PreviewInSolutionExplorer": false
 }

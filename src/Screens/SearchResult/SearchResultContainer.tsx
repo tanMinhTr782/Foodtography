@@ -15,6 +15,6 @@ export const SearchResultContainer = (props: any) => {
     }, []);
 
     return <SearchResult onNavigate={onNavigate} type={props.route.params.type} count={props.route.params.count ? props.route.params.count : 1} ingredients={props.route.params.ingredients} goBack={goBack}
-        dataSearch={props.route.params.dataSearch}
+        dataSearch={props.route.params.dataSearch} scanImage={props.route.params.scanImage ? props.route.params.scanImage.base64 : "none"}
     />;
 };
