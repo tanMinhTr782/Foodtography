@@ -110,13 +110,12 @@ export const SearchByPhoto = () => {
     return <Text>Permission for camera is not granted. Please change this on "Settings".</Text>
   }
   if (photo) {
-    // getIngredients(photo['base64' as any]);
-    let test = ["carrot", "cucumber", "cheese", "cracker", "broccoli"]; 
+    getIngredients(photo['base64' as any]);
     return (
       <SafeAreaView style={styles.cameraContainer}>
         <Text style={styles.resultTitle}> Scan Result </Text>
-        <Text style={styles.result}>1. {test[0]} | 2. {test[1]}</Text>
-        <Text style={styles.result}>3. {test[2]} | 4. {test[3]} | 5. {test[4]}</Text>
+        <Text style={styles.result}>1. {result[0]} | 2. {result[1]}</Text>
+        <Text style={styles.result}>3. {result[2]} | 4. {result[3]} | 5. {result[4]}</Text>
         <Image style={styles.preview} source={{ uri: "data:image/jpg;base64," + photo['base64' as any] }} />
         <SafeAreaView style={{ flexDirection: 'row' }}>
           <Button title="Discard" onPress={() => setPhoto("")} />
