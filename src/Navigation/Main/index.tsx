@@ -41,7 +41,7 @@ export const MainNavigator = () => {
                     } else if (route.name === 'More') {
                         iconName = focused ? 'more-horiz' : 'more-horiz';
                     } else if (route.name === 'My Pantry') {
-                        iconName = focused ? 'view_kanban' : 'view_kanban';
+                        iconName = focused ? 'inventory' : 'inventory';
                     }
 
                     // You can return any component that you like here!

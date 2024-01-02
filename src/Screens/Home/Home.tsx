@@ -157,7 +157,7 @@ export const Home = (props: { onNavigate: (screen: RootScreens, resultData: any)
                                         <View>
                                             <FontAwesome5 name="search" size={16} color="black" />
                                         </View>
-                                        <Text style={styles.addIngredientsText}>SEARCH FOR MORE</Text>
+                                        <Text style={styles.addIngredientsText}>READ MORE</Text>
                                     </View>
                                 </TouchableHighlight>
                             </View>

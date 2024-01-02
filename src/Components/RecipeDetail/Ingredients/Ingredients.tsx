@@ -13,7 +13,7 @@ export const Ingredients = (props: any) => {
         <View style={styles.serves}>
           <Ionicons name="remove-circle-outline" size={24} />
                {
-                   props.usedIngredientCount ? (<Text style={styles.servesCount}>Serves {props.usedIngredientCount}</Text>) : (
+                   props.data.usedIngredientCount ? (<Text style={styles.servesCount}>Serves {props.data.usedIngredientCount}</Text>) : (
                        <Text style={styles.servesCount}>Serves {props.data.extendedIngredients.length}</Text>
                    )
                }
@@ -23,7 +23,7 @@ export const Ingredients = (props: any) => {
       </View>
       <View style={styles.ingredients}>
         {
-            props.usedIngredients ? (
+            props.data.usedIngredients ? (
                       props.data.usedIngredients.map((item: any, id: number) => {
                           return (
                               <IngredientItem
