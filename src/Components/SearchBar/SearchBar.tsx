@@ -21,12 +21,6 @@ export const SearchBar = (props: { icon: any, goBack: () => void, process: any, 
         setSearchText('');
     };
 
-    const handleSearch = () => {
-        // Your logic when the search button is pressed
-        console.log('Searching for:', searchText);
-        // You can perform further actions, such as filtering or fetching data based on the search text
-    };
-
     useEffect(() => {
         if (searchText.length !== 0) {
             setIcon('search1');

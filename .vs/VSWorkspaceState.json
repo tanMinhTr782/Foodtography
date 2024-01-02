@@ -3,10 +3,10 @@
     "",
     "\\src",
     "\\src\\Components",
-    "\\src\\Components\\SearchRecipeDetail",
+    "\\src\\Components\\SearchBar",
     "\\src\\Screens",
     "\\src\\Screens\\SearchResult"
   ],
-  "SelectedNode": "\\src\\Components\\SearchRecipeDetail\\SearchRecipeDetailContainer.tsx",
+  "SelectedNode": "\\src\\Components\\SearchBar\\SearchBar.tsx",
   "PreviewInSolutionExplorer": false
 }
