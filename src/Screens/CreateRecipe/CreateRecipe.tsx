@@ -56,7 +56,7 @@ export const CreateRecipe = (props: CreateRecipeProps) => {
             return item.id;
         });
         let quantitiesList = ingredients.map((item) => {
-            return item.quantity;
+            return Number(item.quantity);
         });
         const body = {
             name: recipeTitle,
