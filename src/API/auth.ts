@@ -55,5 +55,16 @@ export const updateInfo = async (id: String, info: Object) => {
             console.log(error);
             return error.response;
         });
-    // return response;
+};
+export const changePassword = async (info: any, userId: string) => {
+    return await axios
+        .post(`https://foodtography-backend.vercel.app/auth/${userId}/changePassword`, info)
+        .then((response) => {
+            // console.log(response.data);
+            return response.data;
+        })
+        .catch(function (error) {
+            console.log(error);
+            return error.response;
+        });
 };

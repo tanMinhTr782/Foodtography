@@ -22,7 +22,9 @@ import { SearchResultContainer } from '@/Screens/SearchResult';
 import { EnhanceSkillContainer } from '@/Screens/EnhanceSkill';
 import { EnhanceDetailContainer } from '@/Screens/EnhanceDetail';
 import { RecipeDetailContainer } from '@/Screens/RecipeDetail';
-import {SearchByPhotoContainer} from '@/Screens/SearchByPhoto/SearchByPhotoContainer'
+import { SearchByPhotoContainer } from '@/Screens/SearchByPhoto/SearchByPhotoContainer';
+import { ChangePasswordContainer } from '@/Screens/ChangePassword';
+
 export type RootStackParamList = {
     [RootScreens.MAIN]: undefined;
     [RootScreens.WELCOME]: undefined;
@@ -42,6 +44,7 @@ export type RootStackParamList = {
     [RootScreens.ADDRECIPEFROMSEARCH]: undefined;
     [RootScreens.RECIPEDETAIL]: undefined;
     [RootScreens.SEARCHBYPHOTO]: undefined;
+    [RootScreens.CHANGEPASSWORD]: undefined;
 };
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
@@ -51,12 +54,11 @@ const ApplicationNavigator = () => {
     const [firstLaunch, setFirstLaunch] = useState<Boolean>(true);
     useEffect(() => {
         async function setData() {
-            const appData = await AsyncStorage.getItem("appLaunched");
+            const appData = await AsyncStorage.getItem('appLaunched');
             if (appData == null) {
                 setFirstLaunch(true);
-                AsyncStorage.setItem("appLaunched", "true");
-            }
-            else {
+                AsyncStorage.setItem('appLaunched', 'true');
+            } else {
                 setFirstLaunch(false);
             }
         }
@@ -84,10 +86,10 @@ const ApplicationNavigator = () => {
                 <RootStack.Screen name={RootScreens.ENHANCEDETAIL} component={EnhanceDetailContainer} />
                 <RootStack.Screen name={RootScreens.RECIPEDETAIL} component={RecipeDetailContainer} />
                 <RootStack.Screen name={RootScreens.SEARCHBYPHOTO} component={SearchByPhotoContainer} />
+                <RootStack.Screen name={RootScreens.CHANGEPASSWORD} component={ChangePasswordContainer} />
             </RootStack.Navigator>
         </NavigationContainer>
-    )
-
+    );
 };
 
 export { ApplicationNavigator };

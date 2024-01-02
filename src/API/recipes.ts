@@ -22,3 +22,13 @@ export const createRecipe = async (body: any) => {
             return error.response;
         });
 };
+
+export const getRecipesByAuthorId = async (authorId: string) => {
+    return await axios
+        .get(`${URL}/recipes/getByAuthorId/${authorId}`)
+        .then((response) => response.data)
+        .catch(function (error) {
+            console.log(error);
+            return error.response;
+        });
+};
