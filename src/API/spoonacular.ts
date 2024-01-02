@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const URL = 'https://api.spoonacular.com';
-const apiKey = 'e7c3f1b16d5347b8baf81e13bc7adefb';
+const apiKey = 'b23d4398b2624d9192c10b1c96a77e56';
 
 export const getRecipesByIngredients = async (ingredients: string[], quantity: number) => {
     return await axios

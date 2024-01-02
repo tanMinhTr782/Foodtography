@@ -62,7 +62,7 @@ export const SearchByPhoto = (props: { onNavigate: (screen: RootScreens, type: s
 
   const getIngredients = async (IMAGE_BYTES_STRING: string) => {
 
-    const PAT = '63528cf35da24698b5275c9ad45ba6ae';
+    const PAT = '42448b1fea414cc38182e58c669321ed';
     const USER_ID = 'clarifai';
     const APP_ID = 'main';
     const MODEL_ID = 'food-item-recognition';
