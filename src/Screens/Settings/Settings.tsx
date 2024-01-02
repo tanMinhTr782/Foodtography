@@ -33,6 +33,22 @@ export const Settings = () => {
             },
         ]);
 
+    const [name, setName] = useState('Lê Văn Bằng');
+    const [imageUrl, setImageUrl] = useState('');
+
+    const getUser = async () => {
+        await AsyncStorage.getItem('user').then((res) => {
+            if (res) {
+                setName(res.substring(res.indexOf('name') + 7, res.indexOf(',', res.indexOf('name') + 7) - 1));
+                setImageUrl(res.substring(res.indexOf('avatar') + 9, res.indexOf(',', res.indexOf('avatar') + 9) - 1));
+            }
+        });
+    };
+
+    React.useEffect(() => {
+        getUser();
+    }, []);
+
     return (
         <View>
             <View style={styles.createRecipeContainer}>
@@ -44,8 +60,13 @@ export const Settings = () => {
                 </View>
 
                 <View style={styles.userInfoContainer}>
-                    <Image source={require('../../../assets/sampleDish.jpg')} style={styles.imageFrame} />
-                    <Text style={styles.userName}>Lê Văn Bằng </Text>
+                    {!(imageUrl === '123456' || !imageUrl) ? (
+                        <Image source={{ uri: imageUrl }} style={styles.imageFrame} />
+                    ) : (
+                        <View style={styles.imageFrame2}></View>
+                    )}
+                    {/* <Image source={require('../../../assets/sampleDish.jpg')} style={styles.imageFrame} /> */}
+                    <Text style={styles.userName}>{name}</Text>
                 </View>
 
                 <TouchableOpacity onPress={() => navigation.navigate(RootScreens.EDITPROFILE)}>
