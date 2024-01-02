@@ -5,7 +5,6 @@ import { StatusBar } from 'expo-status-bar';
 import { Button } from 'native-base';
 import { RootScreens } from '..';
 import { styles } from './styles';
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const Welcome = (props: { onNavigate: (string: RootScreens) => void }) => {
@@ -22,8 +21,12 @@ export const Welcome = (props: { onNavigate: (string: RootScreens) => void }) =>
     }, []);
 
     return (
-        <>
-            <ImageBackground source={require('../../../assets/Welcome_background.png')} resizeMode="cover" style={styles.container}>
+        <View>
+            <ImageBackground
+                source={require('../../../assets/Welcome_background.png')}
+                resizeMode="cover"
+                style={styles.container}
+            >
                 <View style={styles.welcomeMain}>
                     <Text style={styles.welcomeNameApp}>Foodtography</Text>
                     <Text style={styles.welcomeSlogan}>From Photo To Taste</Text>
@@ -36,6 +39,6 @@ export const Welcome = (props: { onNavigate: (string: RootScreens) => void }) =>
                     </Button>
                 </View>
             </ImageBackground>
-        </>
+        </View>
     );
 };
