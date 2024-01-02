@@ -29,9 +29,7 @@ export const MainNavigator = () => {
 
   return (
     <Tab.Navigator
-
       screenOptions={({ route }) => ({
-
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
 
@@ -59,7 +57,6 @@ export const MainNavigator = () => {
         tabBarActiveTintColor: 'black',
         tabBarInactiveTintColor: 'white',
         tabBarStyle: { backgroundColor: '#3C7363' },
-
 
       })}
     >

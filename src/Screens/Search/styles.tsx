@@ -13,14 +13,14 @@ export const styles = StyleSheet.create({
     ingredientContainer: {
     },
     title: {
-        fontSize: 16,
-        color: Colors.GREENDARK,
+        fontSize: 18,
+        color: Colors.GREENSUPERDARK,
         fontWeight: 'bold',
     },
     buttonViewAll: {
         fontStyle: 'italic',
         textDecorationLine: 'underline',
-        color: Colors.GREENDARK,
+        color: Colors.GREENSUPERDARK,
     },
     itemContainer: {
         display: 'flex',
@@ -36,6 +36,7 @@ export const styles = StyleSheet.create({
     itemText: {
         textAlign: 'center',
         fontSize: 14,
+        color: Colors.GREENSUPERDARK,
     },
     ingredientsImage: {
         width: 55,
@@ -43,7 +44,7 @@ export const styles = StyleSheet.create({
         borderRadius: 35,
     },
     mealContainer: {
-        marginTop: 20
+        marginTop: 5
     },
     mealItemsContainer: {
         display: 'flex',
@@ -56,6 +57,17 @@ export const styles = StyleSheet.create({
         width: "48%",
         position: 'relative',
         marginBottom: 15,
+
+        borderRadius: 30,
+        backgroundColor: '#ffffff',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 3,
+        },
+        shadowOpacity: 0.6,
+        shadowRadius: 2,
+        elevation: 10,
     },
     mealImage: {
         width: '100%',
@@ -83,7 +95,7 @@ export const styles = StyleSheet.create({
             height: 3,
         },
         shadowOpacity: 0.34,
-        shadowRadius: 6.27,
+        shadowRadius: 4.6,
         elevation: 10,
         marginBottom: 25
     },
@@ -101,5 +113,6 @@ export const styles = StyleSheet.create({
         fontWeight: 'bold',
         paddingTop: 18,
         paddingLeft: 20,
+        color: Colors.GREENSUPERDARK,
     }
 });

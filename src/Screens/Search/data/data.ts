@@ -63,7 +63,7 @@ export const meal = [
 export const popular = [
   {
     "id": 1,
-    "type": "Pizza",
+    "type": "Healthy",
   },
   {
     "id": 2,
@@ -71,10 +71,10 @@ export const popular = [
   },
   {
     "id": 3,
-    "type": "Healthy",
+    "type": "Soup",
   },
   {
     "id": 4,
-    "type": "Soup",
+    "type": "BBQ",
   },
 ]

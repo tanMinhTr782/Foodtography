@@ -15,6 +15,7 @@ import { RootScreens } from '..';
 import { RootStackParamList } from '@/Navigation';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { styles } from './styles';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 type CreateSettingsNavigatorProps = NativeStackNavigationProp<RootStackParamList, RootScreens.SETTINGS>;
 
 const showAlert = () =>
@@ -39,7 +40,24 @@ const showAlert = () =>
 export const Settings = () => {
   const navigation = useNavigation<CreateSettingsNavigatorProps>();
   const [isEnabled, setIsEnabled] = useState(false);
+  const [name, setName] = useState("Username");
+  const [imageUrl, setImageUrl] = useState('')
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+
+  const getUser = async () => {
+    await AsyncStorage.getItem('user').then(res => {
+      if (res) {
+        setName(res.substring(res.indexOf("name") + 7, res.indexOf(',', res.indexOf("name") + 7) - 1))
+        setImageUrl(res.substring(res.indexOf("avatar") + 9, res.indexOf(',', res.indexOf("avatar") + 9) - 1))
+      }
+
+    })
+  }
+
+  React.useEffect(() => {
+    getUser()
+  }, [])
+
   return (
     <>
       <View style={styles.createRecipeContainer}>
@@ -51,8 +69,15 @@ export const Settings = () => {
         </View>
 
         <View style={styles.userInfoContainer}>
-          <Image source={require('../../../assets/sampleDish.jpg')} style={styles.imageFrame} />
-          <Text style={styles.userName}>Lê Văn Bằng </Text>
+          {
+            !(imageUrl === '123456' || !imageUrl) ? (
+              <Image source={{ uri: imageUrl }} style={styles.imageFrame} />
+            ) : (
+              <View style={styles.imageFrame2}></View>
+            )
+          }
+
+          <Text style={styles.userName}>{name}</Text>
         </View>
 
         <TouchableOpacity onPress={() => navigation.navigate(RootScreens.EDITPROFILE)}>
@@ -65,20 +90,20 @@ export const Settings = () => {
           </View>
         </TouchableOpacity>
 
-          <View style={styles.componentContainers}>
-            <Ionicons name="md-notifications-outline" size={24} color="black" />
-            <Text style={styles.componentText}> Push Notification </Text>
-            <View style={styles.componentSwitch}>
-              <Switch
-                trackColor={{ false: '#767577', true: '#81b0ff' }}
-                thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
-                ios_backgroundColor="#3e3e3e"
-                onValueChange={toggleSwitch}
-                value={isEnabled}
+        <View style={styles.componentContainers}>
+          <Ionicons name="md-notifications-outline" size={24} color="black" />
+          <Text style={styles.componentText}> Push Notification </Text>
+          <View style={styles.componentSwitch}>
+            <Switch
+              trackColor={{ false: '#767577', true: '#81b0ff' }}
+              thumbColor={isEnabled ? '#f5dd4b' : '#f4f3f4'}
+              ios_backgroundColor="#3e3e3e"
+              onValueChange={toggleSwitch}
+              value={isEnabled}
 
-              />
-            </View>
+            />
           </View>
+        </View>
 
         <TouchableOpacity>
           <View style={styles.componentContainers}>
@@ -90,7 +115,7 @@ export const Settings = () => {
           </View>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress = {showAlert}>
+        <TouchableOpacity onPress={showAlert}>
           <View style={styles.componentContainers}>
             <MaterialIcons name="logout" size={24} color="black" />
             <Text style={styles.componentText}> Log Out </Text>
@@ -101,9 +126,9 @@ export const Settings = () => {
         </TouchableOpacity>
 
         <View style={styles.logoGroup}>
-        <TouchableOpacity><MaterialIcons style = {styles.logoSocial} name="facebook" size={24} color="black" /></TouchableOpacity>
-        <TouchableOpacity><Ionicons style = {styles.logoSocial}  name="md-logo-instagram" size={24} color="black" /></TouchableOpacity>
-          <TouchableOpacity><Ionicons  name="logo-linkedin" size={24} color="black" /></TouchableOpacity>
+          <TouchableOpacity><MaterialIcons style={styles.logoSocial} name="facebook" size={24} color="black" /></TouchableOpacity>
+          <TouchableOpacity><Ionicons style={styles.logoSocial} name="md-logo-instagram" size={24} color="black" /></TouchableOpacity>
+          <TouchableOpacity><Ionicons name="logo-linkedin" size={24} color="black" /></TouchableOpacity>
         </View>
         <Text style={styles.version}> Version 1.1.0 </Text>
         {/* 

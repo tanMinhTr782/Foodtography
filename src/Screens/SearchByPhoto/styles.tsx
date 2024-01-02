@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
         paddingLeft: 18,
         paddingRight: 18,
         paddingTop: 21,
-        paddingBottom: 28,
+        paddingBottom: 18,
         flexDirection: 'row',
     },
     title: {
@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
     },
     cameraFrame: {
         width: "100%",
-        height: 48,
+        height: 50,
         borderRadius: 10,
         paddingLeft: 12,
         paddingRight: 12,
@@ -39,7 +39,8 @@ export const styles = StyleSheet.create({
         fontSize: 16,
         alignItems: 'center',
         fontWeight: 'bold',
-        textAlign: 'center'
+        textAlign: 'center', 
+        marginBottom: 5, 
     },
     uploadIMG: {
         width: 50,
@@ -56,6 +57,7 @@ export const styles = StyleSheet.create({
         paddingTop: 10,
         alignItems: 'center',
         marginBottom: 0,
+        paddingBottom: 10, 
     },
     buttonContainer: {
         width: 50,
@@ -76,8 +78,8 @@ export const styles = StyleSheet.create({
         color: Colors.BLACK,
         paddingLeft: 18,
         paddingRight: 18,
-        paddingTop: 21,
-        paddingBottom: 56,
+        paddingTop: 5,
+        paddingBottom: 28,
         flexDirection: 'row',
         justifyContent: 'space-evenly'
 

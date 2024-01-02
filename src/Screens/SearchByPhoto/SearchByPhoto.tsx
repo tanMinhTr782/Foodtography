@@ -18,6 +18,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Camera } from "expo-camera";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ingredient } from "../Search/data/data";
+import { SearchByIngredientsContainer } from '@/Screens/SearchByIngredients';
 import { styles } from "./styles";
 type CreateScannerNavitgatorProps = NativeStackNavigationProp<RootStackParamList, RootScreens.SEARCHBYPHOTO>;
 
@@ -109,16 +110,17 @@ export const SearchByPhoto = () => {
     return <Text>Permission for camera is not granted. Please change this on "Settings".</Text>
   }
   if (photo) {
-    getIngredients(photo['base64' as any]);
+    // getIngredients(photo['base64' as any]);
+    let test = ["carrot", "cucumber", "cheese", "cracker", "broccoli"]; 
     return (
       <SafeAreaView style={styles.cameraContainer}>
         <Text style={styles.resultTitle}> Scan Result </Text>
-        <Text style={styles.result}>1. {result[0]} | 2. {result[1]}</Text>
-        <Text style={styles.result}>3. {result[2]} | 4. {result[3]} | 5. {result[4]}</Text>
+        <Text style={styles.result}>1. {test[0]} | 2. {test[1]}</Text>
+        <Text style={styles.result}>3. {test[2]} | 4. {test[3]} | 5. {test[4]}</Text>
         <Image style={styles.preview} source={{ uri: "data:image/jpg;base64," + photo['base64' as any] }} />
         <SafeAreaView style={{ flexDirection: 'row' }}>
           <Button title="Discard" onPress={() => setPhoto("")} />
-          <Button title="Search With Scan Result" color='red' onPress={() => setPhoto("")} />
+          <Button title="Search With Scan Result" color='red' onPress={() => setPhoto("") } />
         </SafeAreaView>
       </SafeAreaView>
     );
@@ -132,10 +134,10 @@ export const SearchByPhoto = () => {
           </TouchableOpacity>
           <Text style={styles.title}>Search By Photo</Text>
         </View>
-
-        <Camera style={styles.cameraContainer} ref={cameraRef}>
-          <Text style={styles.subTitle}>Capture or choose image from library </Text>
+        <Text style={styles.subTitle}>Capture or choose image from library </Text>
           <Text style={styles.subTitle}>to begin scanning</Text>
+        <Camera style={styles.cameraContainer} ref={cameraRef}>
+
 
         </Camera>
 

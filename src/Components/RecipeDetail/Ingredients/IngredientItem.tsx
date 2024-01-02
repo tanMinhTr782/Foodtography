@@ -14,10 +14,11 @@ export interface IngredientItemProps {
   image: string;
   name: String;
   count: String;
+  unit: String;
 }
 
 export const IngredientItem = (props: IngredientItemProps) => {
-  const { image, name, count } = props;
+  const { image, name, count, unit } = props;
   return (
     <View style={styles.ingredientContainer}>
       <Image
@@ -26,7 +27,7 @@ export const IngredientItem = (props: IngredientItemProps) => {
         }}
         style={styles.ingredientImage}
       />
-      <Text style={styles.count}>{count} grams</Text>
+      <Text style={styles.count}>{count} {unit}</Text>
       <Text style={styles.ingredientName}>{name}</Text>
     </View>
   );
@@ -52,7 +53,7 @@ const styles = StyleSheet.create({
   count: {
     fontSize: 14,
     fontStyle: "italic",
-    marginRight: 30,
+    marginRight: 5,
   },
   ingredientName: {
     fontSize: 14,
