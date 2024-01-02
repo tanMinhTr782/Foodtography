@@ -3,10 +3,11 @@ import { View, Text, StyleSheet, Image, TouchableHighlight, SafeAreaView } from 
 import { RootScreens } from '..';
 import { styles } from './styles';
 import { SearchBarContainer } from '@/Components/SearchBar';
-import { Center, ScrollView, Skeleton, VStack } from 'native-base';
+import { Button, Center, FormControl, Input, Modal, ScrollView, Skeleton, VStack } from 'native-base';
 import { ingredient, meal, popular } from './data/data'
 import { Colors } from '@/Theme/Variables';
 import { getIngredients } from '@/API/ingredients';
+import { AntDesign } from '@expo/vector-icons';
 
 export const Search = (props: {
     onNavigate: (string: RootScreens, data: {}) => void,
@@ -16,6 +17,14 @@ export const Search = (props: {
 }) => {
     const [data, setData] = useState([]);
     const [isLoading, setLoading] = useState(true);
+    const [modalVisible, setModalVisible] = useState(false);
+    const [text, setSearchText] = useState('');
+
+    const handleSearch = () => {
+        const searchData = text.split(',');
+        props.onNavigateFilter(RootScreens.SEARCHRESULT, "SearchByIngredients", searchData.length, searchData)
+        setModalVisible(false);
+    }
 
     const fetchData = async () => {
         try {
@@ -51,7 +60,46 @@ export const Search = (props: {
                                 <View style={{
                                     display: 'flex', flexDirection: 'row',
                                     alignItems: 'center', justifyContent: 'space-between',
-                                    marginTop: 20, paddingRight: 15
+                                    marginTop: 15, paddingRight: 15
+                                }}>
+                                    <Text style={styles.title}>Search by your ingredients</Text>
+                                    <Modal isOpen={modalVisible} onClose={() => setModalVisible(false)} avoidKeyboard justifyContent="flex-end" bottom="50%" size="lg">
+                                        <Modal.Content>
+                                            <Modal.CloseButton />
+                                            <Modal.Header>Enter Ingredients</Modal.Header>
+                                            <Modal.Body>
+                                                Enter all your ingredients separated by commas.
+                                                <FormControl mt="3">
+                                                    <Input onChangeText={(text) => setSearchText(text)} />
+                                                </FormControl>
+                                            </Modal.Body>
+                                            <Modal.Footer>
+                                                {
+                                                    text !== '' ? (
+                                                        <Button flex="1" onPress={() => {
+                                                            handleSearch();
+                                                        }}>
+                                                            Proceed
+                                                        </Button>
+                                                    ) : (
+                                                        <Button flex="1" style={{ opacity: 0.5 }} disabled>
+                                                                Proceed
+                                                        </Button>
+                                                    )
+                                                }
+                                            </Modal.Footer>
+                                        </Modal.Content>
+                                    </Modal>
+                                    <VStack space={8} alignItems="center">
+                                        <AntDesign name="plussquareo" onPress={() => {
+                                            setModalVisible(!modalVisible);
+                                        }} size={32} />
+                                    </VStack>
+                                </View>
+                                <View style={{
+                                    display: 'flex', flexDirection: 'row',
+                                    alignItems: 'center', justifyContent: 'space-between',
+                                    marginTop: 10, paddingRight: 15
                                 }}>
                                     <Text style={styles.title}>Search by Ingredients</Text>
                                     <TouchableHighlight
