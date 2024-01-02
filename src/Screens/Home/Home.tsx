@@ -1,8 +1,8 @@
 import { i18n, LocalizationKey } from "@/Localization";
-import React from "react";
-import { View, Text, StyleSheet, TouchableHighlight, TouchableOpacity } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, StyleSheet, TouchableHighlight, TouchableOpacity, Image } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import { HStack, Spinner, Heading, ScrollView } from "native-base";
+import { HStack, Spinner, Heading, ScrollView, Center, VStack, Skeleton } from "native-base";
 import { User } from "@/Services";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
@@ -12,21 +12,36 @@ import { useNavigation } from "@react-navigation/native";
 import { RootScreens } from '..';
 import { RootStackParamList } from '@/Navigation';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-
+import { getRandomRecipes } from '@/API/spoonacular';
+import AntDesign from "@expo/vector-icons/AntDesign";
 
 type CreateRecipeNavigatorProps = NativeStackNavigationProp<RootStackParamList, RootScreens.CREATERECIPES>;
 type CreateSettingsNavigatorProps = NativeStackNavigationProp<RootStackParamList, RootScreens.SETTINGS>;
 
-export interface IHomeProps {
-    data: User | undefined;
-    isLoading: boolean;
-
-}
-
-export const Home = (props: IHomeProps) => {
-    const { data, isLoading } = props;
+export const Home = (props: { onNavigate: (screen: RootScreens, resultData: any) => void }) => {
+    const [data, setData] = useState<any>({});
+    const [isLoading, setLoading] = useState(true);
     const navigation1 = useNavigation<CreateRecipeNavigatorProps>();
     const navigation2 = useNavigation<CreateSettingsNavigatorProps>();
+
+    const fetchData = async () => {
+        try {
+            let recipes;
+            recipes = await getRandomRecipes();
+
+            if (recipes) {
+                setData(recipes.recipes[0]);
+                setLoading(false);
+            }
+        } catch (error: any) {
+            console.log('Error fetching data:', error.message);
+            throw error;
+        }
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, []);
 
     return (
         <View style={styles.container}>
@@ -94,37 +109,61 @@ export const Home = (props: IHomeProps) => {
 
             <Text style={styles.title}>Daily Inspriation</Text>
 
-            <ScrollView style={styles.dailyInspiationCard}>
-                <View style={styles.imageContainer}></View>
-                <View style={styles.contentContainer}>
-                    <View style={styles.rateContainer}>
-                        <FontAwesome name="star" size={24} color="#E4D200" />
-                        <FontAwesome name="star" size={24} color="#E4D200" />
-                        <FontAwesome name="star" size={24} color="#E4D200" />
-                        <FontAwesome name="star" size={24} color="#E4D200" />
-                        <FontAwesome name="star-half-o" size={24} color="#E4D200" />
-                    </View>
-                    <Text style={styles.recipeName}>Vietnamese Crab Noodle Soup</Text>
-                    <View style={styles.authorNameContainer}>
-                        <View>
-                            <Ionicons name="person-circle-sharp" size={28} color="black" />
-                        </View>
-                        <Text style={styles.authorName}>Tran Minh Tan</Text>
-                    </View>
-                    <TouchableHighlight
-                        underlayColor="#3C736320"
-                        style={styles.addIngredientsBtn}
-                        onPress={() => navigation1.navigate(RootScreens.SEARCH)}
-                    >
-                        <View style={{ flexDirection: "row", gap: 12 }}>
-                            <View>
-                                <FontAwesome5 name="search" size={16} color="black" />
+            {
+                isLoading ? (
+                    <Center w="100%" h="100%">
+                        <VStack w="90%" maxW="400" borderWidth="1" space={8} overflow="hidden" rounded="md" _dark={{
+                            borderColor: "coolGray.500"
+                        }} _light={{
+                            borderColor: "coolGray.200"
+                        }}>
+                            <Skeleton h="40" />
+                            <Skeleton.Text px="4" />
+                            <Skeleton px="4" my="4" rounded="md" startColor="primary.100" />
+                        </VStack>
+                    </Center>
+                ) : (
+                        <ScrollView style={styles.dailyInspiationCard}>
+                            <Image
+                                style={styles.imageContainer}
+                                source={{ uri: data.image }}
+                            />
+                            <View style={styles.contentContainer}>
+                                <View style={styles.rateContainer}>
+                                    {
+                                        Array.from({ length: (data.likes < 6 ? data.likes : 5) }, (_, index) => index).map((index) => (
+                                            <AntDesign name="star" size={24} color="#E4D200" />
+                                        ))
+                                    }
+                                    {
+                                        Array.from({ length: (5 - (data.likes < 6 ? data.likes : 5)) }, (_, index) => index).map((index) => (
+                                            <AntDesign name="staro" size={24} />
+                                        ))
+                                    }
+                                </View>
+                                <Text style={styles.recipeName}>{data.title}</Text>
+                                <View style={styles.authorNameContainer}>
+                                    <View>
+                                        <Ionicons name="person-circle-sharp" size={28} color="black" />
+                                    </View>
+                                    <Text style={styles.authorName}>Tran Minh Tan</Text>
+                                </View>
+                                <TouchableHighlight
+                                    underlayColor="#3C736320"
+                                    style={styles.addIngredientsBtn}
+                                    onPress={() => props.onNavigate(RootScreens.RECIPEDETAIL, data)}
+                                >
+                                    <View style={{ flexDirection: "row", gap: 12 }}>
+                                        <View>
+                                            <FontAwesome5 name="search" size={16} color="black" />
+                                        </View>
+                                        <Text style={styles.addIngredientsText}>SEARCH FOR MORE</Text>
+                                    </View>
+                                </TouchableHighlight>
                             </View>
-                            <Text style={styles.addIngredientsText}>SEARCH FOR MORE</Text>
-                        </View>
-                    </TouchableHighlight>
-                </View>
-            </ScrollView>
+                        </ScrollView>
+                )
+            }
         </View>
     );
 };

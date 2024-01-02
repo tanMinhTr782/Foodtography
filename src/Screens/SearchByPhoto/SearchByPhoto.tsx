@@ -24,7 +24,7 @@ type CreateScannerNavitgatorProps = NativeStackNavigationProp<RootStackParamList
 
 
 
-export const SearchByPhoto = () => {
+export const SearchByPhoto = (props: { onNavigate: (screen: RootScreens, type: string, count: number, ingredients: string[], scanImage: string) => void}) => {
   let cameraRef = useRef<any>();
   const reference = useRef<any>();
   const navigation = useNavigation<CreateScannerNavitgatorProps>();
@@ -55,6 +55,11 @@ export const SearchByPhoto = () => {
     let newPhoto = await cameraRef.current.takePictureAsync(options);
     setPhoto(newPhoto);
   };
+
+  const handleSearch = () => {
+      props.onNavigate(RootScreens.SEARCHRESULT, "Scan", result.length, result, photo);
+  };
+
   const getIngredients = async (IMAGE_BYTES_STRING: string) => {
 
     const PAT = '63528cf35da24698b5275c9ad45ba6ae';
@@ -94,7 +99,8 @@ export const SearchByPhoto = () => {
       ret.push(parsedData.outputs[0].data.concepts[i]["name"]);
     }
     setResult(ret as unknown as SetStateAction<never[]>);
-  }
+  };
+
   useEffect(() => {
     (async () => {
       const cameraPermission = await Camera.requestCameraPermissionsAsync();
@@ -119,7 +125,7 @@ export const SearchByPhoto = () => {
         <Image style={styles.preview} source={{ uri: "data:image/jpg;base64," + photo['base64' as any] }} />
         <SafeAreaView style={{ flexDirection: 'row' }}>
           <Button title="Discard" onPress={() => setPhoto("")} />
-          <Button title="Search With Scan Result" color='red' onPress={() => setPhoto("") } />
+          <Button title="Search With Scan Result" color='red' onPress={() => handleSearch() } />
         </SafeAreaView>
       </SafeAreaView>
     );

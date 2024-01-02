@@ -7,8 +7,10 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 type CreateScannerNavitgatorProps = NativeStackScreenProps<RootStackParamList, RootScreens.SEARCHBYPHOTO>;
 
 export const SearchByPhotoContainer = ({ navigation }: any) => {
-  const onNavigate = (screen: RootScreens) => {
-    navigation.navigate(screen);
+  const onNavigate = (screen: RootScreens, type: string, count: number, ingredients: string[], scanImage: string) => {
+      navigation.navigate(screen, { type, count, ingredients, scanImage });
   };
-  return <SearchByPhoto />;
+
+
+   return <SearchByPhoto onNavigate={onNavigate} />;
 };

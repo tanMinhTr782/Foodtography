@@ -12,3 +12,13 @@ export const getRecipesByIngredients = async (ingredients: string[], quantity: n
             return error.response;
         });
 };
+
+export const getRandomRecipes = async () => {
+    return await axios
+        .get(`${URL}/recipes/random?apiKey=${apiKey}`)
+        .then((response) => response.data)
+        .catch(function (error) {
+            console.log(error);
+            return error.response;
+        });
+};

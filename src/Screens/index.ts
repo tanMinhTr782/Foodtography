@@ -16,7 +16,6 @@ export enum RootScreens {
     ADDRECIPEFROMSEARCH = 'AddRecipeFromSearch',
     MEALPLANNING = 'MealPlanning',
     RECIPEDETAIL = 'RecipeDetail',
-    SETTINGS = 'Settings', 
-    EDITPROFILE = 'EditProfile', 
-    SEARCHBYPHOTO = 'SearchByPhoto'
+    CHANGEPASSWORD = 'ChangePassword',
+    SEARCHBYPHOTO = 'SearchByPhoto',
 }

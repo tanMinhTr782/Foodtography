@@ -10,7 +10,7 @@ import { SearchBarContainer } from '@/Components/SearchBar'
 import { getRecipesByIngredients } from '@/API/spoonacular';
 
 export const SearchResult = (props: {
-    onNavigate: (string: RootScreens, resultData: any) => void, type: any, count: number, ingredients: string[],
+    onNavigate: (string: RootScreens, resultData: any) => void, type: any, count: number, ingredients: string[], scanImage: string
     goBack: () => void, dataSearch: any
 }) => {
     const [type] = useState(props.type);
@@ -53,7 +53,7 @@ export const SearchResult = (props: {
     const fetchData = async () => {
         try {
             if (props.dataSearch) {
-                let recipes = await getRecipesByIngredients(["beef", "chicken", "soy", "salt", "sugar", "fish", "egg"], 500);
+                let recipes = await getRecipesByIngredients(["beef", "chicken", "soy", "salt", "sugar", "fish", "egg"], 1000);
                 if (recipes) {
                     const newArray = recipes.filter((item: any) => {
                         if (checkSubstring(item.title, props.dataSearch)) {
@@ -98,6 +98,9 @@ export const SearchResult = (props: {
                         recipes = await getRecipesByIngredients(["salad romaine", "cucumber", "tomato", "almond", "yogurt souce"], 30);
                         break;
                     case "SearchByIngredients":
+                        recipes = await getRecipesByIngredients(props.ingredients, 30);
+                        break;
+                    case "Scan":
                         recipes = await getRecipesByIngredients(props.ingredients, 30);
                         break;
                 }
@@ -161,17 +164,26 @@ export const SearchResult = (props: {
                         props.type === "Scan" && (
 
                             <View style={{ height: 250, marginBottom: 10, marginTop: 10 }}>
-                                <Image
-                                    style={styles.scanImage}
-                                    source={require('../../../assets/cooking.jpg')}
-                                />
+                                {
+                                    props.scanImage === "none" ? (
+                                        <Image
+                                            style={styles.scanImage}
+                                            source={require('../../../assets/cooking.jpg')}
+                                        />
+                                    ) : (
+                                            <Image
+                                                style={styles.scanImage}
+                                                source={{ uri: `data:image/jpeg;base64,${props.scanImage}` }}
+                                            />
+                                    )
+                                }
                             </View>
                         )
                     }
                     {
-                        props.type === "SearchByIngredients" && (
+                        (props.type === "SearchByIngredients" || props.type === "Scan") && (
                             <View style={styles.ingredientContainer}>
-                                <Text style={{ fontSize: 22, fontWeight: 'bold', marginRight: 5, marginTop: 5 }}>Ingredients:</Text>
+                                <Text style={{ fontSize: 22, fontWeight: 'bold', marginRight: 5, marginTop: 5, color: Colors.GREENSUPERDARK }}>Ingredients:</Text>
                                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                                     {
                                         props.ingredients.map((data: any, id: number) => {
@@ -191,8 +203,8 @@ export const SearchResult = (props: {
                         )
                     }
                     {
-                        props.type === "SearchByIngredients" && (
-                            <Text style={{ fontSize: 22, fontWeight: 'bold', marginTop: 10, marginBottom: 5 }}>Suggested Recipes</Text>
+                        (props.type === "SearchByIngredients" || props.type === "Scan") && (
+                            <Text style={{ fontSize: 22, fontWeight: 'bold', marginTop: 10, marginBottom: 5, color: Colors.GREENSUPERDARK }}>Suggested Recipes</Text>
                         )
                     }
                     <View style={styles.recipeDetailWrapper}>

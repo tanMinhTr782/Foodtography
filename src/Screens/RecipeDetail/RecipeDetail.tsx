@@ -58,7 +58,13 @@ export const RecipeDetail = (props: {goBack: () => void, data: any}) => {
         </View>
         <Text style={styles.ratingCount}>{props.data.likes} {props.data.likes === 1 ? "Rating" : "Ratings"}</Text>
       </View>
-      <Text style={styles.description}>
+      {
+          props.data.summary ? (
+              <Text style={styles.description}>
+                        {props.data.summary}
+              </Text>
+          ) : (
+              <Text style={styles.description}>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin maximus sagittis dictum.
                 Sed in velit at mi lobortis fermentum accumsan et dui. Class aptent taciti sociosqu ad litora torquent per conubia nostra,
                 per inceptos himenaeos. Curabitur laoreet condimentum sodales. Maecenas odio leo, faucibus eget nulla et, aliquet dictum felis.
@@ -67,7 +73,9 @@ export const RecipeDetail = (props: {goBack: () => void, data: any}) => {
                 Nunc id magna sagittis, tincidunt odio sed, elementum ante. Vivamus bibendum sapien ac lorem tincidunt tempus.
                 Suspendisse potenti. Suspendisse tincidunt, elit et tristique tempor, dolor augue tempus turpis, et facilisis mi nisi et ligula.
                 Morbi sit amet mi blandit, viverra purus sit amet, tincidunt nunc.
-      </Text>
+              </Text>
+          )
+      }
       <View style={styles.timeToCook}>
         <Text style={styles.time}>1 hours 30 mins</Text>
         <Text style={styles.totalTimeText}>Total time</Text>

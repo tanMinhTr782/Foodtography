@@ -12,24 +12,42 @@ export const Ingredients = (props: any) => {
       <View style={styles.servesContainer}>
         <View style={styles.serves}>
           <Ionicons name="remove-circle-outline" size={24} />
-          <Text style={styles.servesCount}>Serves {props.usedIngredientCount}</Text>
+               {
+                   props.usedIngredientCount ? (<Text style={styles.servesCount}>Serves {props.usedIngredientCount}</Text>) : (
+                       <Text style={styles.servesCount}>Serves {props.data.extendedIngredients.length}</Text>
+                   )
+               }
           <Ionicons name="add-circle-outline" size={24} />
         </View>
         <Text style={styles.USPerServing}>US/Serving</Text>
       </View>
       <View style={styles.ingredients}>
         {
-            props.data.usedIngredients.map((item: any, id: number) => {
-                return (
-                    <IngredientItem
-                        name={item.name}
-                        count={item.amount}
-                        image={item.image}
-                        unit={item.unit}
-                        key={"Ingredient-Item-To-Cooking-" + id}
-                    />
-                )
-            })
+            props.usedIngredients ? (
+                      props.data.usedIngredients.map((item: any, id: number) => {
+                          return (
+                              <IngredientItem
+                                  name={item.name}
+                                  count={item.amount}
+                                  image={item.image}
+                                  unit={item.unit}
+                                  key={"Ingredient-Item-To-Cooking-" + id}
+                              />
+                          )
+                      })
+            ) : (
+                props.data.extendedIngredients.map((item: any, id: number) => {
+                          return (
+                              <IngredientItem
+                                  name={item.name}
+                                  count={item.amount}
+                                  image={"https://png.pngtree.com/element_our/20200702/ourmid/pngtree-vector-illustration-knife-and-fork-western-food-plate-image_2283844.jpg"}
+                                  unit={item.unit}
+                                  key={"Ingredient-Item-To-Cooking-" + id}
+                              />
+                          )
+                })
+            )
         }
       </View>
       <TouchableHighlight
