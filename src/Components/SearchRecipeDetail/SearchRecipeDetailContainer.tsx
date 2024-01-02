@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { SearchRecipeDetail } from './SearchRecipeDetail';
 
-export const SearchRecipeDetailContainer = (props : any) => {
+export const SearchRecipeDetailContainer = (props: any) => {
     useEffect(() => {
     }, []);
 

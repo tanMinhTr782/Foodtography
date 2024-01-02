@@ -2,7 +2,7 @@ import { i18n, LocalizationKey } from "@/Localization";
 import React from "react";
 import { View, Text, StyleSheet, TouchableHighlight, TouchableOpacity } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import { HStack, Spinner, Heading } from "native-base";
+import { HStack, Spinner, Heading, ScrollView } from "native-base";
 import { User } from "@/Services";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
@@ -50,7 +50,7 @@ export const Home = (props: IHomeProps) => {
                     </View>
                 </View>
                 <View style={styles.bookmarkCartContainer}>
-                    <TouchableHighlight
+                    {/* <TouchableHighlight
                         style={styles.bookmarkWrap}
                         underlayColor="#CFCFCF"
                         onPress={() => console.log("a")}
@@ -88,13 +88,13 @@ export const Home = (props: IHomeProps) => {
                                 <Text style={styles.cartText}>0</Text>
                             </View>
                         </View>
-                    </TouchableHighlight>
+                    </TouchableHighlight> */}
                 </View>
             </View>
 
             <Text style={styles.title}>Daily Inspriation</Text>
 
-            <View style={styles.dailyInspiationCard}>
+            <ScrollView style={styles.dailyInspiationCard}>
                 <View style={styles.imageContainer}></View>
                 <View style={styles.contentContainer}>
                     <View style={styles.rateContainer}>
@@ -114,17 +114,17 @@ export const Home = (props: IHomeProps) => {
                     <TouchableHighlight
                         underlayColor="#3C736320"
                         style={styles.addIngredientsBtn}
-                        onPress={() => console.log("a")}
+                        onPress={() => navigation1.navigate(RootScreens.SEARCH)}
                     >
                         <View style={{ flexDirection: "row", gap: 12 }}>
                             <View>
-                                <FontAwesome5 name="shopping-cart" size={16} color="black" />
+                                <FontAwesome5 name="search" size={16} color="black" />
                             </View>
-                            <Text style={styles.addIngredientsText}>ADD 10 INGREDIENTS</Text>
+                            <Text style={styles.addIngredientsText}>SEARCH FOR MORE</Text>
                         </View>
                     </TouchableHighlight>
                 </View>
-            </View>
+            </ScrollView>
         </View>
     );
 };
