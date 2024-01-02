@@ -22,7 +22,7 @@ import { SearchResultContainer } from '@/Screens/SearchResult';
 import { EnhanceSkillContainer } from '@/Screens/EnhanceSkill';
 import { EnhanceDetailContainer } from '@/Screens/EnhanceDetail';
 import { RecipeDetailContainer } from '@/Screens/RecipeDetail';
-
+import {SearchByPhotoContainer} from '@/Screens/SearchByPhoto/SearchByPhotoContainer'
 export type RootStackParamList = {
     [RootScreens.MAIN]: undefined;
     [RootScreens.WELCOME]: undefined;
@@ -41,6 +41,7 @@ export type RootStackParamList = {
     [RootScreens.MEALPLANNING]: undefined;
     [RootScreens.ADDRECIPEFROMSEARCH]: undefined;
     [RootScreens.RECIPEDETAIL]: undefined;
+    [RootScreens.SEARCHBYPHOTO]: undefined;
 };
 
 const RootStack = createNativeStackNavigator<RootStackParamList>();
@@ -82,6 +83,7 @@ const ApplicationNavigator = () => {
                 <RootStack.Screen name={RootScreens.ENHANCESKILL} component={EnhanceSkillContainer} />
                 <RootStack.Screen name={RootScreens.ENHANCEDETAIL} component={EnhanceDetailContainer} />
                 <RootStack.Screen name={RootScreens.RECIPEDETAIL} component={RecipeDetailContainer} />
+                <RootStack.Screen name={RootScreens.SEARCHBYPHOTO} component={SearchByPhotoContainer} />
             </RootStack.Navigator>
         </NavigationContainer>
     )

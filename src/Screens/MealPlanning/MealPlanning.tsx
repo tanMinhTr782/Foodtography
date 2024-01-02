@@ -249,15 +249,15 @@ export const MealPlanning = (props: {
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={styles.headerContainer}>
                         <View style={styles.iconsWrap}>
-                            <View style={styles.iconContainer}>
+                            {/* <View style={styles.iconContainer}>
                                 <Ionicons name="person-circle-sharp" size={40} color="black" />
                             </View>
                             <View style={styles.iconContainer}>
                                 <MaterialCommunityIcons name="bell" size={32} color="black" />
-                            </View>
+                            </View> */}
                         </View>
                         <View style={styles.bookmarkCartContainer}>
-                            <TouchableHighlight
+                            {/* <TouchableHighlight
                                 style={styles.bookmarkWrap}
                                 underlayColor="#CFCFCF"
                                 onPress={() => console.log('a')}
@@ -275,9 +275,9 @@ export const MealPlanning = (props: {
                                         <Text style={styles.bookmarkText}>0</Text>
                                     </View>
                                 </View>
-                            </TouchableHighlight>
+                            </TouchableHighlight> */}
 
-                            <TouchableHighlight
+                            {/* <TouchableHighlight
                                 style={styles.cartWrap}
                                 underlayColor="#2A5D4E"
                                 onPress={() => console.log('a')}
@@ -295,7 +295,7 @@ export const MealPlanning = (props: {
                                         <Text style={styles.cartText}>0</Text>
                                     </View>
                                 </View>
-                            </TouchableHighlight>
+                            </TouchableHighlight> */}
                         </View>
                     </View>
 

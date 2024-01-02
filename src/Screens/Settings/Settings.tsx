@@ -43,7 +43,22 @@ export const Settings = () => {
   const [name, setName] = useState("Username");
   const [imageUrl, setImageUrl] = useState('')
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-
+  const handleLogout = async () => {
+    await AsyncStorage.removeItem('user');
+    navigation.navigate(RootScreens.LOGIN);
+};
+const showAlert = () =>
+    Alert.alert('Alert', 'Do you want to log out ?', [
+        {
+            text: 'OK',
+            onPress: () => handleLogout(),
+            style: 'cancel',
+        },
+        {
+            text: 'Cancel',
+            style: 'cancel',
+        },
+    ]);
   const getUser = async () => {
     await AsyncStorage.getItem('user').then(res => {
       if (res) {
@@ -131,16 +146,6 @@ export const Settings = () => {
           <TouchableOpacity><Ionicons name="logo-linkedin" size={24} color="black" /></TouchableOpacity>
         </View>
         <Text style={styles.version}> Version 1.1.0 </Text>
-        {/* 
-         <View> 
-                              <Text> About Foodtography</Text>
-                              <Ionicons name="chevron-forward" size={24} color="black" />
-         </View>
-         <View> 
-         <MaterialIcons name="logout" size={24} color="black" />
-                                  <Text> Log out </Text>
-                                  <Ionicons name="chevron-forward" size={24} color="black" />
-         </View> */}
       </View>
 
     </>

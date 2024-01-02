@@ -8,7 +8,7 @@ import { MealPlanningContainer } from '@/Screens/MealPlanning';
 import { SearchContainer } from '@/Screens/Search';
 
 import { MaterialIcons } from '@expo/vector-icons';
-import { OnboardingContainer } from "@/Screens/Onboarding/OnboardingContainer";
+import { SearchByPhotoContainer } from "@/Screens/SearchByPhoto/SearchByPhotoContainer";
 
 // import {
 //   Menu,
@@ -79,10 +79,10 @@ export const MainNavigator = () => {
       />
       <Tab.Screen
         name="Search by Photo"
-        component={SearchContainer}
+        
+        component={SearchByPhotoContainer}
         options={{
-          // tabBarIconStyle: { display: "none" },
-          // tabBarLabelPosition: "beside-icon",
+          headerShown: false, 
         }}
       />
       <Tab.Screen

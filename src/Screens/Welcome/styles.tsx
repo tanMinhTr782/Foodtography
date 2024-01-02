@@ -7,10 +7,20 @@ export const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
+        height: '100%'
     },
     welcomeImageContainer: {
         width: 375,
         marginTop: -40,
+        paddingTop: 30,
+        paddingRight: 50,
+        backgroundColor: 'transparent',
+        position: 'absolute',
+        bottom: 10,
+        left: 0,
+        right: 0,
+        textAlign: 'center',
+        margin: 'auto'
     },
     welcomeImage: {
         width: '100%',
@@ -42,7 +52,7 @@ export const styles = StyleSheet.create({
     welcomeLoginText: {
         color: Colors.WHITE,
         fontWeight: 'bold',
-        fontSize: 18
+        // fontSize: 18
     },
     welcomeNameApp: {
         color: Colors.GREENLIGHT_MORELIGHT,
@@ -62,8 +72,8 @@ export const styles = StyleSheet.create({
         borderRadius: 100,
         width: '100%',
         backgroundColor: Colors.WHITE,
-        borderColor: Colors.GREENDARK,
-        borderWidth: 1,
+        // borderColor: Colors.GREENDARK,
+        // borderWidth: 1,
     },
     welcomeSignupText: {
         color: Colors.GREENDARK,
